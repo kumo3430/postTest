@@ -27,7 +27,7 @@ struct ContentView: View {
     
     func registerUser() {
         let userData = ["username": username, "password": password, "email": email]
-        guard let url = URL(string: "http://your-api-url.com/register") else { return }
+        guard let url = URL(string: "http://localhost:8888/login/insert.php") else { return }
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.httpBody = try? JSONSerialization.data(withJSONObject: userData, options: [])
