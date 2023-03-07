@@ -13,21 +13,23 @@ struct ContentView: View {
     @State var email: String = ""
     
     var body: some View {
-        Form {
-            TextField("Username", text: $username)
-            SecureField("Password", text: $password)
-            TextField("Email", text: $email)
-            Button(action: {
-                registerUser()
-            }, label: {
-                Text("Register")
-            })
+        NavigationView{
+            VStack{
+                TextField("Username", text: $username)
+                SecureField("Password", text: $password)
+                TextField("Email", text: $email)
+                Button(action: {
+                    registerUser()
+                }, label: {
+                    Text("Register")
+                })
+            }
         }
     }
     
     func registerUser() {
         let userData = ["username": username, "password": password, "email": email]
-        guard let url = URL(string: "http://localhost:8888/login/insert.php") else { return }
+        guard let url = URL(string: "http://localhost:8888/login/insert.php?username=\(username)&password=\(password)&email=\(email)") else { return }
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.httpBody = try? JSONSerialization.data(withJSONObject: userData, options: [])
