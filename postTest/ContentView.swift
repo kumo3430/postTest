@@ -31,12 +31,17 @@ struct ContentView: View {
     func registerUser() {
         let userData = ["username": username, "password": password, "email": email]
         guard let url = URL(string: "http://localhost:8888/login/insert.php?username=\(username)&password=\(password)&email=\(email)") else { return }
+        
+//        guard let url = URL(string: "http://localhost:8888/login/insert.php") else { return }
+        
         var request = URLRequest(url: url)
+//        request.httpMethod = "GET"
         request.httpMethod = "POST"
         request.httpBody = try? JSONSerialization.data(withJSONObject: userData, options: [])
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         
         URLSession.shared.dataTask(with: request) { data, response, error in
+//        URLSession.shared.dataTask(with: url) { data, response, error in
             // handle response
         }.resume()
     }

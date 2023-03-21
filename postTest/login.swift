@@ -54,7 +54,7 @@ struct login: View {
         // Call the login API here to authenticate the user
         // You can use URLSession to send HTTP requests
         // For example:
-        let url = URL(string: "http://localhost:8888/login/insert.php?username=\(username)&password=\(password)&email=\(email)")!
+        let url = URL(string: "http://localhost:8888/login/login.php?username=\(username)&password=\(password)&email=\(email)")!
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -64,6 +64,29 @@ struct login: View {
         let response = String(data: data, encoding: .utf8)!
         return response
     }
+//
+//    func login(username: String, password: String) async throws -> String {
+//            let url = URL(string: "http://localhost:8888/login/login2.php?username=\(username)&password=\(password)&email=\(email)")!
+//            var request = URLRequest(url: url)
+//            request.httpMethod = "POST"
+//            let body = "username=\(username)&password=\(password)"
+//            request.httpBody = body.data(using: .utf8)
+//
+//            URLSession.shared.dataTask(with: request) { data, response, error in
+//                guard let data = data else {
+//                    print("無法獲取資料：\(error?.localizedDescription ?? "未知錯誤")")
+//                    return
+//                }
+//
+//                if let responseString = String(data: data, encoding: .utf8), responseString.contains("登錄成功") {
+//                    DispatchQueue.main.async {
+//                        self.isLoggedIn = true
+//                    }
+//                }
+//            }.resume()
+//        }
+//
+    
 }
 
 struct LoginView_Previews: PreviewProvider {

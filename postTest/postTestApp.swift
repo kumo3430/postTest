@@ -12,8 +12,8 @@ struct postTestApp: App {
     var body: some Scene {
         WindowGroup {
 //            ContentView()
-            login()
-//            login2()
+//            login()
+            login2()
         }
     }
 }

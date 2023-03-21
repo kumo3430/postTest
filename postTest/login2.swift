@@ -33,13 +33,14 @@ struct login2: View {
                     print("Registration failed")
                 }
             } catch {
-                print(error.localizedDescription)
+//                print(error.localizedDescription)
+                print(String(describing: error))
             }
         }.resume()
     }
     
     func login() {
-        let parameters = ["username": username, "password": password]
+        let parameters = ["username": username, "password": password, "email": email]
         guard let url = URL(string: "http://localhost:8888/login/login.php?username=\(username)&password=\(password)&email=\(email)") else { return }
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
@@ -57,20 +58,24 @@ struct login2: View {
                     print("Login failed")
                 }
             } catch {
-                print(error.localizedDescription)
+//                print(error.localizedDescription)
+                print(String(describing: error))
             }
         }.resume()
     }
     
     func logout() {
-        guard let url = URL(string: "https://yourapi.com/logout.php") else { return }
-        URLSession.shared.dataTask(with: url) { data, response, error in
-            if let error = error {
-                print(error.localizedDescription)
-                return
-            }
-            self.isLoggedIn = false
-        }.resume()
+//        guard let url = URL(string: "https://yourapi.com/logout.php") else { return }
+//        URLSession.shared.dataTask(with: url) { data, response, error in
+//            if let error = error {
+//                print(error.localizedDescription)
+//                return
+//            }
+//            self.isLoggedIn = false
+//        }.resume()
+        isLoggedIn = false
+        username = ""
+        password = ""
     }
     
     var body: some View {
