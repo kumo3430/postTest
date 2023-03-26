@@ -14,9 +14,52 @@ struct login2: View {
     @State var email: String = ""
     @State var isLoggedIn: Bool = false
     
+//    func register() {
+//        let parameters = ["username": username, "password": password, "email": email]
+////        let parameters = """
+////{
+////"username":\(username),
+////"password":\(password),
+////"email":\(email)
+////}
+////"""
+//        guard let url = URL(string: "http://localhost:8888/login/insert.php?username=\(username)&password=\(password)&email=\(email)") else { return }
+////        guard let url = URL(string: "http://localhost:8888/login/insert.php") else { return }
+//        var request = URLRequest(url: url)
+//        request.httpMethod = "POST"
+//        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+//        guard let httpBody = try? JSONSerialization.data(withJSONObject: parameters, options: []) else { return }
+//        request.httpBody = httpBody
+//        URLSession.shared.dataTask(with: request) { data, response, error in
+//            guard let data = data else { return }
+//            print(String(data: data, encoding: .utf8)!)
+//            do {
+//                let jsonResponse = try JSONSerialization.jsonObject(with: data, options: [])
+//                guard let dict = jsonResponse as? [String: Any], let status = dict["status"] as? String else { return }
+//                if status == "success" {
+//                    self.isLoggedIn = true
+//                } else {
+//                    print("Registration failed")
+//                }
+//            } catch {
+////                print(error.localizedDescription)
+//                print(String(describing: error))
+//            }
+//                      // handle response
+//        }.resume()
+//    }
+    
     func register() {
         let parameters = ["username": username, "password": password, "email": email]
+//        let parameters = """
+//{
+//"username":\(username),
+//"password":\(password),
+//"email":\(email)
+//}
+//"""
         guard let url = URL(string: "http://localhost:8888/login/insert.php?username=\(username)&password=\(password)&email=\(email)") else { return }
+//        guard let url = URL(string: "http://localhost:8888/login/insert.php") else { return }
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -24,6 +67,7 @@ struct login2: View {
         request.httpBody = httpBody
         URLSession.shared.dataTask(with: request) { data, response, error in
             guard let data = data else { return }
+            print(String(data: data, encoding: .utf8)!)
             do {
                 let jsonResponse = try JSONSerialization.jsonObject(with: data, options: [])
                 guard let dict = jsonResponse as? [String: Any], let status = dict["status"] as? String else { return }
@@ -36,6 +80,7 @@ struct login2: View {
 //                print(error.localizedDescription)
                 print(String(describing: error))
             }
+                      // handle response
         }.resume()
     }
     
@@ -45,10 +90,14 @@ struct login2: View {
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        guard let httpBody = try? JSONSerialization.data(withJSONObject: parameters, options: []) else { return }
-        request.httpBody = httpBody
+        
+//        guard let httpBody = try? JSONSerialization.data(withJSONObject: parameters, options: []) else { return }
+//        request.httpBody = httpBody
+        request.httpBody = Data()
+        
         URLSession.shared.dataTask(with: request) { data, response, error in
             guard let data = data else { return }
+            print(String(data: data, encoding: .utf8)!)
             do {
                 let jsonResponse = try JSONSerialization.jsonObject(with: data, options: [])
                 guard let dict = jsonResponse as? [String: Any], let status = dict["status"] as? String else { return }
@@ -88,9 +137,9 @@ struct login2: View {
             } else {
                 TextField("Username", text: $username)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
-                SecureField("Password", text: $password)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
                 TextField("Email", text: $email)
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                SecureField("Password", text: $password)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                 Button(action: register) {
                     Text("Register")
