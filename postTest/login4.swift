@@ -78,24 +78,23 @@ struct login4: View {
             if let data,
               let content = String(data: data, encoding: .utf8) {
                print(content)
-                if content == "登錄失敗0 個結果" {
-                    isLoggedIn = false
-                    Text("帳號或密碼輸入錯誤")
-                    print("帳號或密碼輸入錯誤")
-                } else{
-                    isLoggedIn = true
-                }
+//                if content == "登錄失敗0 個結果" {
+//                    isLoggedIn = false
+//                    Text("帳號或密碼輸入錯誤")
+//                    print("帳號或密碼輸入錯誤")
+//                } else{
+//                    isLoggedIn = true
+//                }
             }
             // handle response
 //            if let httpResponse = response as? HTTPURLResponse,
 //               httpResponse.statusCode == 200 {
 //                isLoggedIn = true
-            if let httpResponse = response as? HTTPURLResponse,
-               httpResponse.statusCode != 200 {
+            if let httpResponse = response as? HTTPURLResponse,httpResponse.statusCode != 200 {
                 print("httpResponse.statusCode: \(httpResponse.statusCode)")
             } else {
                 let decoder = JSONDecoder()
-//                isLoggedIn = true
+                isLoggedIn = true
                 print(isLoggedIn)
 //            guard let data = data else { return }
 //            print(String(data: data, encoding: .utf8)!)
