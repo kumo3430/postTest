@@ -5,6 +5,7 @@ struct login4: View {
     @State private var username = ""
     @State private var password = ""
     @State private var isLoggedIn = false
+    @State private var errorMessage = ""
     
     var body: some View {
         VStack {
@@ -22,6 +23,8 @@ struct login4: View {
                 Button("Log in") {
                     login()
                 }
+                Text(errorMessage)
+                    .foregroundColor(.red)
             }
         }
         .padding()
@@ -92,6 +95,7 @@ struct login4: View {
 //                isLoggedIn = true
             if let httpResponse = response as? HTTPURLResponse,httpResponse.statusCode != 200 {
                 print("httpResponse.statusCode: \(httpResponse.statusCode)")
+                errorMessage = "帳號或密碼輸入錯誤"
             } else {
                 let decoder = JSONDecoder()
                 isLoggedIn = true
