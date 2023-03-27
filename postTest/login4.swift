@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct login3: View {
+struct login4: View {
     
     @State private var username = ""
     @State private var password = ""
@@ -46,8 +46,20 @@ struct login3: View {
               let content = String(data: data, encoding: .utf8) {
                print(content)
             }
-//            print(response)
-//            print(error)
+            guard let data = data else { return }
+            print(String(data: data, encoding: .utf8)!)
+            do {
+                let jsonResponse = try JSONSerialization.jsonObject(with: data, options: [])
+                guard let dict = jsonResponse as? [String: Any], let status = dict["status"] as? String else { return }
+                if status == "success" {
+                    self.isLoggedIn = true
+                } else {
+                    print("Registration failed")
+                }
+            } catch {
+//                print(error.localizedDescription)
+                print(String(describing: error))
+            }
         }.resume()
     }
     
@@ -66,28 +78,56 @@ struct login3: View {
             if let data,
               let content = String(data: data, encoding: .utf8) {
                print(content)
+                if content == "登錄失敗0 個結果" {
+                    isLoggedIn = false
+                    Text("帳號或密碼輸入錯誤")
+                    print("帳號或密碼輸入錯誤")
+                } else{
+                    isLoggedIn = true
+                }
             }
             // handle response
+//            if let httpResponse = response as? HTTPURLResponse,
+//               httpResponse.statusCode == 200 {
+//                isLoggedIn = true
             if let httpResponse = response as? HTTPURLResponse,
-               httpResponse.statusCode == 200 {
-                isLoggedIn = true
+               httpResponse.statusCode != 200 {
+                print("httpResponse.statusCode: \(httpResponse.statusCode)")
+            } else {
+                let decoder = JSONDecoder()
+//                isLoggedIn = true
+                print(isLoggedIn)
+//            guard let data = data else { return }
+//            print(String(data: data, encoding: .utf8)!)
+//            do {
+//                let jsonResponse = try JSONSerialization.jsonObject(with: data, options: [])
+//                guard let dict = jsonResponse as? [String: Any], let status = dict["status"] as? String else { return }
+//                if status == "success" {
+//                    self.isLoggedIn = true
+//                } else {
+//                    print("Login failed")
+//                }
+//            } catch {
+////                print(error.localizedDescription)
+//                print(String(describing: error))
             }
         }.resume()
     }
     
     private func logout() {
-        let url = URL(string: "http://10.1.1.31:8888/login/logout.php")!
-        var request = URLRequest(url: url)
-        request.httpMethod = "POST"
-        URLSession.shared.dataTask(with: request) { data, response, error in
-            // handle response
-            isLoggedIn = false
-        }.resume()
+        isLoggedIn = false
+//        let url = URL(string: "http://10.1.1.31:8888/login/logout.php")!
+//        var request = URLRequest(url: url)
+//        request.httpMethod = "POST"
+//        URLSession.shared.dataTask(with: request) { data, response, error in
+//            // handle response
+//            isLoggedIn = false
+//        }.resume()
     }
 }
 
-struct login3_Previews: PreviewProvider {
+struct login4_Previews: PreviewProvider {
     static var previews: some View {
-        login3()
+        login4()
     }
 }
