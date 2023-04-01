@@ -144,13 +144,13 @@ struct login4: View {
     
     private func logout() {
         isLoggedIn = false
-//        let url = URL(string: "http://10.1.1.31:8888/login/logout.php")!
-//        var request = URLRequest(url: url)
-//        request.httpMethod = "POST"
-//        URLSession.shared.dataTask(with: request) { data, response, error in
-//            // handle response
-//            isLoggedIn = false
-//        }.resume()
+        let url = URL(string: "http://10.1.1.31:8888/login/logout.php")!
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            // handle response
+            isLoggedIn = false
+        }.resume()
     }
 }
 
