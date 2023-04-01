@@ -18,6 +18,9 @@
 		13F6933B29CC484B0096AE18 /* login04.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13F6933A29CC484B0096AE18 /* login04.swift */; };
 		13F6933D29D06A930096AE18 /* login5.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13F6933C29D06A930096AE18 /* login5.swift */; };
 		13F6933F29D06F9B0096AE18 /* login4.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13F6933E29D06F9B0096AE18 /* login4.swift */; };
+		13F6934129D326770096AE18 /* AddHabitClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13F6934029D326770096AE18 /* AddHabitClass.swift */; };
+		13F6934329D327A30096AE18 /* AddSportWalk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13F6934229D327A30096AE18 /* AddSportWalk.swift */; };
+		13F6934529D328040096AE18 /* SportWalkInsertViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13F6934429D328040096AE18 /* SportWalkInsertViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +37,9 @@
 		13F6933A29CC484B0096AE18 /* login04.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = login04.swift; sourceTree = "<group>"; };
 		13F6933C29D06A930096AE18 /* login5.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = login5.swift; sourceTree = "<group>"; };
 		13F6933E29D06F9B0096AE18 /* login4.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = login4.swift; sourceTree = "<group>"; };
+		13F6934029D326770096AE18 /* AddHabitClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddHabitClass.swift; sourceTree = "<group>"; };
+		13F6934229D327A30096AE18 /* AddSportWalk.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSportWalk.swift; sourceTree = "<group>"; };
+		13F6934429D328040096AE18 /* SportWalkInsertViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SportWalkInsertViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,6 +74,9 @@
 			children = (
 				1389C3FC29B5C37F00D673EE /* Info.plist */,
 				13F6933E29D06F9B0096AE18 /* login4.swift */,
+				13F6934029D326770096AE18 /* AddHabitClass.swift */,
+				13F6934229D327A30096AE18 /* AddSportWalk.swift */,
+				13F6934429D328040096AE18 /* SportWalkInsertViewModel.swift */,
 				13F6933A29CC484B0096AE18 /* login04.swift */,
 				1389C3EE29B5C05800D673EE /* postTestApp.swift */,
 				13D2601029C2AD97001C7B81 /* login.swift */,
@@ -161,12 +170,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				1389C3F129B5C05800D673EE /* ContentView.swift in Sources */,
+				13F6934329D327A30096AE18 /* AddSportWalk.swift in Sources */,
 				13F6933929CC3BCD0096AE18 /* login3.swift in Sources */,
 				13F6933129CAA5290096AE18 /* loginAi.swift in Sources */,
 				13D2601129C2AD97001C7B81 /* login.swift in Sources */,
 				13D2601329C2AF89001C7B81 /* login2.swift in Sources */,
 				13F6933D29D06A930096AE18 /* login5.swift in Sources */,
 				13F6933B29CC484B0096AE18 /* login04.swift in Sources */,
+				13F6934129D326770096AE18 /* AddHabitClass.swift in Sources */,
+				13F6934529D328040096AE18 /* SportWalkInsertViewModel.swift in Sources */,
 				13F6933F29D06F9B0096AE18 /* login4.swift in Sources */,
 				1389C3EF29B5C05800D673EE /* postTestApp.swift in Sources */,
 			);

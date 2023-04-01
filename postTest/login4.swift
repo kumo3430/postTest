@@ -7,6 +7,7 @@ struct login4: View {
     @State private var isLoggedIn = false
     @State private var errorMessage = ""
     @State private var getUsername = ""
+    @State private var errorEmpty = ""
     
     struct UserData : Decodable {
         var id: String
@@ -14,34 +15,46 @@ struct login4: View {
     }
     
     var body: some View {
-        VStack {
-            if isLoggedIn {
-                Text("You are logged in!")
-                Text(getUsername)
-                Button("Log out") {
-                    logout()
+        NavigationView {
+            VStack {
+                if isLoggedIn {
+                    Text("You are logged in!")
+                    Text(getUsername)
+                    NavigationLink {
+                        AddHabitClass()
+                    } label: {
+                        Text("建立習慣")
+                    }
+                    Button("Log out") {
+                        logout()
+                    }
+                } else {
+                    TextField("Username", text: $username)
+                    SecureField("Password", text: $password)
+                    Button("Register") {
+                        register()
+                    }
+                    Button("Log in") {
+                        login()
+                    }
+                    Text(errorEmpty)
+                        .foregroundColor(.red)
+                    Text(errorMessage)
+                        .foregroundColor(.red)
                 }
-            } else {
-                TextField("Username", text: $username)
-                SecureField("Password", text: $password)
-                Button("Register") {
-                    register()
-                }
-                Button("Log in") {
-                    login()
-                }
-                Text(errorMessage)
-                    .foregroundColor(.red)
             }
+            .padding()
         }
-        .padding()
     }
     
     private func register() {
-//        guard !username.isEmpty && !password.isEmpty else {
-//            print("Please fill in all required fields.")
-//            return
-//        }
+        guard !username.isEmpty && !password.isEmpty else {
+            print("Please fill in all required fields.")
+            errorEmpty = "請確認帳號密碼都有輸入"
+            return
+        }
+        errorEmpty = ""
+        errorMessage = ""
         let url = URL(string: "http://127.0.0.1:8888/register/register3.php")!
         var request = URLRequest(url: url)
 //        print(url)
@@ -74,10 +87,13 @@ struct login4: View {
     }
     
     private func login() {
-//        guard !username.isEmpty && !password.isEmpty else {
-//            print("Please fill in all required fields.")
-//            return
-//        }
+        guard !username.isEmpty && !password.isEmpty else {
+            print("Please fill in all required fields.")
+            errorEmpty = "請確認帳號密碼都有輸入"
+            return
+        }
+        errorEmpty = ""
+        errorMessage = ""
         let url = URL(string: "http://127.0.0.1:8888/login/login3.php")!
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
