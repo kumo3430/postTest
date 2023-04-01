@@ -5,12 +5,6 @@
 //  Created by 呂沄 on 2023/2/1.
 //
 
-// 提醒時間包含了日期
-// 大類別是否要做成選單
-// 尚未做小類別的判斷式
-// 選擇日期時間的格式
-// Sqlite 的日期時間為UTC
-
 import SwiftUI
 
 struct AddSportWalk: View {
@@ -155,23 +149,6 @@ struct AddSportWalk: View {
             
         }
     }
-    private func alertToDateString(_ date: Date) -> String {
-        let timeZone = NSTimeZone.local
-        let formatter = DateFormatter()
-        formatter.timeZone = timeZone
-        formatter.dateFormat = "yyyy-MM-dd"
-        let dateString = formatter.string(from: date)
-        return dateString
-    }
-    private func setToDateString(_ date: Date) -> String {
-        let timeZone = NSTimeZone.local
-        let formatter = DateFormatter()
-        formatter.timeZone = timeZone
-        formatter.dateFormat = "yyyy-MM-dd"
-        let dateString = formatter.string(from: date)
-        return dateString
-    }
-
     
     private func dateToDateString() {
         let timeZone = NSTimeZone.local
@@ -184,39 +161,32 @@ struct AddSportWalk: View {
         print(Finish)
 //        return date
     }
-//    private func alertToDateString() {
-//        let timeZone = NSTimeZone.local
-//        let formatter = DateFormatter()
-//        formatter.timeZone = timeZone
-//        formatter.dateFormat = "HH:mm:ss"
-//        Alert_time = formatter.string(from: alert_time)
-//        print(Alert_time)
-////        return date
-//    }
-//    private func setToDateString() {
-//        let date = Date()
-//        let timeZone = NSTimeZone.local
-//        let formatter = DateFormatter()
-//        formatter.timeZone = timeZone
-//        formatter.dateFormat = "yyyy-MM-dd  HH:mm:ss"
-//        Set_up_time = formatter.string(from: set_up_time)
-//        print(Set_up_time)
-////        return date
-//    }
-//    let currentDate = Date()
-//    let dataFormatter = DateFormatter()
-//    func dataFormatter;.locale = Locale(identifier: "zh_Hant_TW")
-//    dataFormatter.dateFormat = "MM/dd/yyyy"
-//    let stringDate = dataFormatter.string(from: begin)
     
+    private func alertToDateString(_ date: Date) -> String {
+        let timeZone = NSTimeZone.local
+        let formatter = DateFormatter()
+        formatter.timeZone = timeZone
+        formatter.dateFormat = "yyyy-MM-dd"
+        let dateString = formatter.string(from: date)
+        print(dateString)
+        return dateString
+    }
+    private func setToDateString(_ date: Date) -> String {
+        let timeZone = NSTimeZone.local
+        let formatter = DateFormatter()
+        formatter.timeZone = timeZone
+        formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        let dateString = formatter.string(from: date)
+        print(dateString)
+        return dateString
+    }
+
     
     private func newSportHabit() {
 
         let url = URL(string: "http://127.0.0.1:8888/addHabits/addSports.php")!
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
-        
-//        let body = ["set_up_time": set_up_time,"_sub_classification": _sub_classification,"task_name": task_name,"tag_id1": tag_id1,"quantity": quantity,"begin": Begin,"finish": Finish,"_cycle": _cycle,"note": note,"alert_time": Alert_time] as [String : Any]
         let body : [String: Any] = ["set_up_time": Set_up_time,"_sub_classification": _sub_classification,"task_name": task_name,"tag_id1": tag_id1,"quantity": quantity,"begin": Begin,"finish": Finish,"_cycle": _cycle,"note": note,"alert_time": Alert_time]
         print(body)
         let jsonData = try! JSONSerialization.data(withJSONObject: body, options: [])
