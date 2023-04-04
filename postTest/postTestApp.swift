@@ -16,7 +16,9 @@ struct postTestApp: App {
 //            login2()
 //            loginAi()
 //            login3()
-            login4()
+//            login4()
+            AddHabitClass()
+//            list02()
         }
     }
 }

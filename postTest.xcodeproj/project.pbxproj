@@ -7,10 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1320D11F29DC2BFE0038FB1F /* List.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1320D11E29DC2BFE0038FB1F /* List.swift */; };
 		1389C3EF29B5C05800D673EE /* postTestApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1389C3EE29B5C05800D673EE /* postTestApp.swift */; };
 		1389C3F129B5C05800D673EE /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1389C3F029B5C05800D673EE /* ContentView.swift */; };
 		1389C3F329B5C05800D673EE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1389C3F229B5C05800D673EE /* Assets.xcassets */; };
 		1389C3F629B5C05800D673EE /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1389C3F529B5C05800D673EE /* Preview Assets.xcassets */; };
+		139D635029DC4C0000C60FF6 /* list02.swift in Sources */ = {isa = PBXBuildFile; fileRef = 139D634F29DC4C0000C60FF6 /* list02.swift */; };
 		13B1211329D8865A00449103 /* livesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13B1211229D8865A00449103 /* livesView.swift */; };
 		13D2601129C2AD97001C7B81 /* login.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13D2601029C2AD97001C7B81 /* login.swift */; };
 		13D2601329C2AF89001C7B81 /* login2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13D2601229C2AF89001C7B81 /* login2.swift */; };
@@ -25,12 +27,14 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1320D11E29DC2BFE0038FB1F /* List.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = List.swift; sourceTree = "<group>"; };
 		1389C3EB29B5C05800D673EE /* postTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = postTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1389C3EE29B5C05800D673EE /* postTestApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = postTestApp.swift; sourceTree = "<group>"; };
 		1389C3F029B5C05800D673EE /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		1389C3F229B5C05800D673EE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1389C3F529B5C05800D673EE /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		1389C3FC29B5C37F00D673EE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		139D634F29DC4C0000C60FF6 /* list02.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = list02.swift; sourceTree = "<group>"; };
 		13B1211229D8865A00449103 /* livesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = livesView.swift; sourceTree = "<group>"; };
 		13D2601029C2AD97001C7B81 /* login.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = login.swift; sourceTree = "<group>"; };
 		13D2601229C2AF89001C7B81 /* login2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = login2.swift; sourceTree = "<group>"; };
@@ -58,6 +62,8 @@
 		1389C3E229B5C05700D673EE = {
 			isa = PBXGroup;
 			children = (
+				139D634F29DC4C0000C60FF6 /* list02.swift */,
+				1320D11E29DC2BFE0038FB1F /* List.swift */,
 				13B1211229D8865A00449103 /* livesView.swift */,
 				1389C3ED29B5C05800D673EE /* postTest */,
 				1389C3EC29B5C05800D673EE /* Products */,
@@ -174,6 +180,7 @@
 			files = (
 				1389C3F129B5C05800D673EE /* ContentView.swift in Sources */,
 				13F6934329D327A30096AE18 /* AddSportWalk.swift in Sources */,
+				139D635029DC4C0000C60FF6 /* list02.swift in Sources */,
 				13B1211329D8865A00449103 /* livesView.swift in Sources */,
 				13F6933929CC3BCD0096AE18 /* login3.swift in Sources */,
 				13F6933129CAA5290096AE18 /* loginAi.swift in Sources */,
@@ -181,6 +188,7 @@
 				13D2601329C2AF89001C7B81 /* login2.swift in Sources */,
 				13F6933D29D06A930096AE18 /* login5.swift in Sources */,
 				13F6933B29CC484B0096AE18 /* login04.swift in Sources */,
+				1320D11F29DC2BFE0038FB1F /* List.swift in Sources */,
 				13F6934129D326770096AE18 /* AddHabitClass.swift in Sources */,
 				13F6934529D328040096AE18 /* SportWalkInsertViewModel.swift in Sources */,
 				13F6933F29D06F9B0096AE18 /* login4.swift in Sources */,
