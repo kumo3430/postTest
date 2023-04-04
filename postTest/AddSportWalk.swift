@@ -10,6 +10,7 @@ import SwiftUI
 struct AddSportWalk: View {
     
 //    @ObservedObject var viewModel: SportWalkInsertViewModel
+//    @ObservedObject var viewModel: AddHabitClass
     
     @State var set_up_time: Date = Date()
     
@@ -36,7 +37,7 @@ struct AddSportWalk: View {
     @State var Set_up_time: String = ""
     
     @State private var chooseTag = false
-    
+    @Environment(\.dismiss) var dismiss
     
     func dateToDateString(_ date:Date) -> String {
         let timeZone = NSTimeZone.local
@@ -132,10 +133,25 @@ struct AddSportWalk: View {
                         Set_up_time = setToDateString(set_up_time)
 //                        setToDateString()
                         newSportHabit()
+//                        NavigationLink(destination: livesView()) {
+//                            EmptyView()
+//                        }
+//                        NavigationLink(destination: livesView()) {
+//
+//                        }
+//                        $viewModel.showingSheet = false
+                        dismiss()
                         print(123)
                     } label: {
                         HStack{
                             Spacer()
+//                            NavigationLink(destination: livesView()) {
+//                                Text("完成")
+//                                    .foregroundColor(.white)
+//                                    .padding(.vertical, 10)
+//                                    .font(.system(size: 14,weight: .semibold))()
+//                            }
+                            
                             Text("完成")
                                 .foregroundColor(.white)
                                 .padding(.vertical, 10)

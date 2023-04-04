@@ -8,18 +8,28 @@
 import SwiftUI
 
 struct AddHabitClass: View {
+    
+    @State private var showingSheet = false
+    
     var body: some View {
         
         NavigationStack {
-            VStack{
-                NavigationLink("學習") {
-//                    AddStudyGeneral()
-                }
-                NavigationLink("運動") {
-//                    AddSportWalk(viewModel: SportWalkInsertViewModel())
-                    AddSportWalk()
-                }
-            }
+//            VStack{
+//                NavigationLink("學習") {
+////                    AddStudyGeneral()
+//                }
+//                NavigationLink("運動") {
+////                    AddSportWalk(viewModel: SportWalkInsertViewModel())
+//                    AddSportWalk()
+//                }
+//            }
+//            @State private var showingSheet = false
+            Button("運動") {
+                      showingSheet.toggle()
+                  }
+                  .sheet(isPresented: $showingSheet) {
+                      AddSportWalk()
+                  }
             .navigationTitle("習慣建立")
         }
         

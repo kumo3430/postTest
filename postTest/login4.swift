@@ -19,6 +19,7 @@ struct login4: View {
             VStack {
                 if isLoggedIn {
                     Text("You are logged in!")
+                    // 印出使用者帳號
                     Text(getUsername)
                     NavigationLink {
                         AddHabitClass()
@@ -37,8 +38,10 @@ struct login4: View {
                     Button("Log in") {
                         login()
                     }
+                    // 如果帳號密碼其中一蘭為空值印出錯誤
                     Text(errorEmpty)
                         .foregroundColor(.red)
+                    // 帳號密碼在資料庫吳資料時
                     Text(errorMessage)
                         .foregroundColor(.red)
                 }
