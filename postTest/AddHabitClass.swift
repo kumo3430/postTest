@@ -12,21 +12,14 @@ struct AddHabitClass: View {
     @State private var showingSheet = false
     
     @State var taskNames: [String] = []
-    @State private var getTaskName = ""
 
-    
-    struct List : Codable {
-//        var taskName: [String]
-        var taskName: String
-    }
-    
     var body: some View {
         
         NavigationStack {
             ForEach(taskNames, id: \.self) { taskName in
                 Text(taskName)
             }
-//            liveList()
+
 //            VStack{
 //                NavigationLink("學習") {
 ////                    AddStudyGeneral()
@@ -48,7 +41,6 @@ struct AddHabitClass: View {
         }
         .onAppear {
             self.liveList()
-            Text(getTaskName)
         }
 
     }
