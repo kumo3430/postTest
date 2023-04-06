@@ -13,6 +13,7 @@
 		1389C3F329B5C05800D673EE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1389C3F229B5C05800D673EE /* Assets.xcassets */; };
 		1389C3F629B5C05800D673EE /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1389C3F529B5C05800D673EE /* Preview Assets.xcassets */; };
 		139D635029DC4C0000C60FF6 /* list02.swift in Sources */ = {isa = PBXBuildFile; fileRef = 139D634F29DC4C0000C60FF6 /* list02.swift */; };
+		139D635329DEA32600C60FF6 /* getDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 139D635229DEA32600C60FF6 /* getDetails.swift */; };
 		13B1211329D8865A00449103 /* livesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13B1211229D8865A00449103 /* livesView.swift */; };
 		13D2601129C2AD97001C7B81 /* login.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13D2601029C2AD97001C7B81 /* login.swift */; };
 		13D2601329C2AF89001C7B81 /* login2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13D2601229C2AF89001C7B81 /* login2.swift */; };
@@ -35,6 +36,7 @@
 		1389C3F529B5C05800D673EE /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		1389C3FC29B5C37F00D673EE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		139D634F29DC4C0000C60FF6 /* list02.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = list02.swift; sourceTree = "<group>"; };
+		139D635229DEA32600C60FF6 /* getDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = getDetails.swift; sourceTree = "<group>"; };
 		13B1211229D8865A00449103 /* livesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = livesView.swift; sourceTree = "<group>"; };
 		13D2601029C2AD97001C7B81 /* login.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = login.swift; sourceTree = "<group>"; };
 		13D2601229C2AF89001C7B81 /* login2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = login2.swift; sourceTree = "<group>"; };
@@ -84,6 +86,7 @@
 				139D634F29DC4C0000C60FF6 /* list02.swift */,
 				13F6933E29D06F9B0096AE18 /* login4.swift */,
 				13F6934029D326770096AE18 /* AddHabitClass.swift */,
+				139D635229DEA32600C60FF6 /* getDetails.swift */,
 				13F6934229D327A30096AE18 /* AddSportWalk.swift */,
 				1389C3EE29B5C05800D673EE /* postTestApp.swift */,
 				139D635129DC507300C60FF6 /* x */,
@@ -187,6 +190,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1389C3F129B5C05800D673EE /* ContentView.swift in Sources */,
+				139D635329DEA32600C60FF6 /* getDetails.swift in Sources */,
 				13F6934329D327A30096AE18 /* AddSportWalk.swift in Sources */,
 				139D635029DC4C0000C60FF6 /* list02.swift in Sources */,
 				13B1211329D8865A00449103 /* livesView.swift in Sources */,

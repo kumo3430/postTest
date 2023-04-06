@@ -12,18 +12,33 @@ struct AddHabitClass: View {
     @State private var showingSheet = false
     
     @State var taskNames: [String] = []
+    
+    @State private var TaskName = ""
 
     var body: some View {
         
         NavigationStack {
             ForEach(taskNames, id: \.self) { taskName in
+                let TaskName = taskName
+//                NavigationLink {
+//                    getDetails()
+//                } label: {
+//                    Text(taskName)
+//                    self.GetDetails()
+//                }
+
+//                NavigationLink(taskName) {
+//                    getDetails()
+//                }
+
                 Button(taskName) {
                           showingSheet.toggle()
+                        self.GetTaskName()
+                    print(TaskName)
                       }
                       .sheet(isPresented: $showingSheet) {
-                          AddSportWalk()
+                          getDetails()
                       }
-//                Text(taskName)
             }
 
 //            VStack{
@@ -35,7 +50,7 @@ struct AddHabitClass: View {
 //                    AddSportWalk()
 //                }
 //            }
-//            @State private var showingSheet = false
+//            @State private var showinmn nnngSheet = false
             Button("運動") {
                       showingSheet.toggle()
                   }
@@ -92,6 +107,11 @@ struct AddHabitClass: View {
                 }
             }
         }.resume()
+    }
+    
+    private func GetTaskName() {
+        
+        
     }
 }
 
