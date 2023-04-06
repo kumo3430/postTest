@@ -12,12 +12,8 @@ struct postTestApp: App {
     var body: some Scene {
         WindowGroup {
 //            ContentView()
-//            login()
-//            login2()
-//            loginAi()
-//            login3()
-//            login4()
-            AddHabitClass()
+            login4()
+//            AddHabitClass()
 //            list02()
         }
     }

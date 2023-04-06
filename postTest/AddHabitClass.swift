@@ -17,7 +17,13 @@ struct AddHabitClass: View {
         
         NavigationStack {
             ForEach(taskNames, id: \.self) { taskName in
-                Text(taskName)
+                Button(taskName) {
+                          showingSheet.toggle()
+                      }
+                      .sheet(isPresented: $showingSheet) {
+                          AddSportWalk()
+                      }
+//                Text(taskName)
             }
 
 //            VStack{
@@ -46,11 +52,28 @@ struct AddHabitClass: View {
     }
     
     private func liveList() {
+        
+        class URLSessionSingleton {
+            static let shared = URLSessionSingleton()
+
+            let session: URLSession
+
+            private init() {
+                let config = URLSessionConfiguration.default
+                config.httpCookieStorage = HTTPCookieStorage.shared
+                config.httpCookieAcceptPolicy = .always
+
+                session = URLSession(configuration: config)
+            }
+        }
+
+        
         let url = URL(string: "http://localhost:8888/habitList/liveList.php")!
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
 
-        URLSession.shared.dataTask(with: request) { data, response, error in
+//        URLSession.shared.dataTask(with: request) { data, response, error in
+        URLSessionSingleton.shared.session.dataTask(with: request) { data, response, error in
             
             guard let data = data else {
                 print("No data returned from server.")
@@ -62,6 +85,7 @@ struct AddHabitClass: View {
                 do {
                     let decoder = JSONDecoder()
                     let taskNames = try decoder.decode([String].self, from: jsonData)
+//                    let taskNames = try decoder.decode([String].self, from: data)
                     self.taskNames = taskNames
                 } catch {
                     print(error.localizedDescription)

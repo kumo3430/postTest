@@ -90,6 +90,22 @@ struct login4: View {
     }
     
     private func login() {
+        
+        class URLSessionSingleton {
+            static let shared = URLSessionSingleton()
+
+            let session: URLSession
+
+            private init() {
+                let config = URLSessionConfiguration.default
+                config.httpCookieStorage = HTTPCookieStorage.shared
+                config.httpCookieAcceptPolicy = .always
+
+                session = URLSession(configuration: config)
+            }
+        }
+
+        
         guard !username.isEmpty && !password.isEmpty else {
             print("Please fill in all required fields.")
             errorEmpty = "請確認帳號密碼都有輸入"
@@ -97,14 +113,15 @@ struct login4: View {
         }
         errorEmpty = ""
         errorMessage = ""
-        let url = URL(string: "http://127.0.0.1:8888/login/login3.php")!
+        let url = URL(string: "http://localhost:8888/login/login3.php")!
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         let body = ["username": username, "password": password]
         
         let jsonData = try! JSONSerialization.data(withJSONObject: body, options: [])
         request.httpBody = jsonData
-        URLSession.shared.dataTask(with: request) { data, response, error in
+//        URLSession.shared.dataTask(with: request) { data, response, error in
+        URLSessionSingleton.shared.session.dataTask(with: request) { data, response, error in
             
             guard let data = data else {
                 print("No data returned from server.")
