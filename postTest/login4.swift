@@ -113,7 +113,7 @@ struct login4: View {
         }
         errorEmpty = ""
         errorMessage = ""
-        let url = URL(string: "http://localhost:8888/login/login3.php")!
+        let url = URL(string: "http://127.0.0.1:8888/login/login3.php")!
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         let body = ["username": username, "password": password]
@@ -164,7 +164,7 @@ struct login4: View {
     
     private func logout() {
         isLoggedIn = false
-        let url = URL(string: "http://10.1.1.31:8888/login/logout.php")!
+        let url = URL(string: "http://127.0.0.1:8888/login/logout.php")!
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         URLSession.shared.dataTask(with: request) { data, response, error in
