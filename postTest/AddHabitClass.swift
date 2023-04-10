@@ -15,6 +15,17 @@ struct AddHabitClass: View {
     @State var taskNames: [String] = []
     
     @State private var TaskName = ""
+    
+    struct TaskDetails : Decodable {
+        var _sub_classification: String
+        var task_name: String
+        var begin: String
+        var finish: String
+        var quantity: String
+        var _cycle: String
+        var note: String
+        var alert_time: String
+    }
 
     var body: some View {
         
@@ -155,8 +166,19 @@ struct AddHabitClass: View {
                 } else {
                     print("Registration failed")
                 }
+                
+//                let decoder = JSONDecoder()
+//                do {
+//                    let taskDetails = try decoder.decode(TaskDetails.self, from: data)
+//                    print("============== taskDetails ==============")
+//                    print(taskDetails)
+//                    print("任務名稱為：\(taskDetails.task_name)")
+//                    print("============== taskDetails ==============")
+//                } catch {
+//                    print("解碼失敗：\(error)")
+//                }
             } catch {
-//                print(error.localizedDescription)
+                print(error.localizedDescription)
                 print(String(describing: error))
             }
         }.resume()
