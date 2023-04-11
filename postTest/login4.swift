@@ -26,6 +26,11 @@ struct login4: View {
                     } label: {
                         Text("建立習慣")
                     }
+                    NavigationLink {
+                        ListTaskClass()
+                    } label: {
+                        Text("顯示習慣")
+                    }
                     Button("Log out") {
                         logout()
                     }
