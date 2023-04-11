@@ -11,10 +11,8 @@ import SwiftUI
 struct postTestApp: App {
     var body: some Scene {
         WindowGroup {
-//            ContentView()
             login4()
-//            AddHabitClass()
-//            list02()
+
         }
     }
 }
