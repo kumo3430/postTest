@@ -13,11 +13,17 @@ struct AddHabitClass: View {
 
     var body: some View {
         
-            Button("運動") {
+//            Button("運動") {
+//                      showingSheet.toggle()
+//                  }
+//                  .sheet(isPresented: $showingSheet) {
+//                      AddSportWalk()
+//                  }
+            Button("作息") {
                       showingSheet.toggle()
                   }
                   .sheet(isPresented: $showingSheet) {
-                      AddSportWalk()
+                      AddRoutineHabit()
                   }
             .navigationTitle("習慣建立")
         }

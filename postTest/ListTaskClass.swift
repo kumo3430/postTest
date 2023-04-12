@@ -11,11 +11,11 @@ struct ListTaskClass: View {
     var body: some View {
         NavigationView {
             VStack{
-                NavigationLink("學習") {
-                    AddHabitClass()
-                }
                 NavigationLink("運動") {
                     SportListView()
+                }
+                NavigationLink("作息") {
+                    AddHabitClass()
                 }
             }
             .navigationTitle("顯示習慣類別")
