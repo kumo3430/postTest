@@ -7,6 +7,35 @@
 
 import SwiftUI
 
+//struct SleepView: View {
+//    @Binding var targetTime: Date
+//
+//    var body: some View {
+//        DatePicker("目標時間：", selection: $targetTime, displayedComponents: .hourAndMinute)
+//            .environment(\.locale, Locale.init(identifier: "zh-TW"))
+//    }
+//}
+
+//struct SugarView: View {
+//    let targets = ["Target 1", "Target 2"]
+//    @Binding var target: String
+//    @Binding var targetQuantity: Int
+//
+//    var body: some View {
+//        HStack {
+//            Picker(selection: $target, label: Text("選擇大類別")) {
+//                ForEach(targets, id: \.self) { target in
+//                    Text(target)
+//                }
+//            }
+//            Text("少於")
+//            TextField("n", value: $targetQuantity, formatter: NumberFormatter())
+//                .textFieldStyle(.roundedBorder)
+//            Text("次 / 週 ")
+//        }
+//    }
+//}
+
 struct AddRoutineHabit: View {
 //    @ObservedObject var viewModel: SportWalkInsertViewModel
 //    @ObservedObject var viewModel: AddHabitClass
@@ -15,6 +44,8 @@ struct AddRoutineHabit: View {
     @State var _classification: Int = 3
     let sub_classification = ["早睡","減糖"]
     @State var _sub_classification: Int = 0
+    let Target = ["甜食","飲料"]
+//    @State var target: Int = 0
     @State var task_name: String = ""
     @State var tag_id1: Int = 0     //
     @State var quantity: Int = 0
@@ -32,10 +63,18 @@ struct AddRoutineHabit: View {
     @State var Set_up_time: String = ""
     
     
-    @State var target: String = ""
-    @State var target_quantity: Int = 0
-    @State var target_time: Date = Date()
-    @State var Target_time: String = ""
+//    @State var target: String = ""
+    @State private var target_quantity: Int = 0
+    @State private var target_time: Date = Date()
+    @State private var Target_time: String = ""
+    
+    @State private var subClassification = 0
+    @State private var targetTime = Date()
+//    @State private var target = "Target 1"
+    @State private var target = "甜食"
+    @State private var target_number: Int = 0
+    @State private var targetQuantity = 0
+
     
     @State private var chooseTag = false
     @Environment(\.dismiss) var dismiss
@@ -80,12 +119,19 @@ struct AddRoutineHabit: View {
 //                                    }
                         }
                         HStack {
-//                            if sub_classification.count = 0{
-//                                DatePicker("目標時間：", selection: $target_time,displayedComponents: .hourAndMinute)
-//                                    .environment(\.locale, Locale.init(identifier: "zh-TW"))
-//                            }
-                            DatePicker("目標時間：", selection: $target_time,displayedComponents: .hourAndMinute)
-                                .environment(\.locale, Locale.init(identifier: "zh-TW"))
+                                    VStack {
+
+                                        if _sub_classification == 0 {
+                                            SleepView(targetTime: $target_time)
+
+                                        }
+//                                        else if subClassification == 1 {
+//                                            SugarView(target: $target, targetQuantity: $targetQuantity)}
+                                        else{
+                                            SugarView(target: $target, targetQuantity: $targetQuantity)
+                                        }
+
+                                    }
                         }
                         HStack {
                             Text("備注：")
@@ -118,7 +164,11 @@ struct AddRoutineHabit: View {
 //                        setToDateString()
                         newSportHabit()
                         dismiss()
-                        print(123)
+//                        print(123)
+//                        print(target)
+//                        print($target)
+//                        print(targetQuantity)
+//                        print($targetQuantity)
                     } label: {
                         HStack{
                             Spacer()
@@ -141,6 +191,14 @@ struct AddRoutineHabit: View {
             }
             
         }
+    }
+    
+    private func sleep() {
+//        let target = "NULL"
+//        let target_quantity = "NULL"
+    }
+    private func sugar() {
+//        target_time = "NULL"
     }
     
     private func dateToDateString() {
@@ -180,7 +238,13 @@ struct AddRoutineHabit: View {
         let url = URL(string: "http://127.0.0.1:8888/addHabits/addRoutineSleep.php")!
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
-        let body : [String: Any] = ["_classification":_classification,"set_up_time": Set_up_time,"_sub_classification": _sub_classification,"task_name": task_name,"tag_id1": tag_id1,"target_time": Target_time,"_cycle": _cycle,"note": note,"alert_time": Alert_time]
+        if (target == "甜食"){
+            target_number = 0
+        } else if (target == "飲料") {
+            target_number = 1
+        }
+        print(target_number)
+        let body : [String: Any] = ["_classification":_classification,"set_up_time": Set_up_time,"_sub_classification": _sub_classification,"task_name": task_name,"tag_id1": tag_id1,"target_time": Target_time,"target": target_number,"target_quantity": targetQuantity,"_cycle": _cycle,"note": note,"alert_time": Alert_time]
         print(body)
         let jsonData = try! JSONSerialization.data(withJSONObject: body, options: [])
         request.httpBody = jsonData

@@ -17,6 +17,8 @@
 		139D635529E5768D00C60FF6 /* ListTaskClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 139D635429E5768D00C60FF6 /* ListTaskClass.swift */; };
 		139D635729E57B9200C60FF6 /* SportListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 139D635629E57B9200C60FF6 /* SportListView.swift */; };
 		139D635929E64F6900C60FF6 /* AddRoutineHabit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 139D635829E64F6900C60FF6 /* AddRoutineHabit.swift */; };
+		139D635B29E6F17A00C60FF6 /* SleepView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 139D635A29E6F17A00C60FF6 /* SleepView.swift */; };
+		139D635D29E6F1A100C60FF6 /* SugarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 139D635C29E6F1A100C60FF6 /* SugarView.swift */; };
 		13B1211329D8865A00449103 /* livesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13B1211229D8865A00449103 /* livesView.swift */; };
 		13D2601129C2AD97001C7B81 /* login.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13D2601029C2AD97001C7B81 /* login.swift */; };
 		13D2601329C2AF89001C7B81 /* login2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13D2601229C2AF89001C7B81 /* login2.swift */; };
@@ -43,6 +45,8 @@
 		139D635429E5768D00C60FF6 /* ListTaskClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTaskClass.swift; sourceTree = "<group>"; };
 		139D635629E57B9200C60FF6 /* SportListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SportListView.swift; sourceTree = "<group>"; };
 		139D635829E64F6900C60FF6 /* AddRoutineHabit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRoutineHabit.swift; sourceTree = "<group>"; };
+		139D635A29E6F17A00C60FF6 /* SleepView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SleepView.swift; sourceTree = "<group>"; };
+		139D635C29E6F1A100C60FF6 /* SugarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SugarView.swift; sourceTree = "<group>"; };
 		13B1211229D8865A00449103 /* livesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = livesView.swift; sourceTree = "<group>"; };
 		13D2601029C2AD97001C7B81 /* login.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = login.swift; sourceTree = "<group>"; };
 		13D2601229C2AF89001C7B81 /* login2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = login2.swift; sourceTree = "<group>"; };
@@ -70,7 +74,9 @@
 		1389C3E229B5C05700D673EE = {
 			isa = PBXGroup;
 			children = (
+				139D635A29E6F17A00C60FF6 /* SleepView.swift */,
 				139D635829E64F6900C60FF6 /* AddRoutineHabit.swift */,
+				139D635C29E6F1A100C60FF6 /* SugarView.swift */,
 				1320D11E29DC2BFE0038FB1F /* List.swift */,
 				13B1211229D8865A00449103 /* livesView.swift */,
 				1389C3ED29B5C05800D673EE /* postTest */,
@@ -204,6 +210,7 @@
 				139D635029DC4C0000C60FF6 /* list02.swift in Sources */,
 				13B1211329D8865A00449103 /* livesView.swift in Sources */,
 				13F6933929CC3BCD0096AE18 /* login3.swift in Sources */,
+				139D635D29E6F1A100C60FF6 /* SugarView.swift in Sources */,
 				13F6933129CAA5290096AE18 /* loginAi.swift in Sources */,
 				139D635929E64F6900C60FF6 /* AddRoutineHabit.swift in Sources */,
 				13D2601129C2AD97001C7B81 /* login.swift in Sources */,
@@ -216,6 +223,7 @@
 				13F6934529D328040096AE18 /* SportWalkInsertViewModel.swift in Sources */,
 				13F6933F29D06F9B0096AE18 /* login4.swift in Sources */,
 				1389C3EF29B5C05800D673EE /* postTestApp.swift in Sources */,
+				139D635B29E6F17A00C60FF6 /* SleepView.swift in Sources */,
 				139D635729E57B9200C60FF6 /* SportListView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
