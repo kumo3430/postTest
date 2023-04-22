@@ -31,7 +31,7 @@ struct RoutineListView: View {
                     print(TaskName)
                       }
                       .sheet(isPresented: $ShowingSheet) {
-                          getDetails(TaskName: $TaskName)
+                          getDetails(TaskName: $TaskName,tableName: $tableName)
                       }
             }
             Text("減糖")
@@ -42,7 +42,7 @@ struct RoutineListView: View {
                     print(TaskName)
                       }
                       .sheet(isPresented: $ShowingSheet) {
-                          getDetails(TaskName: $TaskName)
+                          getDetails(TaskName: $TaskName,tableName: $tableName)
                       }
             }
             .navigationTitle("運動類別")

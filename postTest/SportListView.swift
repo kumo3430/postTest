@@ -33,7 +33,7 @@ struct SportListView: View {
                     print(TaskName)
                       }
                       .sheet(isPresented: $ShowingSheet) {
-                          getDetails(TaskName: $TaskName)
+                          getDetails(TaskName: $TaskName,tableName: $tableName)
                       }
             }
             Text("跑步")
@@ -44,7 +44,7 @@ struct SportListView: View {
                     print(TaskName)
                       }
                       .sheet(isPresented: $ShowingSheet) {
-                          getDetails(TaskName: $TaskName)
+                          getDetails(TaskName: $TaskName,tableName: $tableName)
                       }
             }
             Text("游泳")
@@ -55,7 +55,7 @@ struct SportListView: View {
                     print(TaskName)
                       }
                       .sheet(isPresented: $ShowingSheet) {
-                          getDetails(TaskName: $TaskName)
+                          getDetails(TaskName: $TaskName,tableName: $tableName)
                       }
             }
             Text("騎車")
@@ -66,7 +66,7 @@ struct SportListView: View {
                     print(TaskName)
                       }
                       .sheet(isPresented: $ShowingSheet) {
-                          getDetails(TaskName: $TaskName)
+                          getDetails(TaskName: $TaskName,tableName: $tableName)
                       }
             }
             .navigationTitle("運動類別")

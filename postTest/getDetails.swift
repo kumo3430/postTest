@@ -20,7 +20,8 @@ struct getDetails: View {
     @State private var getAlert_time = ""
     
     @Binding var TaskName : String
-    @State private var tableName = ""
+    @Binding var tableName : String
+//    @State private var tableName = ""
     
     struct TaskDetails : Decodable {
         var _sub_classification: String
@@ -68,7 +69,7 @@ struct getDetails: View {
 //        print(request)
         request.httpMethod = "POST"
         
-        tableName = "lives"
+//        tableName = "lives"
         
         let body = ["taskName": TaskName, "tableName": tableName]
         print(body)
@@ -113,8 +114,9 @@ struct getDetails: View {
 }
 //
 struct getDetails_Previews: PreviewProvider {
-    @State static var TaskName : String = "Some String"
+    @State static var TaskName : String = "TaskName"
+    @State static var TableName : String = "TableName"
     static var previews: some View {
-        getDetails(TaskName: $TaskName)
+        getDetails(TaskName: $TaskName,tableName: $TableName)
     }
 }
