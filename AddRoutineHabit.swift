@@ -187,7 +187,7 @@ struct AddRoutineHabit: View {
                         }.background(Color.blue)
                     }
                 }
-                .navigationTitle("作息")
+                .navigationTitle("建立作息習慣")
             }
             
         }

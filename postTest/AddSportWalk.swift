@@ -160,7 +160,7 @@ struct AddSportWalk: View {
                         }.background(Color.blue)
                     }
                 }
-                .navigationTitle("運動")
+                .navigationTitle("建立運動習慣")
             }
             
         }

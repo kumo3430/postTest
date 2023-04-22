@@ -15,7 +15,7 @@ struct ListTaskClass: View {
                     SportListView()
                 }
                 NavigationLink("作息") {
-                    AddHabitClass()
+                    RoutineListView()
                 }
             }
             .navigationTitle("顯示習慣類別")

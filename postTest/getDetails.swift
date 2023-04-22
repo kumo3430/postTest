@@ -8,6 +8,17 @@
 import SwiftUI
 
 struct getDetails: View {
+    
+//    @ObservedObject var List: SportListView
+    
+    @State private var getTask_name = ""
+    @State private var getBegin = ""
+    @State private var getFinish = ""
+    @State private var getQuantity = ""
+    @State private var get_cycle = ""
+    @State private var getNote = ""
+    @State private var getAlert_time = ""
+    
     var body: some View {
         NavigationStack {
             Text("123")
@@ -19,7 +30,7 @@ struct getDetails: View {
     
     // 印出details
     private func GetDetails() {
-        
+//        getTask_name = $List.TaskDetails.task_name
     }
 }
 
