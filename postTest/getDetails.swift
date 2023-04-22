@@ -19,14 +19,16 @@ struct getDetails: View {
     @State private var getNote = ""
     @State private var getAlert_time = ""
     
-    @Binding var WalkTaskName : String
+    @Binding var TaskName : String
+//    @Binding var WalkTaskName : String
 //    @Binding var RunTaskName : String
     
     var body: some View {
         NavigationStack {
             Text("123")
 //            Text(WalkTaskName)
-            Text("You entered: \(WalkTaskName)")
+            Text("You entered: \(TaskName)")
+//            Text("You entered: \(WalkTaskName)")
 //            Text("You entered: \(RunTaskName)")
         }.navigationTitle("運動")
             .onAppear {
@@ -41,8 +43,8 @@ struct getDetails: View {
 }
 //
 struct getDetails_Previews: PreviewProvider {
-    @State static var WalkTaskName : String = "Some String"
+    @State static var TaskName : String = "Some String"
     static var previews: some View {
-        getDetails(WalkTaskName: $WalkTaskName)
+        getDetails(TaskName: $TaskName)
     }
 }

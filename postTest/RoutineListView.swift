@@ -44,26 +44,34 @@ struct RoutineListView: View {
             ForEach(sleepTaskNames, id: \.self) { taskName in
 
                 Button(taskName) {
-                    SleepTaskName = taskName
+//                    SleepTaskName = taskName
+//                          ShowingSheet.toggle()
+//                        self.GetTaskName()
+//                    print(SleepTaskName)
+                    TaskName = taskName
                           ShowingSheet.toggle()
                         self.GetTaskName()
-                    print(SleepTaskName)
+                    print(TaskName)
                       }
                       .sheet(isPresented: $ShowingSheet) {
-                          getDetails(WalkTaskName: $WalkTaskName)
+                          getDetails(TaskName: $TaskName)
                       }
             }
             Text("減糖")
             ForEach(sugarTaskNames, id: \.self) { taskName in
 
                 Button(taskName) {
-                    SugarTaskName = taskName
+//                    SugarTaskName = taskName
+//                          ShowingSheet.toggle()
+//                        self.GetTaskName()
+//                    print(SugarTaskName)
+                    TaskName = taskName
                           ShowingSheet.toggle()
                         self.GetTaskName()
-                    print(SugarTaskName)
+                    print(TaskName)
                       }
                       .sheet(isPresented: $ShowingSheet) {
-                          getDetails(WalkTaskName: $WalkTaskName)
+                          getDetails(TaskName: $TaskName)
                       }
             }
             .navigationTitle("運動類別")

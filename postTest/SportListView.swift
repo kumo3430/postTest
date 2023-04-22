@@ -17,17 +17,17 @@ struct SportListView: View {
     @State private var TaskName = ""
     
     @State var walkTaskNames: [String] = []
-    @State private var WalkTaskName: String = ""
-    
+//    @State private var WalkTaskName: String = ""
+//
     @State var runTaskNames: [String] = []
-    @State private var RunTaskName = ""
-    
+//    @State private var RunTaskName = ""
+//
     @State var swimTaskNames: [String] = []
-    @State private var SwimTaskNames = ""
-    
+//    @State private var SwimTaskNames = ""
+//
     @State var bikeTaskNames: [String] = []
-    @State private var BikeTaskNames = ""
-    
+//    @State private var BikeTaskNames = ""
+//
     @State private var tableName = ""
     
     struct TaskDetails : Decodable {
@@ -48,52 +48,68 @@ struct SportListView: View {
             ForEach(walkTaskNames, id: \.self) { taskName in
 
                 Button(taskName) {
-                    WalkTaskName = taskName
+//                    WalkTaskName = taskName
+//                          ShowingSheet.toggle()
+//                        self.GetTaskName()
+//                    print(WalkTaskName)
+                    TaskName = taskName
                           ShowingSheet.toggle()
                         self.GetTaskName()
-                    print(WalkTaskName)
+                    print(TaskName)
                       }
                       .sheet(isPresented: $ShowingSheet) {
-                          getDetails(WalkTaskName: $WalkTaskName)
+                          getDetails(TaskName: $TaskName)
                       }
             }
             Text("跑步")
             ForEach(runTaskNames, id: \.self) { taskName in
 
                 Button(taskName) {
-                    RunTaskName = taskName
+//                    RunTaskName = taskName
+//                          ShowingSheet.toggle()
+//                        self.GetTaskName()
+//                    print(RunTaskName)
+                    TaskName = taskName
                           ShowingSheet.toggle()
                         self.GetTaskName()
-                    print(RunTaskName)
+                    print(TaskName)
                       }
                       .sheet(isPresented: $ShowingSheet) {
-                          getDetails(WalkTaskName: $WalkTaskName)
+                          getDetails(TaskName: $TaskName)
                       }
             }
             Text("游泳")
             ForEach(swimTaskNames, id: \.self) { taskName in
 
                 Button(taskName) {
-                    SwimTaskNames = taskName
+//                    SwimTaskNames = taskName
+//                          ShowingSheet.toggle()
+//                        self.GetTaskName()
+//                    print(SwimTaskNames)
+                    TaskName = taskName
                           ShowingSheet.toggle()
                         self.GetTaskName()
-                    print(SwimTaskNames)
+                    print(TaskName)
                       }
                       .sheet(isPresented: $ShowingSheet) {
-                          getDetails(WalkTaskName: $WalkTaskName)
+                          getDetails(TaskName: $TaskName)
                       }
             }
             Text("騎車")
             ForEach(bikeTaskNames, id: \.self) { taskName in
 
                 Button(taskName) {
-                    BikeTaskNames = taskName
+//                    BikeTaskNames = taskName
+//                          ShowingSheet.toggle()
+//                        self.GetTaskName()
+//                    print(BikeTaskNames)
+                    TaskName = taskName
                           ShowingSheet.toggle()
                         self.GetTaskName()
-                    print(BikeTaskNames)
+                    print(TaskName)
                       }
                       .sheet(isPresented: $ShowingSheet) {
-                          getDetails(WalkTaskName: $WalkTaskName)
+                          getDetails(TaskName: $TaskName)
                       }
             }
 
