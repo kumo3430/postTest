@@ -102,10 +102,6 @@ struct SportListView: View {
         .onAppear {
             TableName()
             self.get_sub_classification()
-//            self.get_sub_classification_0()
-//            self.get_sub_classification_1()
-//            self.get_sub_classification_2()
-//            self.get_sub_classification_3()
 //            self.liveList()
         }
     }
@@ -114,13 +110,9 @@ struct SportListView: View {
     }
     
     private func get_sub_classification() {
-//        let i:Int
-        
+
         for i in 0 ... 4 {
-//            let _sub_classification = "\(i)"
             let _sub_classification = i
-            print ("i=\(i) ")
-            
             class URLSessionSingleton {
                 static let shared = URLSessionSingleton()
                 let session: URLSession
@@ -136,7 +128,7 @@ struct SportListView: View {
             request.httpMethod = "POST"
     //        let body : [String: Any] = ["_sub_classification": _sub_classification]
             let body : [String: Any] = ["_sub_classification": _sub_classification, "tableName": tableName]
-            print(body)
+//            print(body)
             let jsonData = try! JSONSerialization.data(withJSONObject: body, options: [])
             request.httpBody = jsonData
     //        URLSession.shared.dataTask(with: request) { data, response, error in
@@ -168,197 +160,6 @@ struct SportListView: View {
                 }
             }.resume()
         }
-    }
-    
-    
-    
-    
-    
-    
-    
-    private func get_sub_classification_0() {
-        
-        let _sub_classification = 0
-        
-        class URLSessionSingleton {
-            static let shared = URLSessionSingleton()
-
-            let session: URLSession
-
-            private init() {
-                let config = URLSessionConfiguration.default
-                config.httpCookieStorage = HTTPCookieStorage.shared
-                config.httpCookieAcceptPolicy = .always
-
-                session = URLSession(configuration: config)
-            }
-        }
-
-        let url = URL(string: "http://127.0.0.1:8888/habitList/nameList/liveList.php")!
-        var request = URLRequest(url: url)
-        request.httpMethod = "POST"
-//        let body : [String: Any] = ["_sub_classification": _sub_classification]
-        let body : [String: Any] = ["_sub_classification": _sub_classification, "tableName": tableName]
-        print(body)
-        let jsonData = try! JSONSerialization.data(withJSONObject: body, options: [])
-        request.httpBody = jsonData
-//        URLSession.shared.dataTask(with: request) { data, response, error in
-        URLSessionSingleton.shared.session.dataTask(with: request) { data, response, error in
-            guard let data = data else {
-                print("No data returned from server.")
-                return
-            }
-            if let content = String(data: data, encoding: .utf8) {
-                print(content)
-                let jsonData = content.data(using: .utf8)!
-                do {
-                    let decoder = JSONDecoder()
-                    let taskNames = try decoder.decode([String].self, from: jsonData)
-//                    let taskNames = try decoder.decode([String].self, from: data)
-                    self.walkTaskNames = taskNames
-                } catch {
-                    print(error.localizedDescription)
-                }
-            }
-        }.resume()
-    }
-    
-    private func get_sub_classification_1() {
-        
-        let _sub_classification = 1
-        
-        class URLSessionSingleton {
-            static let shared = URLSessionSingleton()
-
-            let session: URLSession
-
-            private init() {
-                let config = URLSessionConfiguration.default
-                config.httpCookieStorage = HTTPCookieStorage.shared
-                config.httpCookieAcceptPolicy = .always
-
-                session = URLSession(configuration: config)
-            }
-        }
-
-        let url = URL(string: "http://127.0.0.1:8888/habitList/nameList/liveList.php")!
-        var request = URLRequest(url: url)
-        request.httpMethod = "POST"
-        let body : [String: Any] = ["_sub_classification": _sub_classification, "tableName": tableName]
-        print(body)
-        let jsonData = try! JSONSerialization.data(withJSONObject: body, options: [])
-        request.httpBody = jsonData
-//        URLSession.shared.dataTask(with: request) { data, response, error in
-        URLSessionSingleton.shared.session.dataTask(with: request) { data, response, error in
-            guard let data = data else {
-                print("No data returned from server.")
-                return
-            }
-            if let content = String(data: data, encoding: .utf8) {
-                print(content)
-                let jsonData = content.data(using: .utf8)!
-                do {
-                    let decoder = JSONDecoder()
-                    let taskNames = try decoder.decode([String].self, from: jsonData)
-//                    let taskNames = try decoder.decode([String].self, from: data)
-                    self.runTaskNames = taskNames
-                } catch {
-                    print(error.localizedDescription)
-                }
-            }
-        }.resume()
-    }
-    
-    private func get_sub_classification_2() {
-        
-        let _sub_classification = 2 
-        
-        class URLSessionSingleton {
-            static let shared = URLSessionSingleton()
-
-            let session: URLSession
-
-            private init() {
-                let config = URLSessionConfiguration.default
-                config.httpCookieStorage = HTTPCookieStorage.shared
-                config.httpCookieAcceptPolicy = .always
-
-                session = URLSession(configuration: config)
-            }
-        }
-
-        let url = URL(string: "http://127.0.0.1:8888/habitList/nameList/liveList.php")!
-        var request = URLRequest(url: url)
-        request.httpMethod = "POST"
-        let body : [String: Any] = ["_sub_classification": _sub_classification, "tableName": tableName]
-        print(body)
-        let jsonData = try! JSONSerialization.data(withJSONObject: body, options: [])
-        request.httpBody = jsonData
-//        URLSession.shared.dataTask(with: request) { data, response, error in
-        URLSessionSingleton.shared.session.dataTask(with: request) { data, response, error in
-            guard let data = data else {
-                print("No data returned from server.")
-                return
-            }
-            if let content = String(data: data, encoding: .utf8) {
-                print(content)
-                let jsonData = content.data(using: .utf8)!
-                do {
-                    let decoder = JSONDecoder()
-                    let taskNames = try decoder.decode([String].self, from: jsonData)
-//                    let taskNames = try decoder.decode([String].self, from: data)
-                    self.swimTaskNames = taskNames
-                } catch {
-                    print(error.localizedDescription)
-                }
-            }
-        }.resume()
-    }
-    
-    private func get_sub_classification_3() {
-        
-        let _sub_classification = 3
-        
-        class URLSessionSingleton {
-            static let shared = URLSessionSingleton()
-
-            let session: URLSession
-
-            private init() {
-                let config = URLSessionConfiguration.default
-                config.httpCookieStorage = HTTPCookieStorage.shared
-                config.httpCookieAcceptPolicy = .always
-
-                session = URLSession(configuration: config)
-            }
-        }
-
-        let url = URL(string: "http://127.0.0.1:8888/habitList/nameList/liveList.php")!
-        var request = URLRequest(url: url)
-        request.httpMethod = "POST"
-        let body : [String: Any] = ["_sub_classification": _sub_classification, "tableName": tableName]
-        print(body)
-        let jsonData = try! JSONSerialization.data(withJSONObject: body, options: [])
-        request.httpBody = jsonData
-//        URLSession.shared.dataTask(with: request) { data, response, error in
-        URLSessionSingleton.shared.session.dataTask(with: request) { data, response, error in
-            guard let data = data else {
-                print("No data returned from server.")
-                return
-            }
-            if let content = String(data: data, encoding: .utf8) {
-                print(content)
-                let jsonData = content.data(using: .utf8)!
-                do {
-                    let decoder = JSONDecoder()
-                    let taskNames = try decoder.decode([String].self, from: jsonData)
-//                    let taskNames = try decoder.decode([String].self, from: data)
-                    self.bikeTaskNames = taskNames
-                } catch {
-                    print(error.localizedDescription)
-                }
-            }
-        }.resume()
     }
     
     private func GetTaskName() {
