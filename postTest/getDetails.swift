@@ -20,8 +20,18 @@ struct getDetails: View {
     @State private var getAlert_time = ""
     
     @Binding var TaskName : String
-//    @Binding var WalkTaskName : String
-//    @Binding var RunTaskName : String
+    @State private var tableName = ""
+    
+    struct TaskDetails : Decodable {
+        var _sub_classification: String
+        var task_name: String
+        var begin: String
+        var finish: String
+        var quantity: String
+        var _cycle: String
+        var note: String
+        var alert_time: String
+    }
     
     var body: some View {
         NavigationStack {
@@ -32,13 +42,73 @@ struct getDetails: View {
 //            Text("You entered: \(RunTaskName)")
         }.navigationTitle("運動")
             .onAppear {
-                self.GetDetails()
+                self.GetTaskName()
             }
     }
     
-    // 印出details
-    private func GetDetails() {
-//        getTask_name = TaskDetails.task_name
+    private func GetTaskName() {
+        
+        class URLSessionSingleton {
+            static let shared = URLSessionSingleton()
+
+            let session: URLSession
+
+            private init() {
+                let config = URLSessionConfiguration.default
+                config.httpCookieStorage = HTTPCookieStorage.shared
+                config.httpCookieAcceptPolicy = .always
+
+                session = URLSession(configuration: config)
+            }
+        }
+       
+        let url = URL(string: "http://127.0.0.1:8888/habitList/getTask/getlivesTask.php")!
+        var request = URLRequest(url: url)
+//        print(url)
+//        print(request)
+        request.httpMethod = "POST"
+        
+        tableName = "lives"
+        
+        let body = ["taskName": TaskName, "tableName": tableName]
+        print(body)
+//        let jsonData = try! JSONSerialization.data(withJSONObject: body, options: [])
+        let jsonData = try! JSONSerialization.data(withJSONObject: body, options: [])
+        request.httpBody = jsonData
+//        URLSession.shared.dataTask(with: request) { data, response, error in
+        URLSessionSingleton.shared.session.dataTask(with: request) { data, response, error in
+            // handle response
+            if let data,
+              let content = String(data: data, encoding: .utf8) {
+               print(content)
+            }
+            guard let data = data else { return }
+//            print(String(data: data, encoding: .utf8)!)
+            do {
+//                let jsonResponse = try JSONSerialization.jsonObject(with: data, options: [])
+//                guard let dict = jsonResponse as? [String: Any], let status = dict["status"] as? String else { return }
+//                if status == "success" {
+////                    self.isLoggedIn = true
+//                } else {
+//                    print("Registration failed")
+//                }
+                
+                let decoder = JSONDecoder()
+                do {
+                    let taskDetails = try decoder.decode(TaskDetails.self, from: data)
+                    print("============== taskDetails ==============")
+                    print(taskDetails)
+                    print("任務名稱為：\(taskDetails.task_name)")
+                    print("============== taskDetails ==============")
+                } catch {
+                    print("解碼失敗：\(error)")
+                }
+            } catch {
+                print(error.localizedDescription)
+                print(String(describing: error))
+            }
+        }.resume()
+        
     }
 }
 //
