@@ -15,14 +15,8 @@ struct RoutineListView: View {
     
     @State var taskNames: [String] = []
     @State private var TaskName = ""
-    
     @State var sleepTaskNames: [String] = []
-    @State private var SleepTaskName = ""
-    
     @State var sugarTaskNames: [String] = []
-    @State private var SugarTaskName = ""
-
-    @State private var WalkTaskName: String = ""
     
     @State private var tableName = ""
     
@@ -42,12 +36,7 @@ struct RoutineListView: View {
             //"健走","跑步","游泳","騎車"
             Text("早睡")
             ForEach(sleepTaskNames, id: \.self) { taskName in
-
                 Button(taskName) {
-//                    SleepTaskName = taskName
-//                          ShowingSheet.toggle()
-//                        self.GetTaskName()
-//                    print(SleepTaskName)
                     TaskName = taskName
                           ShowingSheet.toggle()
                         self.GetTaskName()
@@ -59,12 +48,7 @@ struct RoutineListView: View {
             }
             Text("減糖")
             ForEach(sugarTaskNames, id: \.self) { taskName in
-
                 Button(taskName) {
-//                    SugarTaskName = taskName
-//                          ShowingSheet.toggle()
-//                        self.GetTaskName()
-//                    print(SugarTaskName)
                     TaskName = taskName
                           ShowingSheet.toggle()
                         self.GetTaskName()
@@ -86,7 +70,6 @@ struct RoutineListView: View {
         tableName = "routine"
     }
     private func get_sub_classification() {
-
         for i in 0 ... 4 {
             let _sub_classification = i
             class URLSessionSingleton {

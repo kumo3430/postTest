@@ -15,19 +15,11 @@ struct SportListView: View {
     
     @State var taskNames: [String] = []
     @State private var TaskName = ""
-    
     @State var walkTaskNames: [String] = []
-//    @State private var WalkTaskName: String = ""
-//
     @State var runTaskNames: [String] = []
-//    @State private var RunTaskName = ""
-//
     @State var swimTaskNames: [String] = []
-//    @State private var SwimTaskNames = ""
-//
     @State var bikeTaskNames: [String] = []
-//    @State private var BikeTaskNames = ""
-//
+
     @State private var tableName = ""
     
     struct TaskDetails : Decodable {
@@ -46,12 +38,7 @@ struct SportListView: View {
             //"健走","跑步","游泳","騎車"
             Text("健走")
             ForEach(walkTaskNames, id: \.self) { taskName in
-
                 Button(taskName) {
-//                    WalkTaskName = taskName
-//                          ShowingSheet.toggle()
-//                        self.GetTaskName()
-//                    print(WalkTaskName)
                     TaskName = taskName
                           ShowingSheet.toggle()
                         self.GetTaskName()
@@ -63,12 +50,7 @@ struct SportListView: View {
             }
             Text("跑步")
             ForEach(runTaskNames, id: \.self) { taskName in
-
                 Button(taskName) {
-//                    RunTaskName = taskName
-//                          ShowingSheet.toggle()
-//                        self.GetTaskName()
-//                    print(RunTaskName)
                     TaskName = taskName
                           ShowingSheet.toggle()
                         self.GetTaskName()
@@ -80,12 +62,7 @@ struct SportListView: View {
             }
             Text("游泳")
             ForEach(swimTaskNames, id: \.self) { taskName in
-
                 Button(taskName) {
-//                    SwimTaskNames = taskName
-//                          ShowingSheet.toggle()
-//                        self.GetTaskName()
-//                    print(SwimTaskNames)
                     TaskName = taskName
                           ShowingSheet.toggle()
                         self.GetTaskName()
@@ -97,12 +74,7 @@ struct SportListView: View {
             }
             Text("騎車")
             ForEach(bikeTaskNames, id: \.self) { taskName in
-
                 Button(taskName) {
-//                    BikeTaskNames = taskName
-//                          ShowingSheet.toggle()
-//                        self.GetTaskName()
-//                    print(BikeTaskNames)
                     TaskName = taskName
                           ShowingSheet.toggle()
                         self.GetTaskName()
@@ -112,7 +84,6 @@ struct SportListView: View {
                           getDetails(TaskName: $TaskName)
                       }
             }
-
             .navigationTitle("運動類別")
         }
         .onAppear {
@@ -126,7 +97,6 @@ struct SportListView: View {
     }
     
     private func get_sub_classification() {
-
         for i in 0 ... 4 {
             let _sub_classification = i
             class URLSessionSingleton {
