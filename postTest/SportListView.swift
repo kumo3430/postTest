@@ -17,7 +17,7 @@ struct SportListView: View {
     @State private var TaskName = ""
     
     @State var walkTaskNames: [String] = []
-    @State private var WalkTaskName = ""
+    @State private var WalkTaskName: String = ""
     
     @State var runTaskNames: [String] = []
     @State private var RunTaskName = ""
@@ -54,7 +54,7 @@ struct SportListView: View {
                     print(WalkTaskName)
                       }
                       .sheet(isPresented: $ShowingSheet) {
-                          getDetails()
+                          getDetails(WalkTaskName: $WalkTaskName)
                       }
             }
             Text("跑步")
@@ -67,7 +67,7 @@ struct SportListView: View {
                     print(RunTaskName)
                       }
                       .sheet(isPresented: $ShowingSheet) {
-                          getDetails()
+                          getDetails(WalkTaskName: $WalkTaskName)
                       }
             }
             Text("游泳")
@@ -80,7 +80,7 @@ struct SportListView: View {
                     print(SwimTaskNames)
                       }
                       .sheet(isPresented: $ShowingSheet) {
-                          getDetails()
+                          getDetails(WalkTaskName: $WalkTaskName)
                       }
             }
             Text("騎車")
@@ -93,7 +93,7 @@ struct SportListView: View {
                     print(BikeTaskNames)
                       }
                       .sheet(isPresented: $ShowingSheet) {
-                          getDetails()
+                          getDetails(WalkTaskName: $WalkTaskName)
                       }
             }
 

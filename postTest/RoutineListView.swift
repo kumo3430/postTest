@@ -22,6 +22,7 @@ struct RoutineListView: View {
     @State var sugarTaskNames: [String] = []
     @State private var SugarTaskName = ""
 
+    @State private var WalkTaskName: String = ""
     
     @State private var tableName = ""
     
@@ -49,7 +50,7 @@ struct RoutineListView: View {
                     print(SleepTaskName)
                       }
                       .sheet(isPresented: $ShowingSheet) {
-                          getDetails()
+                          getDetails(WalkTaskName: $WalkTaskName)
                       }
             }
             Text("減糖")
@@ -62,7 +63,7 @@ struct RoutineListView: View {
                     print(SugarTaskName)
                       }
                       .sheet(isPresented: $ShowingSheet) {
-                          getDetails()
+                          getDetails(WalkTaskName: $WalkTaskName)
                       }
             }
             .navigationTitle("運動類別")
