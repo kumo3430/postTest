@@ -11,7 +11,8 @@ struct getDetails: View {
     
 //    @ObservedObject var List: SportListView
     
-    @State private var getTask_name = ""
+//    @State private var getTask_name = ""
+    @State private var get_sub_classification = ""
     @State private var getBegin = ""
     @State private var getFinish = ""
     @State private var getQuantity = ""
@@ -35,13 +36,47 @@ struct getDetails: View {
     }
     
     var body: some View {
+//        VStack{
+//            Text("習慣名稱 : \(TaskName)")
+//                .font(.headline)
+//                .fontWeight(.bold)
+//                .padding(6.0)
+//            Text("習慣名稱 : \(TaskName)")
+//                .font(.headline)
+//                .fontWeight(.bold)
+//
+//                .padding(6.0)
+//        }
+        
         NavigationStack {
-            Text("123")
-//            Text(WalkTaskName)
-            Text("You entered: \(TaskName)")
-//            Text("You entered: \(WalkTaskName)")
-//            Text("You entered: \(RunTaskName)")
-        }.navigationTitle("運動")
+            VStack{
+                Text("大類別 : \(TaskName)")
+                    .padding(5.0)
+                Text("小類別 : \(get_sub_classification)")
+                    .padding(5.0)
+                Text("習慣名稱 : \(TaskName)")
+                    .padding(5.0)
+                Text("開始日期 : \(getBegin)")
+                    .padding(5.0)
+                Text("結束日期 : \(getFinish)")
+                    .padding(5.0)
+                HStack{
+                    Text("目標 : \(getQuantity) \(get_cycle)")
+                        .padding(5.0)
+                }
+                Text("備注 : \(getNote)")
+                    .padding(5.0)
+                Text("提醒時間 : \(getAlert_time)")
+                    .padding(5.0)
+            }
+            .multilineTextAlignment(.leading)
+            .font(.headline)
+            .fontWeight(.bold)
+
+
+                .navigationTitle(" \(TaskName)")
+        }
+            .multilineTextAlignment(.center)
             .onAppear {
                 self.GetTaskName()
             }
@@ -51,55 +86,52 @@ struct getDetails: View {
         
         class URLSessionSingleton {
             static let shared = URLSessionSingleton()
-
             let session: URLSession
-
             private init() {
                 let config = URLSessionConfiguration.default
                 config.httpCookieStorage = HTTPCookieStorage.shared
                 config.httpCookieAcceptPolicy = .always
-
                 session = URLSession(configuration: config)
             }
         }
        
         let url = URL(string: "http://127.0.0.1:8888/habitList/getTask/getlivesTask.php")!
         var request = URLRequest(url: url)
-//        print(url)
-//        print(request)
         request.httpMethod = "POST"
-        
-//        tableName = "lives"
         
         let body = ["taskName": TaskName, "tableName": tableName]
         print(body)
-//        let jsonData = try! JSONSerialization.data(withJSONObject: body, options: [])
         let jsonData = try! JSONSerialization.data(withJSONObject: body, options: [])
         request.httpBody = jsonData
-//        URLSession.shared.dataTask(with: request) { data, response, error in
         URLSessionSingleton.shared.session.dataTask(with: request) { data, response, error in
-            // handle response
             if let data,
               let content = String(data: data, encoding: .utf8) {
                print(content)
             }
             guard let data = data else { return }
-//            print(String(data: data, encoding: .utf8)!)
             do {
-//                let jsonResponse = try JSONSerialization.jsonObject(with: data, options: [])
-//                guard let dict = jsonResponse as? [String: Any], let status = dict["status"] as? String else { return }
-//                if status == "success" {
-////                    self.isLoggedIn = true
-//                } else {
-//                    print("Registration failed")
-//                }
-                
                 let decoder = JSONDecoder()
                 do {
                     let taskDetails = try decoder.decode(TaskDetails.self, from: data)
                     print("============== taskDetails ==============")
                     print(taskDetails)
                     print("任務名稱為：\(taskDetails.task_name)")
+                    print("大類別為：\(taskDetails._sub_classification)")
+                    print("小類別為：\(taskDetails._sub_classification)")
+                    print("開始日期為：\(taskDetails.begin)")
+                    print("結束日期為：\(taskDetails.finish)")
+                    print("目標為：\(taskDetails.quantity)")
+                    print("週期為：\(taskDetails._cycle)")
+                    print("備注為：\(taskDetails.note)")
+                    print("提醒時間為：\(taskDetails.alert_time)")
+                    get_sub_classification = taskDetails._sub_classification
+                    getBegin = taskDetails.begin
+                    getFinish = taskDetails.finish
+                    getQuantity = taskDetails.quantity
+                    get_cycle = taskDetails._cycle
+                    getNote = taskDetails.note
+                    getAlert_time = taskDetails.alert_time
+                    
                     print("============== taskDetails ==============")
                 } catch {
                     print("解碼失敗：\(error)")

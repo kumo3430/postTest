@@ -182,7 +182,7 @@ struct AddSportWalk: View {
         let timeZone = NSTimeZone.local
         let formatter = DateFormatter()
         formatter.timeZone = timeZone
-        formatter.dateFormat = "yyyy-MM-dd"
+        formatter.dateFormat = "HH:mm"
         let dateString = formatter.string(from: date)
         print(dateString)
         return dateString
