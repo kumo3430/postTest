@@ -7,42 +7,13 @@
 
 import SwiftUI
 
-//struct SleepView: View {
-//    @Binding var targetTime: Date
-//
-//    var body: some View {
-//        DatePicker("目標時間：", selection: $targetTime, displayedComponents: .hourAndMinute)
-//            .environment(\.locale, Locale.init(identifier: "zh-TW"))
-//    }
-//}
-
-//struct SugarView: View {
-//    let targets = ["Target 1", "Target 2"]
-//    @Binding var target: String
-//    @Binding var targetQuantity: Int
-//
-//    var body: some View {
-//        HStack {
-//            Picker(selection: $target, label: Text("選擇大類別")) {
-//                ForEach(targets, id: \.self) { target in
-//                    Text(target)
-//                }
-//            }
-//            Text("少於")
-//            TextField("n", value: $targetQuantity, formatter: NumberFormatter())
-//                .textFieldStyle(.roundedBorder)
-//            Text("次 / 週 ")
-//        }
-//    }
-//}
-
 struct AddRoutineHabit: View {
 //    @ObservedObject var viewModel: SportWalkInsertViewModel
 //    @ObservedObject var viewModel: AddHabitClass
     @State var set_up_time: Date = Date()
 //    let classification = ["學習","運動","生活","作息"]
     @State var _classification: Int = 3
-    let sub_classification = ["早睡","減糖"]
+    let sub_classification = ["早睡","早起","區間"]
     @State var _sub_classification: Int = 0
     let Target = ["甜食","飲料"]
 //    @State var target: Int = 0
@@ -125,10 +96,11 @@ struct AddRoutineHabit: View {
                                             SleepView(targetTime: $target_time)
 
                                         }
-//                                        else if subClassification == 1 {
-//                                            SugarView(target: $target, targetQuantity: $targetQuantity)}
-                                        else{
-                                            SugarView(target: $target, targetQuantity: $targetQuantity)
+                                        else if (_sub_classification == 1 ){
+                                            SleepView(targetTime: $target_time)
+                                        }
+                                        else {
+                                            IntervalView(targetQuantity: $targetQuantity)
                                         }
 
                                     }
