@@ -17,6 +17,9 @@ struct ListTaskClass: View {
                 NavigationLink("作息") {
                     RoutineListView()
                 }
+                NavigationLink("飲食") {
+                    DietListView()
+                }
             }
             .navigationTitle("顯示習慣類別")
         }

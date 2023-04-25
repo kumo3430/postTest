@@ -12,7 +12,12 @@ struct getDetails: View {
 //    @ObservedObject var List: SportListView
     
 //    @State private var getTask_name = ""
+//    @State private var get_classification:Int = 0
+    @State private var get_classification = ""
+    @State private var Get_classification = ""
+//    @State private var get_sub_classification:Int = 0
     @State private var get_sub_classification = ""
+    @State private var Get_sub_classification = ""
     @State private var getBegin = ""
     @State private var getFinish = ""
     @State private var getQuantity = ""
@@ -25,6 +30,7 @@ struct getDetails: View {
 //    @State private var tableName = ""
     
     struct TaskDetails : Decodable {
+        var _classification : String
         var _sub_classification: String
         var task_name: String
         var begin: String
@@ -50,9 +56,9 @@ struct getDetails: View {
         
         NavigationStack {
             VStack{
-                Text("大類別 : \(TaskName)")
+                Text("大類別 : \(Get_classification)")
                     .padding(5.0)
-                Text("小類別 : \(get_sub_classification)")
+                Text("小類別 : \(Get_sub_classification)")
                     .padding(5.0)
                 Text("習慣名稱 : \(TaskName)")
                     .padding(5.0)
@@ -79,11 +85,26 @@ struct getDetails: View {
             .multilineTextAlignment(.center)
             .onAppear {
                 self.GetTaskName()
+                self.Classification()
             }
     }
     
+    private func Classification() {
+        if (get_classification == "1") {
+            Get_classification = "運動"
+        }
+        if (get_sub_classification == "0"){
+            Get_classification = "健走"
+        } else if (get_sub_classification == "1"){
+            Get_classification = "跑步"
+        } else if (get_sub_classification == "2"){
+            Get_classification = "游泳"
+        } else if (get_sub_classification == "3"){
+            Get_classification = "騎車"
+        }
+    }
+    
     private func GetTaskName() {
-        
         class URLSessionSingleton {
             static let shared = URLSessionSingleton()
             let session: URLSession
@@ -116,7 +137,7 @@ struct getDetails: View {
                     print("============== taskDetails ==============")
                     print(taskDetails)
                     print("任務名稱為：\(taskDetails.task_name)")
-                    print("大類別為：\(taskDetails._sub_classification)")
+                    print("大類別為：\(taskDetails._classification)")
                     print("小類別為：\(taskDetails._sub_classification)")
                     print("開始日期為：\(taskDetails.begin)")
                     print("結束日期為：\(taskDetails.finish)")

@@ -9,27 +9,33 @@ import SwiftUI
 
 struct AddHabitClass: View {
     
-    @State private var showingSheet = false
-    @State private var ShowingSheet = false
+    @State private var showingSheetSport = false
+    @State private var showingSheetRoutine = false
+    @State private var showingSheetDiet = false
 
     var body: some View {
         
         NavigationStack {
 //            ScrollView {
                 VStack{
-                    
-                        Button("運動") {
-                                  showingSheet.toggle()
-                              }
-                              .sheet(isPresented: $showingSheet) {
-                                  AddSportWalk()
-                              }
-                        Button("作息") {
-                                  ShowingSheet.toggle()
-                              }
-                              .sheet(isPresented: $ShowingSheet) {
-                                  AddRoutineHabit()
-                              }
+                    Button("運動") {
+                        showingSheetSport.toggle()
+                          }
+                          .sheet(isPresented: $showingSheetSport) {
+                              AddSportWalk()
+                          }
+                    Button("作息") {
+                        showingSheetRoutine.toggle()
+                          }
+                          .sheet(isPresented: $showingSheetRoutine) {
+                              AddRoutineHabit()
+                          }
+                    Button("飲食") {
+                        showingSheetDiet.toggle()
+                          }
+                          .sheet(isPresented: $showingSheetDiet) {
+                              AddDietHabit()
+                          }
                 }
 //            }
             .navigationTitle("習慣建立")
