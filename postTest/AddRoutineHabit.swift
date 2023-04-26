@@ -24,7 +24,6 @@ struct AddRoutineHabit: View {
     @State var finish: Date = Date()        //
     //@State var fulfill: Int = 0
     let cycle = ["日","週","月"]
-    @State var _cycle: Int = 0
     @State var note: String = ""
     @State var alert_time: Date = Date()
     //@State var show_to_club: String = ""
@@ -210,7 +209,7 @@ struct AddRoutineHabit: View {
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         print(target)
-        let body : [String: Any] = ["_classification":_classification,"set_up_time": Set_up_time,"_sub_classification": _sub_classification,"task_name": task_name,"tag_id1": tag_id1,"target_time": Target_time,"target_quantity": targetQuantity,"_cycle": _cycle,"note": note,"alert_time": Alert_time]
+        let body : [String: Any] = ["_classification":_classification,"set_up_time": Set_up_time,"_sub_classification": _sub_classification,"task_name": task_name,"tag_id1": tag_id1,"target_time": Target_time,"target_quantity": targetQuantity,"note": note,"alert_time": Alert_time]
         print(body)
         let jsonData = try! JSONSerialization.data(withJSONObject: body, options: [])
         request.httpBody = jsonData

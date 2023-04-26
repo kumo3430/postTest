@@ -12,7 +12,7 @@ struct AddDietHabit: View {
     //    @ObservedObject var viewModel: AddHabitClass
         @State var set_up_time: Date = Date()
     //    let classification = ["學習","運動","生活","作息"]
-        @State var _classification: Int = 3
+        @State var _classification: Int = 4
         let sub_classification = ["減糖"]
         @State var _sub_classification: Int = 0
         let Target = ["甜食","飲料"]
@@ -24,7 +24,7 @@ struct AddDietHabit: View {
         @State var finish: Date = Date()        //
         //@State var fulfill: Int = 0
         let cycle = ["日","週","月"]
-        @State var _cycle: Int = 0
+//        @State var _cycle: Int = 0
         @State var note: String = ""
         @State var alert_time: Date = Date()
         //@State var show_to_club: String = ""
@@ -36,11 +36,11 @@ struct AddDietHabit: View {
         
     //    @State var target: String = ""
         @State private var target_quantity: Int = 0
-        @State private var target_time: Date = Date()
-        @State private var Target_time: String = ""
+//        @State private var target_time: Date = Date()
+//        @State private var Target_time: String = ""
         
         @State private var subClassification = 0
-        @State private var targetTime = Date()
+//        @State private var targetTime = Date()
     //    @State private var target = "Target 1"
         @State private var target = "甜食"
         @State private var target_number: Int = 0
@@ -122,7 +122,7 @@ struct AddDietHabit: View {
     //                        Finish = dateToDateString(finish)
                             dateToDateString()
                             Alert_time = alertToDateString(alert_time)
-                            Target_time = alertToDateString(target_time)
+//                            Target_time = alertToDateString(target_time)
     //                        alertToDateString()
                             Set_up_time = setToDateString(set_up_time)
     //                        setToDateString()
@@ -199,7 +199,7 @@ struct AddDietHabit: View {
         
         private func newSportHabit() {
 
-            let url = URL(string: "http://127.0.0.1:8888/addHabits/addRoutineSleep.php")!
+            let url = URL(string: "http://127.0.0.1:8888/addHabits/AddDietHabit.php")!
             var request = URLRequest(url: url)
             request.httpMethod = "POST"
             if (target == "甜食"){
@@ -208,7 +208,7 @@ struct AddDietHabit: View {
                 target_number = 1
             }
             print(target_number)
-            let body : [String: Any] = ["_classification":_classification,"set_up_time": Set_up_time,"_sub_classification": _sub_classification,"task_name": task_name,"tag_id1": tag_id1,"target_time": Target_time,"target": target_number,"target_quantity": targetQuantity,"_cycle": _cycle,"note": note,"alert_time": Alert_time]
+            let body : [String: Any] = ["_classification":_classification,"set_up_time": Set_up_time,"_sub_classification": _sub_classification,"task_name": task_name,"tag_id1": tag_id1,"target": target_number,"target_quantity": targetQuantity,"note": note,"alert_time": Alert_time]
             print(body)
             let jsonData = try! JSONSerialization.data(withJSONObject: body, options: [])
             request.httpBody = jsonData
