@@ -42,8 +42,8 @@ struct AddRoutineHabit: View {
     @State private var subClassification = 0
     @State private var targetTime = Date()
 //    @State private var target = "Target 1"
-    @State private var target = "甜食"
-    @State private var target_number: Int = 0
+    @State private var target : Int = 0
+//    @State private var target_number: Int = 0
     @State private var targetQuantity = 0
 
     
@@ -91,7 +91,6 @@ struct AddRoutineHabit: View {
                         }
                         HStack {
                                     VStack {
-
                                         if _sub_classification == 0 {
                                             SleepView(targetTime: $target_time)
 
@@ -210,13 +209,8 @@ struct AddRoutineHabit: View {
         let url = URL(string: "http://127.0.0.1:8888/addHabits/addRoutineSleep.php")!
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
-        if (target == "甜食"){
-            target_number = 0
-        } else if (target == "飲料") {
-            target_number = 1
-        }
-        print(target_number)
-        let body : [String: Any] = ["_classification":_classification,"set_up_time": Set_up_time,"_sub_classification": _sub_classification,"task_name": task_name,"tag_id1": tag_id1,"target_time": Target_time,"target": target_number,"target_quantity": targetQuantity,"_cycle": _cycle,"note": note,"alert_time": Alert_time]
+        print(target)
+        let body : [String: Any] = ["_classification":_classification,"set_up_time": Set_up_time,"_sub_classification": _sub_classification,"task_name": task_name,"tag_id1": tag_id1,"target_time": Target_time,"target": target,"target_quantity": targetQuantity,"_cycle": _cycle,"note": note,"alert_time": Alert_time]
         print(body)
         let jsonData = try! JSONSerialization.data(withJSONObject: body, options: [])
         request.httpBody = jsonData

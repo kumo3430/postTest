@@ -34,7 +34,7 @@ struct RoutineListView: View {
                           getDetails(TaskName: $TaskName,tableName: $tableName)
                       }
             }
-            Text("減糖")
+            Text("早起")
             ForEach(sugarTaskNames, id: \.self) { taskName in
                 Button(taskName) {
                     TaskName = taskName
@@ -45,6 +45,18 @@ struct RoutineListView: View {
                           getDetails(TaskName: $TaskName,tableName: $tableName)
                       }
             }
+            Text("區間")
+            ForEach(sugarTaskNames, id: \.self) { taskName in
+                Button(taskName) {
+                    TaskName = taskName
+                          ShowingSheet.toggle()
+                    print(TaskName)
+                      }
+                      .sheet(isPresented: $ShowingSheet) {
+                          getDetails(TaskName: $TaskName,tableName: $tableName)
+                      }
+            }
+            
             .navigationTitle("運動類別")
         }
         .onAppear {
