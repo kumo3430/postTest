@@ -10,13 +10,15 @@ import SwiftUI
 struct RoutineListView: View {
 //    @State var _sub_classification: Int = 1
 //    @State private var _sub_classification = 1
-    @State private var showingSheet = false
-    @State private var ShowingSheet = false
+    @State private var showingSheetSleep = false
+    @State private var showingSheetWakeUp = false
+    @State private var showingSheetiInterval = false
     
     @State var taskNames: [String] = []
     @State private var TaskName = ""
     @State var sleepTaskNames: [String] = []
-    @State var sugarTaskNames: [String] = []
+    @State var wakeUpTaskNames: [String] = []
+    @State var intervalTaskNames: [String] = []
     
     @State private var tableName = ""
     
@@ -27,32 +29,32 @@ struct RoutineListView: View {
             ForEach(sleepTaskNames, id: \.self) { taskName in
                 Button(taskName) {
                     TaskName = taskName
-                          ShowingSheet.toggle()
+                    showingSheetSleep.toggle()
                     print(TaskName)
                       }
-                      .sheet(isPresented: $ShowingSheet) {
+                      .sheet(isPresented: $showingSheetSleep) {
                           getDetails(TaskName: $TaskName,tableName: $tableName)
                       }
             }
             Text("早起")
-            ForEach(sugarTaskNames, id: \.self) { taskName in
+            ForEach(wakeUpTaskNames, id: \.self) { taskName in
                 Button(taskName) {
                     TaskName = taskName
-                          ShowingSheet.toggle()
+                    showingSheetWakeUp.toggle()
                     print(TaskName)
                       }
-                      .sheet(isPresented: $ShowingSheet) {
+                      .sheet(isPresented: $showingSheetWakeUp) {
                           getDetails(TaskName: $TaskName,tableName: $tableName)
                       }
             }
             Text("區間")
-            ForEach(sugarTaskNames, id: \.self) { taskName in
+            ForEach(intervalTaskNames, id: \.self) { taskName in
                 Button(taskName) {
                     TaskName = taskName
-                          ShowingSheet.toggle()
+                    showingSheetiInterval.toggle()
                     print(TaskName)
                       }
-                      .sheet(isPresented: $ShowingSheet) {
+                      .sheet(isPresented: $showingSheetiInterval) {
                           getDetails(TaskName: $TaskName,tableName: $tableName)
                       }
             }
@@ -105,7 +107,9 @@ struct RoutineListView: View {
                         if (i==0) {
                             self.sleepTaskNames = taskNames
                         }else if(i==1) {
-                            self.sugarTaskNames = taskNames
+                            self.wakeUpTaskNames = taskNames
+                        }else if(i==2) {
+                            self.intervalTaskNames = taskNames
                         }
                         
                     } catch {
