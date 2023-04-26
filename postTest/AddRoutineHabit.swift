@@ -210,7 +210,7 @@ struct AddRoutineHabit: View {
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         print(target)
-        let body : [String: Any] = ["_classification":_classification,"set_up_time": Set_up_time,"_sub_classification": _sub_classification,"task_name": task_name,"tag_id1": tag_id1,"target_time": Target_time,"target": target,"target_quantity": targetQuantity,"_cycle": _cycle,"note": note,"alert_time": Alert_time]
+        let body : [String: Any] = ["_classification":_classification,"set_up_time": Set_up_time,"_sub_classification": _sub_classification,"task_name": task_name,"tag_id1": tag_id1,"target_time": Target_time,"target_quantity": targetQuantity,"_cycle": _cycle,"note": note,"alert_time": Alert_time]
         print(body)
         let jsonData = try! JSONSerialization.data(withJSONObject: body, options: [])
         request.httpBody = jsonData
