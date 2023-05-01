@@ -112,7 +112,7 @@ struct AddRoutineHabit: View {
                                 .padding()
                         }
                         HStack {
-                            DatePicker("提醒時間：", selection: $alert_time,displayedComponents: .hourAndMinute)
+                            DatePicker("提醒紀錄時間：", selection: $alert_time,displayedComponents: .hourAndMinute)
                                 .environment(\.locale, Locale.init(identifier: "zh-TW"))
                             
                         }
