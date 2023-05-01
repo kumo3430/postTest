@@ -24,6 +24,8 @@
 		139D636329F7FDE200C60FF6 /* AddDietHabit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 139D636229F7FDE200C60FF6 /* AddDietHabit.swift */; };
 		139D636529F7FDFE00C60FF6 /* DietListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 139D636429F7FDFE00C60FF6 /* DietListView.swift */; };
 		139D636729F8039000C60FF6 /* IntervalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 139D636629F8039000C60FF6 /* IntervalView.swift */; };
+		139D636929F966E800C60FF6 /* recordSleepInterval.swift in Sources */ = {isa = PBXBuildFile; fileRef = 139D636829F966E800C60FF6 /* recordSleepInterval.swift */; };
+		139D636B29FBB07200C60FF6 /* recordRoutine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 139D636A29FBB07200C60FF6 /* recordRoutine.swift */; };
 		13B1211329D8865A00449103 /* livesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13B1211229D8865A00449103 /* livesView.swift */; };
 		13D2601129C2AD97001C7B81 /* login.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13D2601029C2AD97001C7B81 /* login.swift */; };
 		13D2601329C2AF89001C7B81 /* login2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13D2601229C2AF89001C7B81 /* login2.swift */; };
@@ -57,6 +59,8 @@
 		139D636229F7FDE200C60FF6 /* AddDietHabit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDietHabit.swift; sourceTree = "<group>"; };
 		139D636429F7FDFE00C60FF6 /* DietListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DietListView.swift; sourceTree = "<group>"; };
 		139D636629F8039000C60FF6 /* IntervalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntervalView.swift; sourceTree = "<group>"; };
+		139D636829F966E800C60FF6 /* recordSleepInterval.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = recordSleepInterval.swift; sourceTree = "<group>"; };
+		139D636A29FBB07200C60FF6 /* recordRoutine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = recordRoutine.swift; sourceTree = "<group>"; };
 		13B1211229D8865A00449103 /* livesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = livesView.swift; sourceTree = "<group>"; };
 		13D2601029C2AD97001C7B81 /* login.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = login.swift; sourceTree = "<group>"; };
 		13D2601229C2AF89001C7B81 /* login2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = login2.swift; sourceTree = "<group>"; };
@@ -116,6 +120,8 @@
 				139D635429E5768D00C60FF6 /* ListTaskClass.swift */,
 				139D635629E57B9200C60FF6 /* SportListView.swift */,
 				139D636029F3CB6100C60FF6 /* RoutineListView.swift */,
+				139D636829F966E800C60FF6 /* recordSleepInterval.swift */,
+				139D636A29FBB07200C60FF6 /* recordRoutine.swift */,
 				139D636429F7FDFE00C60FF6 /* DietListView.swift */,
 				139D635229DEA32600C60FF6 /* getDetails.swift */,
 				139D635E29EAD9A800C60FF6 /* LiveListView.swift */,
@@ -220,7 +226,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				139D636529F7FDFE00C60FF6 /* DietListView.swift in Sources */,
+				139D636929F966E800C60FF6 /* recordSleepInterval.swift in Sources */,
 				1389C3F129B5C05800D673EE /* ContentView.swift in Sources */,
+				139D636B29FBB07200C60FF6 /* recordRoutine.swift in Sources */,
 				139D635329DEA32600C60FF6 /* getDetails.swift in Sources */,
 				13F6934329D327A30096AE18 /* AddSportWalk.swift in Sources */,
 				139D635029DC4C0000C60FF6 /* list02.swift in Sources */,

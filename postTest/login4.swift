@@ -31,6 +31,16 @@ struct login4: View {
                     } label: {
                         Text("顯示習慣")
                     }
+                    NavigationLink {
+                        recordSleepInterval()
+                    } label: {
+                        Text("紀錄睡覺區間")
+                    }
+                    NavigationLink {
+                        recordRoutine()
+                    } label: {
+                        Text("紀錄飲食")
+                    }
                     Button("Log out") {
                         logout()
                     }
