@@ -26,10 +26,14 @@ struct AddRoutineHabit: View {
     let cycle = ["日","週","月"]
     @State var note: String = ""
     @State var alert_time: Date = Date()
+    @State var alert_time_s: Date = Date()
+    @State var alert_time_w: Date = Date()
     //@State var show_to_club: String = ""
     //@State var completion: Int = 0
     @State var uid: Int = 0     //
     @State var Alert_time: String = ""
+    @State var Alert_time_s: String = ""
+    @State var Alert_time_w: String = ""
     @State var Set_up_time: String = ""
     
     
@@ -62,7 +66,6 @@ struct AddRoutineHabit: View {
         NavigationStack {
             ScrollView {
                 VStack{
-                    
                     Group {
                         HStack {
                         Text("類別：")
@@ -89,19 +92,23 @@ struct AddRoutineHabit: View {
 //                                    }
                         }
                         HStack {
+                            VStack {
+                                if _sub_classification == 2 {
                                     VStack {
-                                        if _sub_classification == 0 {
-                                            SleepView(targetTime: $target_time)
-
-                                        }
-                                        else if (_sub_classification == 1 ){
-                                            SleepView(targetTime: $target_time)
-                                        }
-                                        else {
-                                            IntervalView(targetQuantity: $targetQuantity)
-                                        }
-
+                                        IntervalView(targetQuantity: $targetQuantity)
+                                        DatePicker("預計起床時間：", selection: $alert_time_w,displayedComponents: .hourAndMinute)
+                                            .environment(\.locale, Locale.init(identifier: "zh-TW"))
+                                        DatePicker("預計睡覺時間：", selection: $alert_time_s,displayedComponents: .hourAndMinute)
+                                            .environment(\.locale, Locale.init(identifier: "zh-TW"))
                                     }
+                                } else {
+                                    VStack {
+                                        SleepView(targetTime: $target_time)
+                                        DatePicker("提醒預備時間：", selection: $alert_time,displayedComponents: .hourAndMinute)
+                                            .environment(\.locale, Locale.init(identifier: "zh-TW"))
+                                    }
+                                }
+                            }
                         }
                         HStack {
                             Text("備注：")
@@ -111,11 +118,11 @@ struct AddRoutineHabit: View {
 //                                .keyboardType(.numberPad)
                                 .padding()
                         }
-                        HStack {
-                            DatePicker("提醒紀錄時間：", selection: $alert_time,displayedComponents: .hourAndMinute)
-                                .environment(\.locale, Locale.init(identifier: "zh-TW"))
-                            
-                        }
+//                        HStack {
+//                            DatePicker("提醒預備時間：", selection: $alert_time,displayedComponents: .hourAndMinute)
+//                                .environment(\.locale, Locale.init(identifier: "zh-TW"))
+//                            
+//                        }
 //                        HStack {
 //                            Text("分享社群：")
 //                        }
@@ -128,6 +135,8 @@ struct AddRoutineHabit: View {
 //                        Finish = dateToDateString(finish)
                         dateToDateString()
                         Alert_time = alertToDateString(alert_time)
+                        Alert_time_s = alertToDateString(alert_time_s)
+                        Alert_time_w = alertToDateString(alert_time_w)
                         Target_time = alertToDateString(target_time)
 //                        alertToDateString()
                         Set_up_time = setToDateString(set_up_time)
@@ -204,12 +213,11 @@ struct AddRoutineHabit: View {
 
     
     private func newSportHabit() {
-
         let url = URL(string: "http://127.0.0.1:8888/addHabits/addRoutineSleep.php")!
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         print(target)
-        let body : [String: Any] = ["_classification":_classification,"set_up_time": Set_up_time,"_sub_classification": _sub_classification,"task_name": task_name,"tag_id1": tag_id1,"target_time": Target_time,"target_quantity": targetQuantity,"note": note,"alert_time": Alert_time]
+        let body : [String: Any] = ["_classification":_classification,"set_up_time": Set_up_time,"_sub_classification": _sub_classification,"task_name": task_name,"tag_id1": tag_id1,"target_time": Target_time,"target_quantity": targetQuantity,"note": note,"alert_time": Alert_time,"alert_time_w": Alert_time_w,"alert_time_s": Alert_time_s]
         print(body)
         let jsonData = try! JSONSerialization.data(withJSONObject: body, options: [])
         request.httpBody = jsonData
