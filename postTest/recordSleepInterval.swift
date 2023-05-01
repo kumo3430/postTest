@@ -24,6 +24,8 @@ struct recordSleepInterval: View {
         NavigationStack {
             VStack {
                 if (isSleep == true) {
+                    Spacer()
+                    Spacer()
                     Button(action: {
                         classification = 0
                         isSleep = false
@@ -47,6 +49,8 @@ struct recordSleepInterval: View {
                         .cornerRadius(40)
                     }
                 } else {
+                    Spacer()
+                    Spacer()
                     Button(action: {
                         isSleep = true
                         classification = 1
@@ -67,6 +71,25 @@ struct recordSleepInterval: View {
                         .cornerRadius(40)
                     }
                 }
+                Spacer()
+                VStack(alignment:.leading) {
+                    HStack {
+                        Text("今日日期：")
+                        Text(Date(), style: .date)
+                    }
+                    .padding()
+                    HStack {
+                        Text("當下時間：")
+                        Text(Date(), style: .time)
+                    }
+                    .padding()
+                }
+                .frame(alignment: .trailing)
+                .fontWeight(.bold)
+                .font(.title)
+                .padding()
+                Spacer()
+                Spacer()
             }
             .navigationTitle("紀錄睡覺區間")
         }
