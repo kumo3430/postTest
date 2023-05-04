@@ -36,9 +36,14 @@ struct AddRoutineHabit: View {
     @State var Alert_time_w: String = ""
     @State var Set_up_time: String = ""
     
+    @State var Add: String = ""
+    @State var Sub: String = ""
+    
     
 //    @State var target: String = ""
     @State private var target_quantity: Int = 0
+    @State var timeDifference: TimeInterval?
+
     @State private var target_time: Date = Date()
     @State private var Target_time: String = ""
     
@@ -95,12 +100,33 @@ struct AddRoutineHabit: View {
                             VStack {
                                 if _sub_classification == 2 {
                                     VStack {
-                                        IntervalView(targetQuantity: $targetQuantity)
-                                        DatePicker("預計起床時間：", selection: $alert_time_w,displayedComponents: .hourAndMinute)
-                                            .environment(\.locale, Locale.init(identifier: "zh-TW"))
+//                                        IntervalView(targetQuantity: $targetQuantity)
+                                        HStack {
+                                            Text("我要睡滿")
+                                            TextField("n", value: $targetQuantity, formatter: NumberFormatter())
+                                                .keyboardType(.numberPad)
+                                                .textFieldStyle(.roundedBorder)
+                                            Text("小時！！")
+                                        }
                                         DatePicker("預計睡覺時間：", selection: $alert_time_s,displayedComponents: .hourAndMinute)
                                             .environment(\.locale, Locale.init(identifier: "zh-TW"))
+//                                            .onAppear {
+//                                                timeDifference = Double(targetQuantity * 60) * 60
+//                                                let calendar = Calendar.current
+//                                                let newTime = calendar.date(byAdding: .second, value: Int(timeDifference!), to: alert_time_s)!
+//                                                alert_time_w = newTime
+//                                            }
+                                        DatePicker("預計起床時間：", selection: $alert_time_w,displayedComponents: .hourAndMinute)
+                                            .environment(\.locale, Locale.init(identifier: "zh-TW"))
                                     }
+                                    .onChange(of: alert_time_s, perform: { _ in
+                                                // 計算第二個日期選擇器的預設值
+                                                let calendar = Calendar.current
+                                                let offsetComponents = DateComponents(hour: targetQuantity)
+                                                let newDate = calendar.date(byAdding: offsetComponents, to: alert_time_s) ?? alert_time_s
+                                                // 更新第二個日期選擇器的變數
+                                        alert_time_w = newDate
+                                            })
                                 } else {
                                     VStack {
                                         SleepView(targetTime: $target_time)
@@ -131,8 +157,6 @@ struct AddRoutineHabit: View {
                     .background(Color.white)
                     
                     Button{
-//                        Begin = dateToDateString(begin)
-//                        Finish = dateToDateString(finish)
                         dateToDateString()
                         Alert_time = alertToDateString(alert_time)
                         Alert_time_s = alertToDateString(alert_time_s)
@@ -143,11 +167,7 @@ struct AddRoutineHabit: View {
 //                        setToDateString()
                         newSportHabit()
                         dismiss()
-//                        print(123)
-//                        print(target)
-//                        print($target)
-//                        print(targetQuantity)
-//                        print($targetQuantity)
+
                     } label: {
                         HStack{
                             Spacer()
@@ -172,9 +192,10 @@ struct AddRoutineHabit: View {
         }
     }
     
-    private func sleep() {
-//        let target = "NULL"
-//        let target_quantity = "NULL"
+    private func add() {
+//        let calendar = Calendar.current
+//        alert_time_w = calendar.date(byAdding: .hour, value: targetQuantity, to: alert_time_s)!
+
     }
     private func sugar() {
 //        target_time = "NULL"
