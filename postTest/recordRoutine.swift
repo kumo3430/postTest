@@ -65,8 +65,17 @@ struct recordRoutine: View {
         var body: some View {
             NavigationStack {
                 ScrollView {
-                    VStack{
+                    VStack (alignment:.leading) {
                         Group {
+                            HStack {
+                                Spacer()
+                                Text(Date(), style: .date)
+                                Spacer()
+                            }
+                            .frame(alignment: .trailing)
+                            .fontWeight(.bold)
+                            .font(.title)
+                            .padding()
                             HStack {
                             Text("類別：")
                                 Picker(selection: $_sub_classification, label: Text("選擇大類別")) {
