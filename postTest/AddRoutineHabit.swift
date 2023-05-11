@@ -6,6 +6,20 @@
 //
 
 import SwiftUI
+import UserNotifications
+
+//func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+//    // 請求推播通知權限
+//    UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { (granted, error) in
+//        if granted {
+//            print("使用者已同意推播通知")
+//        } else {
+//            print("使用者未同意推播通知")
+//        }
+//    }
+//
+//    return true
+//}
 
 struct AddRoutineHabit: View {
 //    @ObservedObject var viewModel: SportWalkInsertViewModel
@@ -15,7 +29,7 @@ struct AddRoutineHabit: View {
     @State var _classification: Int = 3
     let sub_classification = ["早睡","早起","區間"]
     @State var _sub_classification: Int = 0
-    let Target = ["甜食","飲料"]
+//    let Target = ["甜食","飲料"]
 //    @State var target: Int = 0
     @State var task_name: String = ""
     @State var tag_id1: Int = 0     //
@@ -56,6 +70,7 @@ struct AddRoutineHabit: View {
 
     
     @State private var chooseTag = false
+    @State private var notificationScheduled = false
     @Environment(\.dismiss) var dismiss
     
     func dateToDateString(_ date:Date) -> String {
@@ -166,6 +181,8 @@ struct AddRoutineHabit: View {
                         Set_up_time = setToDateString(set_up_time)
 //                        setToDateString()
                         newSportHabit()
+//                        setNotification()
+                        scheduleNotificationIfNeeded()
                         dismiss()
 
                     } label: {
@@ -191,6 +208,18 @@ struct AddRoutineHabit: View {
             
         }
     }
+    
+//    func setNotification(){
+//        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]){ (granted, _) in
+//            if granted {
+//                //用户同意我们推送通知
+//                print("用户已同意推送通知")
+//            }else{
+//                //用户不同意
+//                print("用户未同意推送通知")
+//            }
+//        }
+//    }
     
     private func add() {
 //        let calendar = Calendar.current
@@ -264,6 +293,32 @@ struct AddRoutineHabit: View {
             }
         }.resume()
     }
+    
+    private func scheduleNotificationIfNeeded() {
+            guard !notificationScheduled else {
+                return
+            }
+            
+            let content = UNMutableNotificationContent()
+            content.title = "推播通知標題"
+            content.body = "推播通知內容"
+            content.sound = UNNotificationSound.default
+            
+            let calendar = Calendar.current
+            let components = calendar.dateComponents([.year, .month, .day, .hour, .minute], from: alert_time)
+            let trigger = UNCalendarNotificationTrigger(dateMatching: components, repeats: false)
+            
+            let request = UNNotificationRequest(identifier: "YourNotificationIdentifier", content: content, trigger: trigger)
+            
+            UNUserNotificationCenter.current().add(request) { error in
+                if let error = error {
+                    print("無法設定推播通知: \(error)")
+                } else {
+                    print("推播通知已設定")
+                    notificationScheduled = true
+                }
+            }
+        }
     
 }
 
