@@ -71,6 +71,8 @@ struct AddRoutineHabit: View {
     
     @State private var chooseTag = false
     @State private var notificationScheduled = false
+    @State var showSleepView = false
+
     @Environment(\.dismiss) var dismiss
     
     func dateToDateString(_ date:Date) -> String {
