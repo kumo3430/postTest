@@ -8,19 +8,6 @@
 import SwiftUI
 import UserNotifications
 
-//func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-//    // 請求推播通知權限
-//    UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { (granted, error) in
-//        if granted {
-//            print("使用者已同意推播通知")
-//        } else {
-//            print("使用者未同意推播通知")
-//        }
-//    }
-//
-//    return true
-//}
-
 struct AddRoutineHabit: View {
 //    @ObservedObject var viewModel: SportWalkInsertViewModel
 //    @ObservedObject var viewModel: AddHabitClass
@@ -127,12 +114,6 @@ struct AddRoutineHabit: View {
                                         }
                                         DatePicker("預計睡覺時間：", selection: $alert_time_s,displayedComponents: .hourAndMinute)
                                             .environment(\.locale, Locale.init(identifier: "zh-TW"))
-//                                            .onAppear {
-//                                                timeDifference = Double(targetQuantity * 60) * 60
-//                                                let calendar = Calendar.current
-//                                                let newTime = calendar.date(byAdding: .second, value: Int(timeDifference!), to: alert_time_s)!
-//                                                alert_time_w = newTime
-//                                            }
                                         DatePicker("預計起床時間：", selection: $alert_time_w,displayedComponents: .hourAndMinute)
                                             .environment(\.locale, Locale.init(identifier: "zh-TW"))
                                     }
@@ -162,11 +143,6 @@ struct AddRoutineHabit: View {
                                 .padding()
                         }
 //                        HStack {
-//                            DatePicker("提醒預備時間：", selection: $alert_time,displayedComponents: .hourAndMinute)
-//                                .environment(\.locale, Locale.init(identifier: "zh-TW"))
-//                            
-//                        }
-//                        HStack {
 //                            Text("分享社群：")
 //                        }
                     }
@@ -190,13 +166,6 @@ struct AddRoutineHabit: View {
                     } label: {
                         HStack{
                             Spacer()
-//                            NavigationLink(destination: livesView()) {
-//                                Text("完成")
-//                                    .foregroundColor(.white)
-//                                    .padding(.vertical, 10)
-//                                    .font(.system(size: 14,weight: .semibold))()
-//                            }
-                            
                             Text("完成")
                                 .foregroundColor(.white)
                                 .padding(.vertical, 10)
@@ -211,37 +180,11 @@ struct AddRoutineHabit: View {
         }
     }
     
-//    func setNotification(){
-//        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]){ (granted, _) in
-//            if granted {
-//                //用户同意我们推送通知
-//                print("用户已同意推送通知")
-//            }else{
-//                //用户不同意
-//                print("用户未同意推送通知")
-//            }
-//        }
-//    }
-    
-    private func add() {
-//        let calendar = Calendar.current
-//        alert_time_w = calendar.date(byAdding: .hour, value: targetQuantity, to: alert_time_s)!
-
-    }
-    private func sugar() {
-//        target_time = "NULL"
-    }
-    
     private func dateToDateString() {
         let timeZone = NSTimeZone.local
         let formatter = DateFormatter()
         formatter.timeZone = timeZone
         formatter.dateFormat = "yyyy-MM-dd"
-//        Begin = formatter.string(from: begin)
-//        Finish = formatter.string(from: finish)
-//        print(Begin)
-//        print(Finish)
-//        return date
     }
     
     private func alertToDateString(_ date: Date) -> String {
@@ -302,8 +245,8 @@ struct AddRoutineHabit: View {
             }
             
             let content = UNMutableNotificationContent()
-            content.title = "推播通知標題"
-            content.body = "推播通知內容"
+            content.title = "該睡覺了！！"
+            content.body = "該放下手機 準備該睡覺了囉～"
             content.sound = UNNotificationSound.default
             
             let calendar = Calendar.current
@@ -321,6 +264,10 @@ struct AddRoutineHabit: View {
                 }
             }
         }
+    
+    private func scheduleNotificationIfNeeded_1() {
+        
+    }
     
 }
 
