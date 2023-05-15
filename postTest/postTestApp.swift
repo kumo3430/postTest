@@ -35,19 +35,19 @@ struct postTestApp: App {
         }
         
         // 在这里处理接收到的推送通知
-        func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
-                // 在這裡處理推播通知的點擊事件，顯示相應的視圖
-                if response.actionIdentifier == UNNotificationDefaultActionIdentifier {
-                    // 使用者點擊了通知，顯示你想要的視圖
-                    let sleepView = Sleep()
-                            let hostingController = UIHostingController(rootView: sleepView)
-                            
-                            if let window = UIApplication.shared.windows.first(where: { $0.isKeyWindow }) {
-                                window.rootViewController?.present(hostingController, animated: true, completion: nil)
-                            }
-                }
-                completionHandler()
-            }
+//        func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+//                // 在這裡處理推播通知的點擊事件，顯示相應的視圖
+//                if response.actionIdentifier == UNNotificationDefaultActionIdentifier {
+//                    // 使用者點擊了通知，顯示你想要的視圖
+//                    let sleepView = Sleep()
+//                            let hostingController = UIHostingController(rootView: sleepView)
+//
+//                            if let window = UIApplication.shared.windows.first(where: { $0.isKeyWindow }) {
+//                                window.rootViewController?.present(hostingController, animated: true, completion: nil)
+//                            }
+//                }
+//                completionHandler()
+//            }
         
         
         
@@ -71,39 +71,39 @@ struct postTestApp: App {
 //                completionHandler()
 //            }
         
-//        func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
-//               let notification = response.notification
-//               let notificationTitle = notification.request.content.title
-//               
-//               // 根据通知的标题跳转到不同的 SwiftUI 视图
-//            if notificationTitle == "該睡覺了！！" {
-//                print("該睡覺了！！")
-//                let view = Sleep()
-//                // 在这里进行导航或跳转到 ViewA 视图
-//                let hostingController = UIHostingController(rootView: view)
-//                
-//                if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-//                   let window = windowScene.windows.first(where: { $0.isKeyWindow }) {
-//                    window.rootViewController?.present(hostingController, animated: true, completion: nil)
-//                }
-//
-//            } else if notificationTitle == "該起床了！！" {
-//                print("該起床了！！")
-//                let view = Sleep()
-//                // 在这里进行导航或跳转到 ViewA 视图
-//                let hostingController = UIHostingController(rootView: view)
-//                
-//                if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-//                   let window = windowScene.windows.first(where: { $0.isKeyWindow }) {
-//                    window.rootViewController?.present(hostingController, animated: true, completion: nil)
-//                }
-//
-//            }
-//            else {
-//                print("null")
-//            }
-//               completionHandler()
-//           }
+        func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+               let notification = response.notification
+               let notificationTitle = notification.request.content.title
+               
+               // 根据通知的标题跳转到不同的 SwiftUI 视图
+            if notificationTitle == "該睡覺了！！" {
+                print("該睡覺了！！")
+                let view = Sleep()
+                // 在这里进行导航或跳转到 ViewA 视图
+                let hostingController = UIHostingController(rootView: view)
+                
+                if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+                   let window = windowScene.windows.first(where: { $0.isKeyWindow }) {
+                    window.rootViewController?.present(hostingController, animated: true, completion: nil)
+                }
+
+            } else if notificationTitle == "該起床了！！" {
+                print("該起床了！！")
+                let view = wakeUp()
+                // 在这里进行导航或跳转到 ViewA 视图
+                let hostingController = UIHostingController(rootView: view)
+                
+                if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+                   let window = windowScene.windows.first(where: { $0.isKeyWindow }) {
+                    window.rootViewController?.present(hostingController, animated: true, completion: nil)
+                }
+
+            }
+            else {
+                print("null")
+            }
+               completionHandler()
+           }
        
 
         

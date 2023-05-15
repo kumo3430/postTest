@@ -1,16 +1,13 @@
 //
-//  Sleep.swift
+//  wakeUp.swift
 //  postTest
 //
-//  Created by 呂沄 on 2023/5/12.
-// 尚未寫一天只能按一次的判斷
+//  Created by 呂沄 on 2023/5/15.
+//
 
 import SwiftUI
 
-struct Sleep: View {
-//    @State private var isSleep = true
-//    @State var classification: Int = 0
-    
+struct wakeUp: View {
     @State var set_date: Date = Date()
     @State var Set_date: String = ""
     
@@ -25,25 +22,20 @@ struct Sleep: View {
             VStack {
                 Spacer()
                 Button(action: {
-//                    classification = 0
-//                    isSleep = false
                     self.setTime()
                     newSportHabit()
-//                        Set_date = dateToDateString(set_date)
-//                        Set_time = alertToDateString(set_time)
-//                        Set_up_time = setToDateString(set_up_time)
-                    print("我要睡了")
+                    print("我醒來了")
                 }) {
                     HStack {
-                        Text("我要睡了")
+                        Text("我醒來了")
                             .fontWeight(.semibold)
                             .font(.title)
-                        Image(systemName: "bed.double.fill")
+                        Image(systemName: "sunrise.circle.fill")
                             .font(.title)
                     }
                     .padding()
                     .foregroundColor(.white)
-                    .background(LinearGradient(gradient: Gradient(colors: [Color.red, Color.blue]), startPoint: .top, endPoint: .bottom))
+                    .background(LinearGradient(gradient: Gradient(colors: [Color.red, Color.blue]), startPoint: .leading, endPoint: .trailing))
                     .cornerRadius(40)
                 }
                 Spacer()
@@ -66,12 +58,11 @@ struct Sleep: View {
                 Spacer()
                 Spacer()
             }
-            .navigationTitle("我要睡了")
+            .navigationTitle("我醒來了")
         }
         .onAppear{
             
         }
-
     }
     private func setTime() {
         Set_date = dateToDateString(set_date)
@@ -87,11 +78,6 @@ struct Sleep: View {
         let dateString = formatter.string(from: date)
         print(dateString)
         return dateString
-//        Begin = formatter.string(from: begin)
-//        Finish = formatter.string(from: finish)
-//        print(Begin)
-//        print(Finish)
-//        return date
     }
     
     private func alertToDateString(_ date: Date) -> String {
@@ -146,8 +132,8 @@ struct Sleep: View {
     }
 }
 
-struct Sleep_Previews: PreviewProvider {
+struct wakeUp_Previews: PreviewProvider {
     static var previews: some View {
-        Sleep()
+        wakeUp()
     }
 }
