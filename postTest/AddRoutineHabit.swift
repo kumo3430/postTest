@@ -55,7 +55,7 @@ struct AddRoutineHabit: View {
 //    @State private var target_number: Int = 0
     @State private var targetQuantity = 0
 
-    
+//    @State private var content: String = ""
     @State private var chooseTag = false
     @State private var notificationScheduled = false
     @State var showSleepView = false
@@ -160,7 +160,11 @@ struct AddRoutineHabit: View {
 //                        setToDateString()
                         newSportHabit()
 //                        setNotification()
+//                        if _sub_classification == 0 {
+//                            scheduleNotificationIfNeeded_0()
+//                        }
                         scheduleNotificationIfNeeded()
+//                        scheduleNotificationIfNeeded_0()
                         dismiss()
 
                     } label: {
@@ -240,35 +244,64 @@ struct AddRoutineHabit: View {
     }
     
     private func scheduleNotificationIfNeeded() {
-            guard !notificationScheduled else {
-                return
-            }
-            
-            let content = UNMutableNotificationContent()
+        guard !notificationScheduled else {
+            return
+        }
+        var content = UNMutableNotificationContent()
+        if _sub_classification == 0 {
             content.title = "該睡覺了！！"
             content.body = "該放下手機 準備該睡覺了囉～"
             content.sound = UNNotificationSound.default
-            
-            let calendar = Calendar.current
-            let components = calendar.dateComponents([.year, .month, .day, .hour, .minute], from: alert_time)
-            let trigger = UNCalendarNotificationTrigger(dateMatching: components, repeats: false)
-            
-            let request = UNNotificationRequest(identifier: "YourNotificationIdentifier", content: content, trigger: trigger)
-            
-            UNUserNotificationCenter.current().add(request) { error in
-                if let error = error {
-                    print("無法設定推播通知: \(error)")
-                } else {
-                    print("推播通知已設定")
-                    notificationScheduled = true
-                }
-            }
+            print(content.title)
+
+        } else if _sub_classification == 1 {
+            content.title = "該起床了！！"
+            content.body = "太陽曬屁股了 快點起床！"
+            content.sound = UNNotificationSound.default
+            print(content.title)
         }
     
-    private func scheduleNotificationIfNeeded_1() {
+        let calendar = Calendar.current
+        let components = calendar.dateComponents([.year, .month, .day, .hour, .minute], from: alert_time)
+        let trigger = UNCalendarNotificationTrigger(dateMatching: components, repeats: false)
         
+//    let request = UNNotificationRequest(identifier: "YourNotificationIdentifier", content: UNMutableNotificationContent(), trigger: trigger)
+            let request = UNNotificationRequest(identifier: "YourNotificationIdentifier", content: content, trigger: trigger)
+        UNUserNotificationCenter.current().add(request) { error in
+            if let error = error {
+                print("無法設定推播通知: \(error)")
+            } else {
+                print("推播通知已設定")
+                notificationScheduled = true
+            }
+        }
     }
     
+    private func scheduleNotificationIfNeeded_0() {
+        guard !notificationScheduled else {
+            return
+        }
+
+        let content = UNMutableNotificationContent()
+        content.title = "該睡覺了～～"
+        content.body = "該放下手機 準備該睡覺了囉～"
+        content.sound = UNNotificationSound.default
+
+        let calendar = Calendar.current
+        let components = calendar.dateComponents([.year, .month, .day, .hour, .minute], from: alert_time)
+        let trigger = UNCalendarNotificationTrigger(dateMatching: components, repeats: false)
+
+//        let request = UNNotificationRequest(identifier: "YourNotificationIdentifier", content: UNMutableNotificationContent(), trigger: trigger)
+                    let request = UNNotificationRequest(identifier: "YourNotificationIdentifier", content: content, trigger: trigger)
+        UNUserNotificationCenter.current().add(request) { error in
+            if let error = error {
+                print("無法設定推播通知: \(error)")
+            } else {
+                print("推播通知已設定")
+                notificationScheduled = true
+            }
+        }
+    }
 }
 
 struct AddRoutineHabit_Previews: PreviewProvider {
