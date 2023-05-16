@@ -115,7 +115,7 @@ struct Sleep: View {
     }
     
     private func newSportHabit() {
-        let url = URL(string: "http://127.0.0.1:8888/addHabits/recordSleepInterval.php")!
+        let url = URL(string: "http://127.0.0.1:8888/addHabits/Sleep.php")!
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         let body : [String: Any] = ["set_date": Set_date,"set_time": Set_time,"set_up_time": Set_up_time]

@@ -59,6 +59,10 @@ struct AddRoutineHabit: View {
     @State private var chooseTag = false
     @State private var notificationScheduled = false
     @State var showSleepView = false
+    
+    @State var num: String = ""
+    @State var error = false
+
 
     @Environment(\.dismiss) var dismiss
     
@@ -158,15 +162,19 @@ struct AddRoutineHabit: View {
 //                        alertToDateString()
                         Set_up_time = setToDateString(set_up_time)
 //                        setToDateString()
-                        newSportHabit()
-//                        setNotification()
-//                        if _sub_classification == 0 {
-//                            scheduleNotificationIfNeeded_0()
-//                        }
-                        scheduleNotificationIfNeeded()
-//                        scheduleNotificationIfNeeded_0()
-                        dismiss()
-
+                        if (num == "0") {
+                            error = false
+                            newSportHabit()
+                            scheduleNotificationIfNeeded()
+                            dismiss()
+    //                        setNotification()
+    //                        if _sub_classification == 0 {
+    //                            scheduleNotificationIfNeeded_0()
+    //                        }
+    //                        scheduleNotificationIfNeeded_0()
+                        } else {
+                            error = true
+                        }
                     } label: {
                         HStack{
                             Spacer()
@@ -176,6 +184,10 @@ struct AddRoutineHabit: View {
                                 .font(.system(size: 14,weight: .semibold))
                             Spacer()
                         }.background(Color.blue)
+                    }
+                    if(error == true) {
+                        Text("已重複建立")
+                            .foregroundColor(.red)
                     }
                 }
                 .navigationTitle("建立作息習慣")
@@ -209,7 +221,38 @@ struct AddRoutineHabit: View {
         print(dateString)
         return dateString
     }
-
+    private func judge() {
+        let url = URL(string: "http://127.0.0.1:8888/addHabits/addRoutineSleep_judge.php")!
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        print(target)
+        let body : [String: Any] = ["_sub_classification": _sub_classification]
+        print(body)
+        let jsonData = try! JSONSerialization.data(withJSONObject: body, options: [])
+        request.httpBody = jsonData
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            // handle response
+            if let data,
+              let content = String(data: data, encoding: .utf8) {
+                num = content
+               print(num)
+            }
+            guard let data = data else { return }
+//            print(String(data: data, encoding: .utf8)!)
+            do {
+                let jsonResponse = try JSONSerialization.jsonObject(with: data, options: [])
+                guard let dict = jsonResponse as? [String: Any], let status = dict["status"] as? String else { return }
+                if status == "success" {
+//                    self.isLoggedIn = true
+                } else {
+                    print("Registration failed")
+                }
+            } catch {
+//                print(error.localizedDescription)
+                print(String(describing: error))
+            }
+        }.resume()
+    }
     
     private func newSportHabit() {
         let url = URL(string: "http://127.0.0.1:8888/addHabits/addRoutineSleep.php")!
