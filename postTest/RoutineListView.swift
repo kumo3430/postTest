@@ -33,7 +33,8 @@ struct RoutineListView: View {
                     print(TaskName)
                       }
                       .sheet(isPresented: $showingSheetSleep) {
-                          getDetails(TaskName: $TaskName,tableName: $tableName)
+//                          getDetails(TaskName: $TaskName,tableName: $tableName)
+                          getDetailsJudge(TaskName: $TaskName,tableName: $tableName)
                       }
             }
             Text("早起")
@@ -44,7 +45,8 @@ struct RoutineListView: View {
                     print(TaskName)
                       }
                       .sheet(isPresented: $showingSheetWakeUp) {
-                          getDetails(TaskName: $TaskName,tableName: $tableName)
+//                          getDetails(TaskName: $TaskName,tableName: $tableName)
+                          getDetailsJudge(TaskName: $TaskName,tableName: $tableName)
                       }
             }
             Text("區間")
@@ -55,7 +57,8 @@ struct RoutineListView: View {
                     print(TaskName)
                       }
                       .sheet(isPresented: $showingSheetiInterval) {
-                          getDetails(TaskName: $TaskName,tableName: $tableName)
+//                          getDetails(TaskName: $TaskName,tableName: $tableName)
+                          getDetailsJudge(TaskName: $TaskName,tableName: $tableName)
                       }
             }
             

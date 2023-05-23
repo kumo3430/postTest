@@ -10,6 +10,7 @@
 		13040ADC2A0D32A900D89878 /* sleepView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13040ADB2A0D32A900D89878 /* sleepView.swift */; };
 		13040ADE2A0DE3DB00D89878 /* Sleep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13040ADD2A0DE3DB00D89878 /* Sleep.swift */; };
 		13040AE02A1211B100D89878 /* wakeUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13040ADF2A1211B100D89878 /* wakeUp.swift */; };
+		13040AE42A1464CA00D89878 /* getDetailsJudge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13040AE32A1464CA00D89878 /* getDetailsJudge.swift */; };
 		1320D11F29DC2BFE0038FB1F /* List.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1320D11E29DC2BFE0038FB1F /* List.swift */; };
 		1389C3EF29B5C05800D673EE /* postTestApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1389C3EE29B5C05800D673EE /* postTestApp.swift */; };
 		1389C3F129B5C05800D673EE /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1389C3F029B5C05800D673EE /* ContentView.swift */; };
@@ -46,6 +47,7 @@
 		13040ADB2A0D32A900D89878 /* sleepView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sleepView.swift; sourceTree = "<group>"; };
 		13040ADD2A0DE3DB00D89878 /* Sleep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sleep.swift; sourceTree = "<group>"; };
 		13040ADF2A1211B100D89878 /* wakeUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = wakeUp.swift; sourceTree = "<group>"; };
+		13040AE32A1464CA00D89878 /* getDetailsJudge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = getDetailsJudge.swift; sourceTree = "<group>"; };
 		1320D11E29DC2BFE0038FB1F /* List.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = List.swift; sourceTree = "<group>"; };
 		1389C3EB29B5C05800D673EE /* postTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = postTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1389C3EE29B5C05800D673EE /* postTestApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = postTestApp.swift; sourceTree = "<group>"; };
@@ -132,6 +134,7 @@
 				139D636A29FBB07200C60FF6 /* recordRoutine.swift */,
 				139D636429F7FDFE00C60FF6 /* DietListView.swift */,
 				139D635229DEA32600C60FF6 /* getDetails.swift */,
+				13040AE32A1464CA00D89878 /* getDetailsJudge.swift */,
 				139D635E29EAD9A800C60FF6 /* LiveListView.swift */,
 				139D635129DC507300C60FF6 /* x */,
 				1389C3F229B5C05800D673EE /* Assets.xcassets */,
@@ -239,6 +242,7 @@
 				1389C3F129B5C05800D673EE /* ContentView.swift in Sources */,
 				139D636B29FBB07200C60FF6 /* recordRoutine.swift in Sources */,
 				139D635329DEA32600C60FF6 /* getDetails.swift in Sources */,
+				13040AE42A1464CA00D89878 /* getDetailsJudge.swift in Sources */,
 				13F6934329D327A30096AE18 /* AddSportWalk.swift in Sources */,
 				139D635029DC4C0000C60FF6 /* list02.swift in Sources */,
 				139D636329F7FDE200C60FF6 /* AddDietHabit.swift in Sources */,
