@@ -21,9 +21,9 @@ struct getDetailsJudge: View {
     @State private var getAlert_time = ""
     @State private var getNote = ""
     
+    @State var revise_time: Date = Date()
+    @State var Revise_time: String = ""
     @State private var tartet_time: Date = Date()
-    //    var alert_time: Date
-    
     @State var alert_time: Date = Date()
     @State var alert_time_s: Date = Date()
     @State var alert_time_w: Date = Date()
@@ -100,7 +100,7 @@ struct getDetailsJudge: View {
 //                        }
 //                    }
                     Button{
-                        
+                        Revise_time = setToDateString(revise_time)
                     } label: {
                         HStack{
                             Spacer()
@@ -128,6 +128,16 @@ struct getDetailsJudge: View {
                 }
             }
         }
+    }
+    
+    private func setToDateString(_ date: Date) -> String {
+        let timeZone = NSTimeZone.local
+        let formatter = DateFormatter()
+        formatter.timeZone = timeZone
+        formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        let dateString = formatter.string(from: date)
+        print(dateString)
+        return dateString
     }
     
     private func getRoutineTask() async {
@@ -206,7 +216,38 @@ struct getDetailsJudge: View {
                 print(String(describing: error))
             }
         }.resume()
-        
+    }
+    
+    // 新增修改時間
+    private func reviseRoutineTask() {
+        let url = URL(string: "http://127.0.0.1:8888/addHabits/addRoutineSleep.php")!
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        let body : [String: Any] = ["revise_time": Set_up_time,"task_name": TaskName,"target_time": tartet_time,"note": getNote,"alert_time": Alert_time,"alert_time_w": Alert_time_w,"alert_time_s": Alert_time_s]
+        print(body)
+        let jsonData = try! JSONSerialization.data(withJSONObject: body, options: [])
+        request.httpBody = jsonData
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            // handle response
+            if let data,
+              let content = String(data: data, encoding: .utf8) {
+               print(content)
+            }
+            guard let data = data else { return }
+//            print(String(data: data, encoding: .utf8)!)
+            do {
+                let jsonResponse = try JSONSerialization.jsonObject(with: data, options: [])
+                guard let dict = jsonResponse as? [String: Any], let status = dict["status"] as? String else { return }
+                if status == "success" {
+//                    self.isLoggedIn = true
+                } else {
+                    print("Registration failed")
+                }
+            } catch {
+//                print(error.localizedDescription)
+                print(String(describing: error))
+            }
+        }.resume()
     }
 }
 

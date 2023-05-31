@@ -16,8 +16,6 @@ struct AddRoutineHabit: View {
     @State var _classification: Int = 3
     let sub_classification = ["早睡","早起","區間"]
     @State var _sub_classification: Int = 0
-//    let Target = ["甜食","飲料"]
-//    @State var target: Int = 0
     @State var task_name: String = ""
     @State var tag_id1: Int = 0     //
     @State var quantity: Int = 0
@@ -39,9 +37,7 @@ struct AddRoutineHabit: View {
     
     @State var Add: String = ""
     @State var Sub: String = ""
-    
-    
-//    @State var target: String = ""
+
     @State private var target_quantity: Int = 0
     @State var timeDifference: TimeInterval?
 
@@ -50,7 +46,6 @@ struct AddRoutineHabit: View {
     
     @State private var subClassification = 0
     @State private var targetTime = Date()
-//    @State private var target = "Target 1"
     @State private var target : Int = 0
 //    @State private var target_number: Int = 0
     @State private var targetQuantity = 0
@@ -61,11 +56,13 @@ struct AddRoutineHabit: View {
     @State var showSleepView = false
     
     @State var num: String = ""
-    @State var error = false
+    @State private var Num : Int = 0
+    @State var Error = false
 
 
     @Environment(\.dismiss) var dismiss
     
+    // 似乎可以把這段程式碼拿掉
     func dateToDateString(_ date:Date) -> String {
         let timeZone = NSTimeZone.local
         let formatter = DateFormatter()
@@ -83,7 +80,9 @@ struct AddRoutineHabit: View {
                         HStack {
                         Text("類別：")
                             Picker(selection: $_sub_classification, label: Text("選擇大類別")) {
+                                // sub_classification = ["早睡","早起","區間"]
                                 ForEach(0 ..< sub_classification.count) {
+                                    // ?
                                     Text(sub_classification[$0]).tag($0)
                                 }
                             }
@@ -152,29 +151,8 @@ struct AddRoutineHabit: View {
                     }
                     .padding(12)
                     .background(Color.white)
-                    
                     Button{
-                        dateToDateString()
-                        Alert_time = alertToDateString(alert_time)
-                        Alert_time_s = alertToDateString(alert_time_s)
-                        Alert_time_w = alertToDateString(alert_time_w)
-                        Target_time = alertToDateString(target_time)
-//                        alertToDateString()
-                        Set_up_time = setToDateString(set_up_time)
-//                        setToDateString()
-                        if (num == "0") {
-                            error = false
-                            newSportHabit()
-                            scheduleNotificationIfNeeded()
-                            dismiss()
-    //                        setNotification()
-    //                        if _sub_classification == 0 {
-    //                            scheduleNotificationIfNeeded_0()
-    //                        }
-    //                        scheduleNotificationIfNeeded_0()
-                        } else {
-                            error = true
-                        }
+                        judge()
                     } label: {
                         HStack{
                             Spacer()
@@ -185,7 +163,7 @@ struct AddRoutineHabit: View {
                             Spacer()
                         }.background(Color.blue)
                     }
-                    if(error == true) {
+                    if(Error == true) {
                         Text("已重複建立")
                             .foregroundColor(.red)
                     }
@@ -221,44 +199,58 @@ struct AddRoutineHabit: View {
         print(dateString)
         return dateString
     }
+    // 判斷是否在資料庫已新增過同樣小類別的資料了
+    // 希望可以印出ex: 作息-早睡 已新增過
     private func judge() {
         let url = URL(string: "http://127.0.0.1:8888/addHabits/addRoutineSleep_judge.php")!
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
-        print(target)
         let body : [String: Any] = ["_sub_classification": _sub_classification]
-        print(body)
         let jsonData = try! JSONSerialization.data(withJSONObject: body, options: [])
         request.httpBody = jsonData
         URLSession.shared.dataTask(with: request) { data, response, error in
             // handle response
             if let data,
               let content = String(data: data, encoding: .utf8) {
+                // 如果此類別再資料庫已有一筆資料會印出num:1
                 num = content
-               print(num)
-            }
-            guard let data = data else { return }
-//            print(String(data: data, encoding: .utf8)!)
-            do {
-                let jsonResponse = try JSONSerialization.jsonObject(with: data, options: [])
-                guard let dict = jsonResponse as? [String: Any], let status = dict["status"] as? String else { return }
-                if status == "success" {
-//                    self.isLoggedIn = true
+                if (num == "0" ) {
+                    Num = 0
+                    
                 } else {
-                    print("Registration failed")
+                    Num = 1
                 }
-            } catch {
-//                print(error.localizedDescription)
-                print(String(describing: error))
+               print("num:\(num)")
+                print("Num:\(Num)")
+                if (Num == 0 ) {
+//                    DispatchQueue.main.async {
+                        print("檢查是否有進入此程式碼")
+                        Error = false
+                        dateToDateString()
+                        Alert_time = alertToDateString(alert_time)
+                        Alert_time_s = alertToDateString(alert_time_s)
+                        Alert_time_w = alertToDateString(alert_time_w)
+                        Target_time = alertToDateString(target_time)
+                        //                        alertToDateString()
+                        Set_up_time = setToDateString(set_up_time)
+                        self.newSportHabit()
+                        scheduleNotificationIfNeeded()
+                        dismiss()
+//                    }
+                } else {
+//                    DispatchQueue.main.async {
+                        Error = true
+                        print("已重複建立")
+//                    }
+                }
             }
         }.resume()
     }
     
     private func newSportHabit() {
-        let url = URL(string: "http://127.0.0.1:8888/addHabits/addRoutineSleep.php")!
+        let url = URL(string: "http://127.0.0.1:8888/addHabits/addRoutineSleep2.php")!
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
-        print(target)
         let body : [String: Any] = ["_classification":_classification,"set_up_time": Set_up_time,"_sub_classification": _sub_classification,"task_name": task_name,"tag_id1": tag_id1,"target_time": Target_time,"target_quantity": targetQuantity,"note": note,"alert_time": Alert_time,"alert_time_w": Alert_time_w,"alert_time_s": Alert_time_s]
         print(body)
         let jsonData = try! JSONSerialization.data(withJSONObject: body, options: [])
