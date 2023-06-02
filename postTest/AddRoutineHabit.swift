@@ -153,27 +153,27 @@ struct AddRoutineHabit: View {
                     .background(Color.white)
                     Button{
                         judge()
-                        if (Num == 0 ) {
-//                            DispatchQueue.main.async {
-                                print("檢查是否有進入此程式碼")
-                                Error = false
-                                dateToDateString()
-                                Alert_time = alertToDateString(alert_time)
-                                Alert_time_s = alertToDateString(alert_time_s)
-                                Alert_time_w = alertToDateString(alert_time_w)
-                                Target_time = alertToDateString(target_time)
-                                //                        alertToDateString()
-                                Set_up_time = setToDateString(set_up_time)
-                                self.newSportHabit()
-                                scheduleNotificationIfNeeded()
-                                dismiss()
-//                            }
-                        } else {
-//                            DispatchQueue.main.async {
-                                Error = true
-                                print("已重複建立")
-//                            }
-                        }
+//                        if (Num == 0 ) {
+////                            DispatchQueue.main.async {
+//                                print("檢查是否有進入此程式碼")
+//                                Error = false
+//                                dateToDateString()
+//                                Alert_time = alertToDateString(alert_time)
+//                                Alert_time_s = alertToDateString(alert_time_s)
+//                                Alert_time_w = alertToDateString(alert_time_w)
+//                                Target_time = alertToDateString(target_time)
+//                                //                        alertToDateString()
+//                                Set_up_time = setToDateString(set_up_time)
+//                                self.newSportHabit()
+//                                scheduleNotificationIfNeeded()
+//                                dismiss()
+////                            }
+//                        } else {
+////                            DispatchQueue.main.async {
+//                                Error = true
+//                                print("已重複建立")
+////                            }
+//                        }
                     } label: {
                         HStack{
                             Spacer()
@@ -258,27 +258,27 @@ struct AddRoutineHabit: View {
                 }
                print("num:\(num)")
                 print("Num:\(Num)")
-//                if (num == "0" ) {
-//                    DispatchQueue.main.async {
-//                        print("檢查是否有進入此程式碼")
-//                        Error = false
-//                        dateToDateString()
-//                        Alert_time = alertToDateString(alert_time)
-//                        Alert_time_s = alertToDateString(alert_time_s)
-//                        Alert_time_w = alertToDateString(alert_time_w)
-//                        Target_time = alertToDateString(target_time)
-//                        //                        alertToDateString()
-//                        Set_up_time = setToDateString(set_up_time)
-//                        self.newSportHabit()
-//                        scheduleNotificationIfNeeded()
-//                        dismiss()
-//                    }
-//                } else {
-//                    DispatchQueue.main.async {
-//                        Error = true
-//                        print("已重複建立")
-//                    }
-//                }
+                if (num == "0" ) {
+                    DispatchQueue.main.async {
+                        print("檢查是否有進入此程式碼")
+                        Error = false
+                        dateToDateString()
+                        Alert_time = alertToDateString(alert_time)
+                        Alert_time_s = alertToDateString(alert_time_s)
+                        Alert_time_w = alertToDateString(alert_time_w)
+                        Target_time = alertToDateString(target_time)
+                        //                        alertToDateString()
+                        Set_up_time = setToDateString(set_up_time)
+                        self.newSportHabit()
+                        scheduleNotificationIfNeeded()
+                        dismiss()
+                    }
+                } else {
+                    DispatchQueue.main.async {
+                        Error = true
+                        print("已重複建立")
+                    }
+                }
             }
         }.resume()
     }
