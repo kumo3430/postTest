@@ -153,6 +153,27 @@ struct AddRoutineHabit: View {
                     .background(Color.white)
                     Button{
                         judge()
+                        if (Num == 0 ) {
+//                            DispatchQueue.main.async {
+                                print("檢查是否有進入此程式碼")
+                                Error = false
+                                dateToDateString()
+                                Alert_time = alertToDateString(alert_time)
+                                Alert_time_s = alertToDateString(alert_time_s)
+                                Alert_time_w = alertToDateString(alert_time_w)
+                                Target_time = alertToDateString(target_time)
+                                //                        alertToDateString()
+                                Set_up_time = setToDateString(set_up_time)
+                                self.newSportHabit()
+                                scheduleNotificationIfNeeded()
+                                dismiss()
+//                            }
+                        } else {
+//                            DispatchQueue.main.async {
+                                Error = true
+                                print("已重複建立")
+//                            }
+                        }
                     } label: {
                         HStack{
                             Spacer()
@@ -202,60 +223,98 @@ struct AddRoutineHabit: View {
     // 判斷是否在資料庫已新增過同樣小類別的資料了
     // 希望可以印出ex: 作息-早睡 已新增過
     private func judge() {
+        
+        class URLSessionSingleton {
+            static let shared = URLSessionSingleton()
+
+            let session: URLSession
+
+            private init() {
+                let config = URLSessionConfiguration.default
+                config.httpCookieStorage = HTTPCookieStorage.shared
+                config.httpCookieAcceptPolicy = .always
+
+                session = URLSession(configuration: config)
+            }
+        }
+        
         let url = URL(string: "http://127.0.0.1:8888/addHabits/addRoutineSleep_judge.php")!
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         let body : [String: Any] = ["_sub_classification": _sub_classification]
         let jsonData = try! JSONSerialization.data(withJSONObject: body, options: [])
         request.httpBody = jsonData
-        URLSession.shared.dataTask(with: request) { data, response, error in
+//        URLSession.shared.dataTask(with: request) { data, response, error in
+        URLSessionSingleton.shared.session.dataTask(with: request) { data, response, error in
             // handle response
             if let data,
               let content = String(data: data, encoding: .utf8) {
                 // 如果此類別再資料庫已有一筆資料會印出num:1
                 num = content
-                if (num == "0" ) {
+                if (num == "0") {
                     Num = 0
-                    
                 } else {
                     Num = 1
                 }
                print("num:\(num)")
                 print("Num:\(Num)")
-                if (Num == 0 ) {
+//                if (num == "0" ) {
 //                    DispatchQueue.main.async {
-                        print("檢查是否有進入此程式碼")
-                        Error = false
-                        dateToDateString()
-                        Alert_time = alertToDateString(alert_time)
-                        Alert_time_s = alertToDateString(alert_time_s)
-                        Alert_time_w = alertToDateString(alert_time_w)
-                        Target_time = alertToDateString(target_time)
-                        //                        alertToDateString()
-                        Set_up_time = setToDateString(set_up_time)
-                        self.newSportHabit()
-                        scheduleNotificationIfNeeded()
-                        dismiss()
+//                        print("檢查是否有進入此程式碼")
+//                        Error = false
+//                        dateToDateString()
+//                        Alert_time = alertToDateString(alert_time)
+//                        Alert_time_s = alertToDateString(alert_time_s)
+//                        Alert_time_w = alertToDateString(alert_time_w)
+//                        Target_time = alertToDateString(target_time)
+//                        //                        alertToDateString()
+//                        Set_up_time = setToDateString(set_up_time)
+//                        self.newSportHabit()
+//                        scheduleNotificationIfNeeded()
+//                        dismiss()
 //                    }
-                } else {
+//                } else {
 //                    DispatchQueue.main.async {
-                        Error = true
-                        print("已重複建立")
+//                        Error = true
+//                        print("已重複建立")
 //                    }
-                }
+//                }
             }
         }.resume()
     }
     
     private func newSportHabit() {
+        
+        class URLSessionSingleton {
+            static let shared = URLSessionSingleton()
+
+            let session: URLSession
+
+            private init() {
+                let config = URLSessionConfiguration.default
+                config.httpCookieStorage = HTTPCookieStorage.shared
+                config.httpCookieAcceptPolicy = .always
+
+                session = URLSession(configuration: config)
+            }
+        }
+        
+        // 建立 URL 物件：
         let url = URL(string: "http://127.0.0.1:8888/addHabits/addRoutineSleep2.php")!
+        // 建立 URLRequest 物件：使用剛剛建立的 URL 物件建立一個 URLRequest 物件
         var request = URLRequest(url: url)
+        // 設定該請求的 HTTP 方法為 "POST"
         request.httpMethod = "POST"
+        // 設定請求的內容：使用一個字典 body 儲存要傳送給伺服器的參數資料
         let body : [String: Any] = ["_classification":_classification,"set_up_time": Set_up_time,"_sub_classification": _sub_classification,"task_name": task_name,"tag_id1": tag_id1,"target_time": Target_time,"target_quantity": targetQuantity,"note": note,"alert_time": Alert_time,"alert_time_w": Alert_time_w,"alert_time_s": Alert_time_s]
         print(body)
+        // 轉換為 JSON：將字典 body 轉換為 JSON 格式的資料，存入 jsonData 變數
         let jsonData = try! JSONSerialization.data(withJSONObject: body, options: [])
+        // 設定請求的內容：資料設定為請求的 httpBody，這樣資料就會以 JSON 格式傳送給伺服器
         request.httpBody = jsonData
-        URLSession.shared.dataTask(with: request) { data, response, error in
+        // 發送請求並設定一個回呼函式處理回應。當伺服器回應後，回呼函式會被呼叫。
+//        URLSession.shared.dataTask(with: request) { data, response, error in
+        URLSessionSingleton.shared.session.dataTask(with: request) { data, response, error in
             // handle response
             if let data,
               let content = String(data: data, encoding: .utf8) {
@@ -264,6 +323,7 @@ struct AddRoutineHabit: View {
             guard let data = data else { return }
 //            print(String(data: data, encoding: .utf8)!)
             do {
+                // 將回應資料轉換為 JSON 物件，並嘗試將其轉換為字典 dict
                 let jsonResponse = try JSONSerialization.jsonObject(with: data, options: [])
                 guard let dict = jsonResponse as? [String: Any], let status = dict["status"] as? String else { return }
                 if status == "success" {
@@ -274,6 +334,7 @@ struct AddRoutineHabit: View {
             } catch {
 //                print(error.localizedDescription)
                 print(String(describing: error))
+//                print("Error parsing JSON: \(error.localizedDescription)")
             }
         }.resume()
     }
