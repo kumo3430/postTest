@@ -116,7 +116,7 @@ struct RoutineListView: View {
                         }
                         
                     } catch {
-                        print(error.localizedDescription)
+//                        print(error.localizedDescription)
                     }
                 }
             }.resume()

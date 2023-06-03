@@ -19,6 +19,11 @@ struct getDetailsJudge: View {
     @State private var Get_sub_classification = ""
     @State private var getTartet_time  = ""
     @State private var getAlert_time = ""
+    @State private var getAlert_time_w  = ""
+    @State private var getAlert_time_s = ""
+    
+    @State private var getTarget_quantity = ""
+    @State private var GetTarget_quantity: Int?
     @State private var getNote = ""
     
     @State var revise_time: Date = Date()
@@ -44,8 +49,11 @@ struct getDetailsJudge: View {
         var _classification : String
         var _sub_classification: String
         var task_name: String
-        var target_time: String
-        var alert_time: String
+        var target_time: String?
+        var alert_time: String?
+        var target_quantity: String?
+        var alert_time_w: String?
+        var alert_time_s: String?
         var note: String
     }
     
@@ -54,22 +62,38 @@ struct getDetailsJudge: View {
             ScrollView {
                 VStack{
                     Group {
-                        VStack {
-                            HStack{
-                                Text("類別：")
-                                Text(get_sub_classification)
-                            }
                             HStack{
                                 Text("名稱：")
-                                Text(TaskName)
+
+                                TextField("名稱", text:$TaskName)
+                                    .textFieldStyle(.roundedBorder)
+                                    .padding()
                             }
-                        }
                         HStack {
                             VStack {
                                 if get_sub_classification == "2" {
                                     VStack {
-                                        Text("名稱：")
+//                                        IntervalView(targetQuantity: $targetQuantity)
+                                        HStack {
+                                            Text("我要睡滿")
+                                            TextField("n", value: $GetTarget_quantity, formatter: NumberFormatter())
+                                                .keyboardType(.numberPad)
+                                                .textFieldStyle(.roundedBorder)
+                                            Text("小時！！")
+                                        }
+                                        DatePicker("預計睡覺時間：", selection: $alert_time_s,displayedComponents: .hourAndMinute)
+                                            .environment(\.locale, Locale.init(identifier: "zh-TW"))
+                                        DatePicker("預計起床時間：", selection: $alert_time_w,displayedComponents: .hourAndMinute)
+                                            .environment(\.locale, Locale.init(identifier: "zh-TW"))
                                     }
+                                    .onChange(of: alert_time_s, perform: { _ in
+                                                // 計算第二個日期選擇器的預設值
+                                                let calendar = Calendar.current
+                                                let offsetComponents = DateComponents(hour: Int(getTarget_quantity))
+                                                let newDate = calendar.date(byAdding: offsetComponents, to: alert_time_s) ?? alert_time_s
+                                                // 更新第二個日期選擇器的變數
+                                        alert_time_w = newDate
+                                            })
                                 } else {
                                     VStack {
                                         DatePicker("目標時間：", selection:  $tartet_time, displayedComponents: .hourAndMinute)
@@ -83,22 +107,14 @@ struct getDetailsJudge: View {
                         }
                         HStack {
                             Text("備注：")
-                            // 將帳號密碼的資料存放到LoginInsertViewModel的password
                             TextField("備注", text:$getNote)
                                 .textFieldStyle(.roundedBorder)
-                            //                                .keyboardType(.numberPad)
                                 .padding()
                         }
                     }
                     .padding(12)
                     .background(Color.white)
-//                    .onAppear {
-//                        Task {
-//                            await order()
-//                            print(tartet_time)
-//                            print(66666666666)
-//                        }
-//                    }
+
                     Button{
                         Revise_time = setToDateString(revise_time)
                     } label: {
@@ -123,8 +139,12 @@ struct getDetailsJudge: View {
                     formatter.dateFormat = "HH:mm"
                     let tartetTimeString = formatter.string(from: tartet_time)
                     let alertTimeString = formatter.string(from: alert_time)
+                    let alertTimeWString = formatter.string(from: alert_time_w)
+                    let alertTimeSString = formatter.string(from: alert_time_s)
                     print("tartetTimeString\(tartetTimeString)")
                     print("alertTimeString\(alertTimeString)")
+                    print("alertTimeString\(alertTimeWString)")
+                    print("alertTimeString\(alertTimeSString)")
                 }
             }
         }
@@ -177,11 +197,18 @@ struct getDetailsJudge: View {
                     print("小類別：\(taskDetails._sub_classification)")
                     print("目標時間：\(taskDetails.target_time)")
                     print("提醒時間：\(taskDetails.alert_time)")
+                    print("目標時數：\(taskDetails.target_quantity)")
+                    print("目標起床：\(taskDetails.alert_time_w)")
+                    print("目標睡覺：\(taskDetails.alert_time_s)")
                     print("備注：\(taskDetails.note)")
                     get_sub_classification = taskDetails._sub_classification
-                    getTartet_time = taskDetails.target_time
+                    getTartet_time = taskDetails.target_time ?? "Null"
+                    getTarget_quantity = taskDetails.target_quantity ?? "Null"
+                    GetTarget_quantity = Int(getTarget_quantity)
+                    getAlert_time_w = taskDetails.alert_time_w ?? "Null"
+                    getAlert_time_s = taskDetails.alert_time_s ?? "Null"
                     print(getTartet_time)
-                    getAlert_time = taskDetails.alert_time
+                    getAlert_time = taskDetails.alert_time ?? "Null"
                     getNote = taskDetails.note
                     print("============== taskDetails ==============")
                     print("任務名稱：\(taskDetails.task_name)")
@@ -189,24 +216,46 @@ struct getDetailsJudge: View {
                     print("小類別：\(get_sub_classification)")
                     print("目標時間：\(getTartet_time)")
                     print("提醒時間：\(getAlert_time)")
+                    print("目標時數：\(getTarget_quantity)")
+                    print("G目標時數：\(GetTarget_quantity)")
+                    print("目標起床：\(getAlert_time_w)")
+                    print("目標睡覺：\(getAlert_time_s)")
                     print("備注：\(getNote)")
                     print("============== taskDetails ==============")
                     let formatter = DateFormatter()
                     formatter.timeZone = TimeZone.current
                     formatter.dateFormat = "HH:mm:ss"
+                    // 轉換取得的目標時間
                     if let defaultDate = formatter.date(from: getTartet_time) {
                         tartet_time = defaultDate
                         print(formatter.string(from: tartet_time))
                         print(tartet_time)
                     } else {
-                        print("無法解析目標時間：\(getTartet_time)")
+                        print("目標時間：\(getTartet_time)")
                     }
+                    // 轉換取得的提醒時間
                     if let defaultDate = formatter.date(from: getAlert_time) {
                         alert_time = defaultDate
                         print(formatter.string(from: alert_time))
                         print(alert_time)
                     } else {
-                        print("無法解析提醒時間：\(getAlert_time)")
+                        print("提醒時間：\(getAlert_time)")
+                    }
+                    // 轉換取得的提醒時間
+                    if let defaultDate = formatter.date(from: getAlert_time_w) {
+                        alert_time_w = defaultDate
+                        print(formatter.string(from: alert_time_w))
+                        print(alert_time_w)
+                    } else {
+                        print("提醒時間：\(getAlert_time_w)")
+                    }
+                    // 轉換取得的提醒時間
+                    if let defaultDate = formatter.date(from: getAlert_time_s) {
+                        alert_time_s = defaultDate
+                        print(formatter.string(from: alert_time_s))
+                        print(alert_time_s)
+                    } else {
+                        print("提醒時間：\(getAlert_time_s)")
                     }
                 } catch {
                     print("解碼失敗：\(error)")

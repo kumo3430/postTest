@@ -130,7 +130,9 @@ struct AddRoutineHabit: View {
                                             })
                                 } else {
                                     VStack {
-                                        SleepView(targetTime: $target_time)
+//                                        SleepView(targetTime: $target_time)
+                                        DatePicker("目標時間：", selection: $target_time,displayedComponents: .hourAndMinute)
+                                            .environment(\.locale, Locale.init(identifier: "zh-TW"))
                                         DatePicker("提醒預備時間：", selection: $alert_time,displayedComponents: .hourAndMinute)
                                             .environment(\.locale, Locale.init(identifier: "zh-TW"))
                                     }
