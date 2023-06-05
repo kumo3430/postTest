@@ -47,7 +47,29 @@ struct Sleep: View {
                     .cornerRadius(40)
                 }
                 Spacer()
+                Button(action: {
+
+                    
+                }) {
+                    HStack {
+                        Text("查看/修改")
+                            .fontWeight(.semibold)
+                            .font(.title)
+                        Image(systemName: "doc.plaintext")
+                            .font(.title)
+                    }
+                    .padding()
+                    .foregroundColor(.white)
+                    .background(LinearGradient(gradient: Gradient(colors: [Color.red, Color.blue]), startPoint: .leading, endPoint: .trailing))
+                    .cornerRadius(40)
+                }
+                Spacer()
                 VStack(alignment:.leading) {
+                    HStack {
+                        Text("連續天數：")
+                    }
+                    .padding()
+                    .foregroundColor(.red)
                     HStack {
                         Text("今日日期：")
                         Text(Date(), style: .date)

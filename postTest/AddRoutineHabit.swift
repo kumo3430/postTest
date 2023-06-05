@@ -165,7 +165,7 @@ struct AddRoutineHabit: View {
 //                                Alert_time_w = alertToDateString(alert_time_w)
 //                                Target_time = alertToDateString(target_time)
 //                                //                        alertToDateString()
-//                                Set_up_time = setToDateString(set_up_time)
+                                Set_up_time = setToDateString(set_up_time)
 //                                self.newSportHabit()
 //                                scheduleNotificationIfNeeded()
 //                                dismiss()

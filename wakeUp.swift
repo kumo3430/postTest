@@ -39,7 +39,29 @@ struct wakeUp: View {
                     .cornerRadius(40)
                 }
                 Spacer()
+                Button(action: {
+
+                    
+                }) {
+                    HStack {
+                        Text("查看/修改")
+                            .fontWeight(.semibold)
+                            .font(.title)
+                        Image(systemName: "doc.plaintext")
+                            .font(.title)
+                    }
+                    .padding()
+                    .foregroundColor(.white)
+                    .background(LinearGradient(gradient: Gradient(colors: [Color.red, Color.blue]), startPoint: .leading, endPoint: .trailing))
+                    .cornerRadius(40)
+                }
+                Spacer()
                 VStack(alignment:.leading) {
+                    HStack {
+                        Text("連續天數：")
+                    }
+                    .padding()
+                    .foregroundColor(.red)
                     HStack {
                         Text("今日日期：")
                         Text(Date(), style: .date)
@@ -101,7 +123,7 @@ struct wakeUp: View {
     }
     
     private func newSportHabit() {
-        let url = URL(string: "http://127.0.0.1:8888/addHabits/wakeUp.php")!
+        let url = URL(string: "http://127.0.0.1:8888/addHabits/WakeUp.php")!
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         let body : [String: Any] = ["set_date": Set_date,"set_time": Set_time,"set_up_time": Set_up_time]

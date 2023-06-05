@@ -41,6 +41,16 @@ struct login4: View {
                     } label: {
                         Text("紀錄飲食")
                     }
+                    NavigationLink {
+                        Sleep()
+                    } label: {
+                        Text("Sleep")
+                    }
+                    NavigationLink {
+                        wakeUp()
+                    } label: {
+                        Text("wakeUp")
+                    }
                     Button("Log out") {
                         logout()
                     }

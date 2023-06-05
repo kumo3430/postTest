@@ -32,12 +32,15 @@ struct getDetailsJudge: View {
     @State var alert_time: Date = Date()
     @State var alert_time_s: Date = Date()
     @State var alert_time_w: Date = Date()
+    @State var Target_time: String = ""
     @State var Alert_time: String = ""
     @State var Alert_time_s: String = ""
     @State var Alert_time_w: String = ""
     @State var Set_up_time: String = ""
     @State var GetTaskName: String = ""
     
+    @State var taskName: String = ""
+    @State var note: String = ""
     
     @Binding var TaskName : String
     @Binding var tableName : String
@@ -65,7 +68,7 @@ struct getDetailsJudge: View {
                             HStack{
                                 Text("名稱：")
 
-                                TextField("名稱", text:$TaskName)
+                                TextField(TaskName, text:$taskName)
                                     .textFieldStyle(.roundedBorder)
                                     .padding()
                             }
@@ -76,7 +79,7 @@ struct getDetailsJudge: View {
 //                                        IntervalView(targetQuantity: $targetQuantity)
                                         HStack {
                                             Text("我要睡滿")
-                                            TextField("n", value: $GetTarget_quantity, formatter: NumberFormatter())
+                                            TextField("", value: $GetTarget_quantity, formatter: NumberFormatter())
                                                 .keyboardType(.numberPad)
                                                 .textFieldStyle(.roundedBorder)
                                             Text("小時！！")
@@ -107,7 +110,7 @@ struct getDetailsJudge: View {
                         }
                         HStack {
                             Text("備注：")
-                            TextField("備注", text:$getNote)
+                            TextField(getNote, text:$note)
                                 .textFieldStyle(.roundedBorder)
                                 .padding()
                         }
@@ -116,7 +119,11 @@ struct getDetailsJudge: View {
                     .background(Color.white)
 
                     Button{
+                        dateToDateString()
                         Revise_time = setToDateString(revise_time)
+                        Task {
+                            await reviseRoutineTask()
+                        }
                     } label: {
                         HStack{
                             Spacer()
@@ -149,12 +156,28 @@ struct getDetailsJudge: View {
             }
         }
     }
+    private func dateToDateString() {
+        let timeZone = NSTimeZone.local
+        let formatter = DateFormatter()
+        formatter.timeZone = timeZone
+        formatter.dateFormat = "yyyy-MM-dd"
+    }
     
     private func setToDateString(_ date: Date) -> String {
         let timeZone = NSTimeZone.local
         let formatter = DateFormatter()
         formatter.timeZone = timeZone
         formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        let dateString = formatter.string(from: date)
+        print(dateString)
+        return dateString
+    }
+    
+    private func alertToDateString(_ date: Date) -> String {
+        let timeZone = NSTimeZone.local
+        let formatter = DateFormatter()
+        formatter.timeZone = timeZone
+        formatter.dateFormat = "HH:mm:ss"
         let dateString = formatter.string(from: date)
         print(dateString)
         return dateString
@@ -192,15 +215,6 @@ struct getDetailsJudge: View {
                     let taskDetails = try decoder.decode(TaskDetails.self, from: data)
                     print("============== taskDetails ==============")
                     print(taskDetails)
-                    print("任務名稱：\(taskDetails.task_name)")
-                    print("大類別：\(taskDetails._classification)")
-                    print("小類別：\(taskDetails._sub_classification)")
-                    print("目標時間：\(taskDetails.target_time)")
-                    print("提醒時間：\(taskDetails.alert_time)")
-                    print("目標時數：\(taskDetails.target_quantity)")
-                    print("目標起床：\(taskDetails.alert_time_w)")
-                    print("目標睡覺：\(taskDetails.alert_time_s)")
-                    print("備注：\(taskDetails.note)")
                     get_sub_classification = taskDetails._sub_classification
                     getTartet_time = taskDetails.target_time ?? "Null"
                     getTarget_quantity = taskDetails.target_quantity ?? "Null"
@@ -210,7 +224,6 @@ struct getDetailsJudge: View {
                     print(getTartet_time)
                     getAlert_time = taskDetails.alert_time ?? "Null"
                     getNote = taskDetails.note
-                    print("============== taskDetails ==============")
                     print("任務名稱：\(taskDetails.task_name)")
                     print("大類別：\(taskDetails._classification)")
                     print("小類別：\(get_sub_classification)")
@@ -228,34 +241,34 @@ struct getDetailsJudge: View {
                     // 轉換取得的目標時間
                     if let defaultDate = formatter.date(from: getTartet_time) {
                         tartet_time = defaultDate
-                        print(formatter.string(from: tartet_time))
-                        print(tartet_time)
+//                        print(formatter.string(from: tartet_time))
+//                        print(tartet_time)
                     } else {
-                        print("目標時間：\(getTartet_time)")
+//                        print("目標時間：\(getTartet_time)")
                     }
                     // 轉換取得的提醒時間
                     if let defaultDate = formatter.date(from: getAlert_time) {
                         alert_time = defaultDate
-                        print(formatter.string(from: alert_time))
-                        print(alert_time)
+//                        print(formatter.string(from: alert_time))
+//                        print(alert_time)
                     } else {
-                        print("提醒時間：\(getAlert_time)")
+//                        print("提醒時間：\(getAlert_time)")
                     }
                     // 轉換取得的提醒時間
                     if let defaultDate = formatter.date(from: getAlert_time_w) {
                         alert_time_w = defaultDate
-                        print(formatter.string(from: alert_time_w))
-                        print(alert_time_w)
+//                        print(formatter.string(from: alert_time_w))
+//                        print(alert_time_w)
                     } else {
-                        print("提醒時間：\(getAlert_time_w)")
+//                        print("提醒時間：\(getAlert_time_w)")
                     }
                     // 轉換取得的提醒時間
                     if let defaultDate = formatter.date(from: getAlert_time_s) {
                         alert_time_s = defaultDate
-                        print(formatter.string(from: alert_time_s))
-                        print(alert_time_s)
+//                        print(formatter.string(from: alert_time_s))
+//                        print(alert_time_s)
                     } else {
-                        print("提醒時間：\(getAlert_time_s)")
+//                        print("提醒時間：\(getAlert_time_s)")
                     }
                 } catch {
                     print("解碼失敗：\(error)")
@@ -268,15 +281,32 @@ struct getDetailsJudge: View {
     }
     
     // 新增修改時間
-    private func reviseRoutineTask() {
-        let url = URL(string: "http://127.0.0.1:8888/addHabits/addRoutineSleep.php")!
+    private  func reviseRoutineTask() async {
+        class URLSessionSingleton {
+            static let shared = URLSessionSingleton()
+            let session: URLSession
+            private init() {
+                let config = URLSessionConfiguration.default
+                config.httpCookieStorage = HTTPCookieStorage.shared
+                config.httpCookieAcceptPolicy = .always
+                session = URLSession(configuration: config)
+            }
+        }
+        dateToDateString()
+        Alert_time = alertToDateString(alert_time)
+        Alert_time_s = alertToDateString(alert_time_s)
+        Alert_time_w = alertToDateString(alert_time_w)
+        Target_time = alertToDateString(tartet_time)
+        Revise_time = setToDateString(revise_time)
+        let url = URL(string: "http://127.0.0.1:8888/addHabits/reviseTask/reviseRoutineTask.php")!
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
-        let body : [String: Any] = ["revise_time": Set_up_time,"task_name": TaskName,"target_time": tartet_time,"note": getNote,"alert_time": Alert_time,"alert_time_w": Alert_time_w,"alert_time_s": Alert_time_s]
+        let body : [String: Any] = ["revise_time": Revise_time,"task_name": taskName,"target_time": Target_time,"note": note,"alert_time": Alert_time,"alert_time_w": Alert_time_w,"alert_time_s": Alert_time_s,"target_quantity": getTarget_quantity]
         print(body)
         let jsonData = try! JSONSerialization.data(withJSONObject: body, options: [])
         request.httpBody = jsonData
-        URLSession.shared.dataTask(with: request) { data, response, error in
+//        URLSession.shared.dataTask(with: request) { data, response, error in
+        URLSessionSingleton.shared.session.dataTask(with: request) { data, response, error in
             // handle response
             if let data,
               let content = String(data: data, encoding: .utf8) {
