@@ -357,10 +357,14 @@ struct getDetailsJudge: View {
         let url = URL(string: "http://127.0.0.1:8888/Delete/deleteRoutineTask.php")!
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
-        let body = ["taskName": TaskName, "tableName": tableName]
+//        let body = ["taskName": TaskName, "tableName": tableName]
+        // 建立空的 body
+        let body: [String: Any] = [:]
+        // 將 body 轉換為 JSON 資料
         let jsonData = try! JSONSerialization.data(withJSONObject: body, options: [])
         request.httpBody = jsonData
 //        URLSession.shared.dataTask(with: request) { data, response, error in
+        // 使用 URLSessionSingleton 的 shared 實例發送請求
         URLSessionSingleton.shared.session.dataTask(with: request) { data, response, error in
             // handle response
             if let data,

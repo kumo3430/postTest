@@ -96,7 +96,13 @@ struct Sleep: View {
             .navigationTitle("我要睡了")
         }
         .onAppear{
-            
+            self.tableName()
+//            DispatchQueue.main.async {
+//                self.tableName()
+//                DispatchQueue.main.async {
+//                    self.judgeDate()
+//                }
+//            }
         }
 
     }
@@ -139,6 +145,97 @@ struct Sleep: View {
         let dateString = formatter.string(from: date)
         print(dateString)
         return dateString
+    }
+    
+    private func judgeDate() {
+        class URLSessionSingleton {
+            static let shared = URLSessionSingleton()
+            let session: URLSession
+            private init() {
+                let config = URLSessionConfiguration.default
+                config.httpCookieStorage = HTTPCookieStorage.shared
+                config.httpCookieAcceptPolicy = .always
+                session = URLSession(configuration: config)
+            }
+        }
+        let url = URL(string: "http://127.0.0.1:8888/judge/judgeDate.php")!
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+//        let body = ["taskName": TaskName, "tableName": tableName]
+        // 建立空的 body
+        let body: [String: Any] = [:]
+        // 將 body 轉換為 JSON 資料
+        let jsonData = try! JSONSerialization.data(withJSONObject: body, options: [])
+        request.httpBody = jsonData
+//        URLSession.shared.dataTask(with: request) { data, response, error in
+        // 使用 URLSessionSingleton 的 shared 實例發送請求
+        URLSessionSingleton.shared.session.dataTask(with: request) { data, response, error in
+            // handle response
+            if let data,
+              let content = String(data: data, encoding: .utf8) {
+               print(content)
+                print("連續天數：\(content)")
+            }
+            guard let data = data else { return }
+//            print(String(data: data, encoding: .utf8)!)
+            do {
+                let jsonResponse = try JSONSerialization.jsonObject(with: data, options: [])
+                guard let dict = jsonResponse as? [String: Any], let status = dict["status"] as? String else { return }
+                if status == "success" {
+//                    self.isLoggedIn = true
+                } else {
+                    print("Registration failed")
+                }
+            } catch {
+//                print(error.localizedDescription)
+                print(String(describing: error))
+            }
+        }.resume()
+    }
+    
+    private func tableName() {
+        class URLSessionSingleton {
+            static let shared = URLSessionSingleton()
+            let session: URLSession
+            private init() {
+                let config = URLSessionConfiguration.default
+                config.httpCookieStorage = HTTPCookieStorage.shared
+                config.httpCookieAcceptPolicy = .always
+                session = URLSession(configuration: config)
+            }
+        }
+        let url = URL(string: "http://127.0.0.1:8888/judge/tableName_Sleep.php")!
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+//        let body = ["taskName": TaskName, "tableName": tableName]
+        // 建立空的 body
+        let body: [String: Any] = [:]
+        // 將 body 轉換為 JSON 資料
+        let jsonData = try! JSONSerialization.data(withJSONObject: body, options: [])
+        request.httpBody = jsonData
+//        URLSession.shared.dataTask(with: request) { data, response, error in
+        // 使用 URLSessionSingleton 的 shared 實例發送請求
+        URLSessionSingleton.shared.session.dataTask(with: request) { data, response, error in
+            // handle response
+            if let data,
+              let content = String(data: data, encoding: .utf8) {
+               print(content)
+            }
+            guard let data = data else { return }
+//            print(String(data: data, encoding: .utf8)!)
+            do {
+                let jsonResponse = try JSONSerialization.jsonObject(with: data, options: [])
+                guard let dict = jsonResponse as? [String: Any], let status = dict["status"] as? String else { return }
+                if status == "success" {
+//                    self.isLoggedIn = true
+                } else {
+                    print("Registration failed")
+                }
+            } catch {
+//                print(error.localizedDescription)
+                print(String(describing: error))
+            }
+        }.resume()
     }
     
     private func newSportHabit() {
