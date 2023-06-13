@@ -20,6 +20,8 @@ struct Sleep: View {
     @State var set_up_time: Date = Date()
     @State var Set_up_time: String = ""
     
+    @State private var showOtherView = false
+    
     var body: some View {
         NavigationStack {
             VStack {
@@ -48,11 +50,11 @@ struct Sleep: View {
                 }
                 Spacer()
                 Button(action: {
-
-                    
+//                    routineList()
+                    showOtherView = true
                 }) {
                     HStack {
-                        Text("查看/修改")
+                        Text("查看紀錄")
                             .fontWeight(.semibold)
                             .font(.title)
                         Image(systemName: "doc.plaintext")
@@ -62,6 +64,9 @@ struct Sleep: View {
                     .foregroundColor(.white)
                     .background(LinearGradient(gradient: Gradient(colors: [Color.red, Color.blue]), startPoint: .leading, endPoint: .trailing))
                     .cornerRadius(40)
+                }
+                .sheet(isPresented: $showOtherView) {
+                    routineList()
                 }
                 Spacer()
                 VStack(alignment:.leading) {

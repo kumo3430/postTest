@@ -29,7 +29,7 @@ struct login4: View {
                     NavigationLink {
                         ListTaskClass()
                     } label: {
-                        Text("顯示習慣")
+                        Text("修改/刪除習慣")
                     }
                     NavigationLink {
                         recordSleepInterval()

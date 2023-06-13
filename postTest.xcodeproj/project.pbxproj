@@ -31,6 +31,7 @@
 		139D636929F966E800C60FF6 /* recordSleepInterval.swift in Sources */ = {isa = PBXBuildFile; fileRef = 139D636829F966E800C60FF6 /* recordSleepInterval.swift */; };
 		139D636B29FBB07200C60FF6 /* recordRoutine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 139D636A29FBB07200C60FF6 /* recordRoutine.swift */; };
 		13B1211329D8865A00449103 /* livesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13B1211229D8865A00449103 /* livesView.swift */; };
+		13CAFE922A31CD240080B761 /* routineList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13CAFE912A31CD240080B761 /* routineList.swift */; };
 		13D2601129C2AD97001C7B81 /* login.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13D2601029C2AD97001C7B81 /* login.swift */; };
 		13D2601329C2AF89001C7B81 /* login2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13D2601229C2AF89001C7B81 /* login2.swift */; };
 		13F6933129CAA5290096AE18 /* loginAi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13F6933029CAA5290096AE18 /* loginAi.swift */; };
@@ -70,6 +71,7 @@
 		139D636829F966E800C60FF6 /* recordSleepInterval.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = recordSleepInterval.swift; sourceTree = "<group>"; };
 		139D636A29FBB07200C60FF6 /* recordRoutine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = recordRoutine.swift; sourceTree = "<group>"; };
 		13B1211229D8865A00449103 /* livesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = livesView.swift; sourceTree = "<group>"; };
+		13CAFE912A31CD240080B761 /* routineList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = routineList.swift; sourceTree = "<group>"; };
 		13D2601029C2AD97001C7B81 /* login.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = login.swift; sourceTree = "<group>"; };
 		13D2601229C2AF89001C7B81 /* login2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = login2.swift; sourceTree = "<group>"; };
 		13F6933029CAA5290096AE18 /* loginAi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = loginAi.swift; sourceTree = "<group>"; };
@@ -123,6 +125,7 @@
 				1389C3EE29B5C05800D673EE /* postTestApp.swift */,
 				13040ADB2A0D32A900D89878 /* sleepView.swift */,
 				13F6933E29D06F9B0096AE18 /* login4.swift */,
+				13CAFE912A31CD240080B761 /* routineList.swift */,
 				13F6934029D326770096AE18 /* AddHabitClass.swift */,
 				13F6934229D327A30096AE18 /* AddSportWalk.swift */,
 				139D635829E64F6900C60FF6 /* AddRoutineHabit.swift */,
@@ -267,6 +270,7 @@
 				13F6934529D328040096AE18 /* SportWalkInsertViewModel.swift in Sources */,
 				13F6933F29D06F9B0096AE18 /* login4.swift in Sources */,
 				1389C3EF29B5C05800D673EE /* postTestApp.swift in Sources */,
+				13CAFE922A31CD240080B761 /* routineList.swift in Sources */,
 				139D635B29E6F17A00C60FF6 /* SleepView.swift in Sources */,
 				139D635729E57B9200C60FF6 /* SportListView.swift in Sources */,
 			);

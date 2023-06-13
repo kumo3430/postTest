@@ -79,7 +79,10 @@ struct getDetailsJudge: View {
 //                                        IntervalView(targetQuantity: $targetQuantity)
                                         HStack {
                                             Text("我要睡滿")
-                                            TextField("", value: $GetTarget_quantity, formatter: NumberFormatter())
+//                                            TextField(GetTarget_quantity, text:$taskName)
+//                                                .textFieldStyle(.roundedBorder)
+//                                                .padding()
+                                            TextField("n", value: $GetTarget_quantity, formatter: NumberFormatter())
                                                 .keyboardType(.numberPad)
                                                 .textFieldStyle(.roundedBorder)
                                             Text("小時！！")
@@ -134,10 +137,21 @@ struct getDetailsJudge: View {
                             Spacer()
                         }.background(Color.blue)
                     }
-                    
+                    Button{
+                        delete()
+                    } label: {
+                        HStack{
+                            Spacer()
+                            Text("刪除")
+                                .foregroundColor(.white)
+                                .padding(.vertical, 10)
+                                .font(.system(size: 14,weight: .semibold))
+                            Spacer()
+                        }.background(Color.red)
+                    }
                     
                 }
-                .navigationTitle("建立作息習慣")
+                .navigationTitle("修改作息習慣")
             }
             .onAppear {
                 Task {
@@ -303,6 +317,47 @@ struct getDetailsJudge: View {
         request.httpMethod = "POST"
         let body : [String: Any] = ["revise_time": Revise_time,"task_name": taskName,"target_time": Target_time,"note": note,"alert_time": Alert_time,"alert_time_w": Alert_time_w,"alert_time_s": Alert_time_s,"target_quantity": getTarget_quantity]
         print(body)
+        let jsonData = try! JSONSerialization.data(withJSONObject: body, options: [])
+        request.httpBody = jsonData
+//        URLSession.shared.dataTask(with: request) { data, response, error in
+        URLSessionSingleton.shared.session.dataTask(with: request) { data, response, error in
+            // handle response
+            if let data,
+              let content = String(data: data, encoding: .utf8) {
+               print(content)
+            }
+            guard let data = data else { return }
+//            print(String(data: data, encoding: .utf8)!)
+            do {
+                let jsonResponse = try JSONSerialization.jsonObject(with: data, options: [])
+                guard let dict = jsonResponse as? [String: Any], let status = dict["status"] as? String else { return }
+                if status == "success" {
+//                    self.isLoggedIn = true
+                } else {
+                    print("Registration failed")
+                }
+            } catch {
+//                print(error.localizedDescription)
+                print(String(describing: error))
+            }
+        }.resume()
+    }
+    
+    private  func delete()  {
+        class URLSessionSingleton {
+            static let shared = URLSessionSingleton()
+            let session: URLSession
+            private init() {
+                let config = URLSessionConfiguration.default
+                config.httpCookieStorage = HTTPCookieStorage.shared
+                config.httpCookieAcceptPolicy = .always
+                session = URLSession(configuration: config)
+            }
+        }
+        let url = URL(string: "http://127.0.0.1:8888/Delete/deleteRoutineTask.php")!
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        let body = ["taskName": TaskName, "tableName": tableName]
         let jsonData = try! JSONSerialization.data(withJSONObject: body, options: [])
         request.httpBody = jsonData
 //        URLSession.shared.dataTask(with: request) { data, response, error in
