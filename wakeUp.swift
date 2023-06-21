@@ -18,6 +18,10 @@ struct wakeUp: View {
     @State var Set_up_time: String = ""
     
     @State private var showOtherView = false
+    @State var Conitnuous_Days: String = ""
+    struct ContinuousDays : Decodable {
+        var continuousDays:Int
+    }
     
     var body: some View {
         NavigationStack {
@@ -64,6 +68,8 @@ struct wakeUp: View {
                 VStack(alignment:.leading) {
                     HStack {
                         Text("連續天數：")
+//                        Text(String(Conitnuous_Days))
+                        Text("\(Conitnuous_Days)")
                     }
                     .padding()
                     .foregroundColor(.red)
@@ -88,15 +94,25 @@ struct wakeUp: View {
             .navigationTitle("我醒來了")
         }
         .onAppear{
-            self.tableName()
+//            self.tableName()
 //            DispatchQueue.main.async {
 //                self.tableName()
 //                DispatchQueue.main.async {
 //                    self.judgeDate()
 //                }
 //            }
+            first()
         }
     }
+    private func first() {
+        DispatchQueue.main.async {
+            self.tableName()
+            DispatchQueue.main.async {
+                self.judgeDate()
+            }
+        }
+    }
+    
     private func setTime() {
         Set_date = dateToDateString(set_date)
         Set_time = alertToDateString(set_time)
@@ -132,6 +148,7 @@ struct wakeUp: View {
         print(dateString)
         return dateString
     }
+    
     private func judgeDate() {
         class URLSessionSingleton {
             static let shared = URLSessionSingleton()
@@ -156,11 +173,30 @@ struct wakeUp: View {
         // 使用 URLSessionSingleton 的 shared 實例發送請求
         URLSessionSingleton.shared.session.dataTask(with: request) { data, response, error in
             // handle response
-            if let data,
-              let content = String(data: data, encoding: .utf8) {
-               print(content)
-                print("連續天數：\(content)")
-            }
+            
+//            if let data,
+//              let content = String(data: data, encoding: .utf8) {
+//               print(content)
+//                Conitnuous_Days = content
+//                print("連續天數：\(content)")
+//                print("連續天數Conitnuous_Days：\(Conitnuous_Days)")
+//            }
+            
+            do {
+                    // handle response
+                    if let data = data,
+                       let content = String(data: data, encoding: .utf8) {
+                        print(content)
+                        let jsonData = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
+                        let continuousDays = jsonData?["continuousDays"] as? String
+                        Conitnuous_Days = continuousDays ?? "無法辨識"
+                        print("連續天數：\(Conitnuous_Days)")
+                    }
+                    // ...
+                } catch {
+                    print(error.localizedDescription)
+                }
+
             guard let data = data else { return }
 //            print(String(data: data, encoding: .utf8)!)
             do {

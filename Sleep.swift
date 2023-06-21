@@ -22,6 +22,12 @@ struct Sleep: View {
     
     @State private var showOtherView = false
     
+    @State var Conitnuous_Days: String = ""
+    struct ContinuousDays : Codable {
+        var continuousDays:String
+    }
+    
+    
     var body: some View {
         NavigationStack {
             VStack {
@@ -72,6 +78,7 @@ struct Sleep: View {
                 VStack(alignment:.leading) {
                     HStack {
                         Text("連續天數：")
+                        Text("\(Conitnuous_Days)")
                     }
                     .padding()
                     .foregroundColor(.red)
@@ -96,13 +103,13 @@ struct Sleep: View {
             .navigationTitle("我要睡了")
         }
         .onAppear{
-            self.tableName()
-//            DispatchQueue.main.async {
-//                self.tableName()
-//                DispatchQueue.main.async {
-//                    self.judgeDate()
-//                }
-//            }
+//            self.tableName()
+            DispatchQueue.main.async {
+                self.tableName()
+                DispatchQueue.main.async {
+                    self.judgeDate()
+                }
+            }
         }
 
     }
@@ -171,11 +178,30 @@ struct Sleep: View {
         // 使用 URLSessionSingleton 的 shared 實例發送請求
         URLSessionSingleton.shared.session.dataTask(with: request) { data, response, error in
             // handle response
-            if let data,
-              let content = String(data: data, encoding: .utf8) {
-               print(content)
-                print("連續天數：\(content)")
-            }
+            
+//            if let data,
+//              let content = String(data: data, encoding: .utf8) {
+//               print(content)
+//                Conitnuous_Days = content
+//                print("連續天數：\(content)")
+//                print("連續天數Conitnuous_Days：\(Conitnuous_Days)")
+//            }
+            
+            do {
+                    // handle response
+                    if let data = data,
+                       let content = String(data: data, encoding: .utf8) {
+                        print(content)
+                        let jsonData = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
+                        let continuousDays = jsonData?["continuousDays"] as? String
+                        Conitnuous_Days = continuousDays ?? "無法辨識"
+                        print("連續天數：\(Conitnuous_Days)")
+                    }
+                    // ...
+                } catch {
+                    print(error.localizedDescription)
+                }
+
             guard let data = data else { return }
 //            print(String(data: data, encoding: .utf8)!)
             do {
@@ -192,6 +218,80 @@ struct Sleep: View {
             }
         }.resume()
     }
+    
+    
+    
+//    private func judgeDate() {
+//        class URLSessionSingleton {
+//            static let shared = URLSessionSingleton()
+//            let session: URLSession
+//            private init() {
+//                let config = URLSessionConfiguration.default
+//                config.httpCookieStorage = HTTPCookieStorage.shared
+//                config.httpCookieAcceptPolicy = .always
+//                session = URLSession(configuration: config)
+//            }
+//        }
+//        let url = URL(string: "http://127.0.0.1:8888/judge/judgeDate.php")!
+//        var request = URLRequest(url: url)
+//        request.httpMethod = "POST"
+////        let body = ["taskName": TaskName, "tableName": tableName]
+//        // 建立空的 body
+//        let body: [String: Any] = [:]
+//        // 將 body 轉換為 JSON 資料
+//        let jsonData = try! JSONSerialization.data(withJSONObject: body, options: [])
+//        request.httpBody = jsonData
+////        URLSession.shared.dataTask(with: request) { data, response, error in
+//        // 使用 URLSessionSingleton 的 shared 實例發送請求
+//        URLSessionSingleton.shared.session.dataTask(with: request) { data, response, error in
+//            // handle response
+//            do {
+//                if let data = data {
+//                    let content = String(data: data, encoding: .utf8)
+//                    print(content)
+//                    if let jsonString = content,
+//                       let jsonData = jsonString.data(using: .utf8) {
+//                        // 解析 JSON 數據
+//                        let decoder = JSONDecoder()
+//                        do {
+//                            let continuousDays = try decoder.decode(ContinuousDays.self, from: jsonData)
+//                            print("連續天數：\(continuousDays.continuousDays)")
+//                            Conitnuous_Days = continuousDays.continuousDays
+//                            print("連續天數C：\(Conitnuous_Days)")
+//                        } catch {
+//                            print("Error decoding JSON: \(error)")
+//                        }
+//                    }
+//
+////                    let decoder = JSONDecoder()
+////                    let continuous_days = try decoder.decode(ContinuousDays.self, from: data)
+////                    print("連續天數：\(continuous_days.continuousDays)")
+////                    Conitnuous_Days = continuous_days.continuousDays
+////                    print("連續天數C：\(Conitnuous_Days)")
+//                }
+//
+//                if let error = error {
+//                    throw error // 拋出錯誤以進行後續處理
+//                }
+//
+//                guard let data = data else {
+//                    return
+//                }
+//
+//                let jsonResponse = try JSONSerialization.jsonObject(with: data, options: [])
+//
+//                if let dict = jsonResponse as? [String: Any], let status = dict["status"] as? String {
+//                    if status == "success" {
+//                        // 登錄成功
+//                    } else {
+//                        print("Registration failed")
+//                    }
+//                }
+//            } catch {
+//                print("Error: \(error)") // 處理錯誤
+//            }
+//        }.resume()
+//    }
     
     private func tableName() {
         class URLSessionSingleton {
