@@ -22,6 +22,11 @@ struct wakeUp: View {
     struct ContinuousDays : Decodable {
         var continuousDays:Int
     }
+    @State var already: String = ""
+//    @State var Already = false
+    struct Message : Decodable {
+        var message:String
+    }
     
     var body: some View {
         NavigationStack {
@@ -32,17 +37,25 @@ struct wakeUp: View {
                     newSportHabit()
                     print("我醒來了")
                 }) {
-                    HStack {
-                        Text("我醒來了")
-                            .fontWeight(.semibold)
-                            .font(.title)
-                        Image(systemName: "sunrise.circle.fill")
-                            .font(.title)
+                    VStack {
+                        HStack {
+                            Text("我醒來了")
+                                .fontWeight(.semibold)
+                                .font(.title)
+                            Image(systemName: "sunrise.circle.fill")
+                                .font(.title)
+                        }
+                        .padding()
+                        .foregroundColor(.white)
+                        .background(LinearGradient(gradient: Gradient(colors: [Color.red, Color.blue]), startPoint: .leading, endPoint: .trailing))
+                        .cornerRadius(40)
+//                        if (Already) {
+                        if (already != "") {
+                            Text(already)
+                                .foregroundColor(.red)
+                        }
                     }
-                    .padding()
-                    .foregroundColor(.white)
-                    .background(LinearGradient(gradient: Gradient(colors: [Color.red, Color.blue]), startPoint: .leading, endPoint: .trailing))
-                    .cornerRadius(40)
+                    
                 }
                 Spacer()
                 Button(action: {
@@ -172,16 +185,6 @@ struct wakeUp: View {
 //        URLSession.shared.dataTask(with: request) { data, response, error in
         // 使用 URLSessionSingleton 的 shared 實例發送請求
         URLSessionSingleton.shared.session.dataTask(with: request) { data, response, error in
-            // handle response
-            
-//            if let data,
-//              let content = String(data: data, encoding: .utf8) {
-//               print(content)
-//                Conitnuous_Days = content
-//                print("連續天數：\(content)")
-//                print("連續天數Conitnuous_Days：\(Conitnuous_Days)")
-//            }
-            
             do {
                     // handle response
                     if let data = data,
@@ -272,6 +275,22 @@ struct wakeUp: View {
             if let data,
               let content = String(data: data, encoding: .utf8) {
                print(content)
+                
+                let decoder = JSONDecoder()
+                do {
+                    let judge = try decoder.decode(Message.self, from: data)
+                    print("============== wakeUP message ==============")
+                    print(judge)
+                    print("message：\(judge.message)")
+                    if (judge.message == "you had built") {
+                        self.already = "今日已新增過了"
+                    }
+//                    Already = true
+                    print("============== wakeUP message ==============")
+                } catch {
+                    print("解碼失敗：\(error)")
+                }
+                
             }
             guard let data = data else { return }
 //            print(String(data: data, encoding: .utf8)!)
