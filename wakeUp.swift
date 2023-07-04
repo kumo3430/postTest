@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct wakeUp: View {
+    @State private var isReady = false
     @State var set_date: Date = Date()
     @State var Set_date: String = ""
     
@@ -107,24 +108,41 @@ struct wakeUp: View {
             .navigationTitle("我醒來了")
         }
         .onAppear{
-//            self.tableName()
-//            DispatchQueue.main.async {
-//                self.tableName()
-//                DispatchQueue.main.async {
-//                    self.judgeDate()
-//                }
-//            }
-            first()
-        }
-    }
-    private func first() {
-        DispatchQueue.main.async {
-            self.tableName()
-            DispatchQueue.main.async {
-                self.judgeDate()
+            Task {
+                await first()
             }
         }
     }
+    
+//    private func first() {
+////        let serialQueue = DispatchQueue(label: "serialQueue")
+////        serialQueue.sync {
+////            tableName()
+////        }
+////        serialQueue.sync {
+////            judgeDate()
+////        }
+//        DispatchQueue.global(qos: .background).sync {
+//            tableName()
+//        }
+//        DispatchQueue.global(qos: .userInteractive).async {
+//            judgeDate()
+//        }
+//    }
+    func first() async {
+        do {
+            let name = try await tableName()
+            print("Table name: \(name)")
+
+            // Call judgeDate() after tableName() completes
+            try await judgeDate()
+            print("judgeDate() completed after tableName()")
+        } catch {
+            print("Error: \(error)")
+        }
+    }
+
+
     
     private func setTime() {
         Set_date = dateToDateString(set_date)
@@ -161,8 +179,9 @@ struct wakeUp: View {
         print(dateString)
         return dateString
     }
-    
-    private func judgeDate() {
+    private func judgeDate() async {
+//    private func judgeDate() {
+        print("2")
         class URLSessionSingleton {
             static let shared = URLSessionSingleton()
             let session: URLSession
@@ -194,6 +213,7 @@ struct wakeUp: View {
                         let continuousDays = jsonData?["continuousDays"] as? String
                         Conitnuous_Days = continuousDays ?? "無法辨識"
                         print("連續天數：\(Conitnuous_Days)")
+                        print("------------------------")
                     }
                     // ...
                 } catch {
@@ -216,8 +236,9 @@ struct wakeUp: View {
             }
         }.resume()
     }
-    
-    private func tableName() {
+    private func tableName() async throws -> String {
+//    private func tableName() {
+        print("1")
         class URLSessionSingleton {
             static let shared = URLSessionSingleton()
             let session: URLSession
@@ -229,6 +250,9 @@ struct wakeUp: View {
             }
         }
         let url = URL(string: "http://127.0.0.1:8888/judge/tableName_WakeUp.php")!
+        let (data, _) = try await URLSession.shared.data(from: url)
+        let name = String(data: data, encoding: .utf8)!
+        return name
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
 //        let body = ["taskName": TaskName, "tableName": tableName]
@@ -260,6 +284,7 @@ struct wakeUp: View {
                 print(String(describing: error))
             }
         }.resume()
+//        await judgeDate()
     }
     
     private func newSportHabit() {

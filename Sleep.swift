@@ -108,16 +108,25 @@ struct Sleep: View {
             .navigationTitle("我要睡了")
         }
         .onAppear{
-//            self.tableName()
-            DispatchQueue.main.async {
-                self.tableName()
-                DispatchQueue.main.async {
-                    self.judgeDate()
-                }
+            Task {
+                await first()
             }
         }
-
     }
+
+    func first() async {
+        do {
+            let name = try await tableName()
+            print("Table name: \(name)")
+
+            // Call judgeDate() after tableName() completes
+            try await judgeDate()
+            print("judgeDate() completed after tableName()")
+        } catch {
+            print("Error: \(error)")
+        }
+    }
+    
     private func setTime() {
         Set_date = dateToDateString(set_date)
         Set_time = alertToDateString(set_time)
@@ -154,7 +163,9 @@ struct Sleep: View {
         return dateString
     }
     
-    private func judgeDate() {
+    private func judgeDate() async {
+//    private func judgeDate() async {
+//        await tableName()
         class URLSessionSingleton {
             static let shared = URLSessionSingleton()
             let session: URLSession
@@ -187,6 +198,7 @@ struct Sleep: View {
                         let continuousDays = jsonData?["continuousDays"] as? String
                         Conitnuous_Days = continuousDays ?? "無法辨識"
                         print("連續天數：\(Conitnuous_Days)")
+                        print("------------------------")
                     }
                     // ...
                 } catch {
@@ -210,7 +222,8 @@ struct Sleep: View {
         }.resume()
     }
     
-    private func tableName() {
+    // 要先執行
+    private func tableName() async throws -> String {
         class URLSessionSingleton {
             static let shared = URLSessionSingleton()
             let session: URLSession
@@ -222,6 +235,9 @@ struct Sleep: View {
             }
         }
         let url = URL(string: "http://127.0.0.1:8888/judge/tableName_Sleep.php")!
+        let (data, _) = try await URLSession.shared.data(from: url)
+        let name = String(data: data, encoding: .utf8)!
+        return name
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
 //        let body = ["taskName": TaskName, "tableName": tableName]
