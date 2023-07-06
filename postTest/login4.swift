@@ -51,6 +51,11 @@ struct login4: View {
                     } label: {
                         Text("wakeUp")
                     }
+                    NavigationLink {
+                        recordSleepInterval()
+                    } label: {
+                        Text("TEST")
+                    }
                     Button("Log out") {
                         logout()
                     }
